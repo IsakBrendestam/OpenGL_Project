@@ -25,7 +25,7 @@ $(APP_NAME): main.o
 	$(CXX) -o $(APP_NAME) main.o $(GLAD_PATH)/glad.o $(INCLUDE) $(LIBS) $(LDFLAGS)
 
 libs:
-	cd $(DEP)/glad && $(CXX) -o glad.o -Iinclude -c glad.c
+	cd $(DEP)/glad && $(CXX) -o glad.o -Iinclude -c glad.c && ar -rc glad.a glad.o
 
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c main.cpp $(INCLUDE)
