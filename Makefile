@@ -19,9 +19,9 @@ GLAD_PATH = $(DEP)/glad
 INCLUDE = -I$(GLFW_INCLUDE_PATH) -I$(GLAD_PATH)
 LIBS =  -L$(GLFW_LIB_PATH)
 
-all: $(APP_NAME)
+all: libs $(APP_NAME)
 
-$(APP_NAME): main.o libs
+$(APP_NAME): main.o
 	$(CXX) -o $(APP_NAME) main.o $(GLAD_PATH)/glad.o $(INCLUDE) $(LIBS) $(LDFLAGS)
 
 libs:
@@ -30,7 +30,7 @@ libs:
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c main.cpp $(INCLUDE)
 
-run:
+run: all
 	./$(APP_NAME)
 
 clean:
