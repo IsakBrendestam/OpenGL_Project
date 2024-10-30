@@ -1,0 +1,4 @@
+
+*.o
+*.a
+hello_triangle
