@@ -3,6 +3,8 @@
 #include "dep/glad/glad.h"
 #include <GLFW/glfw3.h>
 
+#include "EngineSettings.h"
+
 float vertices[] = {
     -0.5f, -0.5f, 0.0f,
      0.5f, -0.5f, 0.0f,
@@ -148,6 +150,11 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         processInput(window);
+
+        if (EngineSettings::g_wireframeOn)
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        else
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         Render(shaderProgram);
 

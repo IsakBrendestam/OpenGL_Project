@@ -27,7 +27,7 @@ $(APP_NAME): main.o
 libs:
 	cd $(DEP)/glad && $(CXX) -o glad.o -Iinclude -c glad.c && ar -rc glad.a glad.o
 
-main.o: main.cpp
+main.o: main.cpp EngineSettings.h
 	$(CXX) $(CXXFLAGS) -c main.cpp $(INCLUDE)
 
 run: all
