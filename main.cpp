@@ -112,8 +112,6 @@ void LoadShader(unsigned int& shaderProgram)
 
 int main()
 {
-    printf("Hello World!\n");
-
     // Init GLFW
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -157,6 +155,7 @@ int main()
         glfwPollEvents();    
     }
 
+    glDeleteProgram(shaderProgram);
     glfwTerminate();
 
     return 0;
