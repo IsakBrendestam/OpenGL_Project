@@ -22,13 +22,15 @@ INCLUDE := -I$(GLFW_INCLUDE_PATH) -I$(GLAD_PATH)
 LIBS :=  -L$(GLFW_LIB_PATH)
 
 SRC_FILES := $(shell find $(SRC) -name '*.cpp')
-FILES := $(patsubst %.cpp, $(BUILD)/%.o, $(notdir $(SRC_FILES)))
+FILES := $(patsubst %.cpp, $(BUILD)/%.o, $(notdir $(SRC_FILES))) $(BUILD)/main.o
 
 all: libs $(APP_NAME)
 
-$(APP_NAME): main.o $(FILES)
-	echo $^
-	$(CXX) -o $(APP_NAME) main.o $(GLAD_PATH)/glad.o $(INCLUDE) $(LIBS) $(LDFLAGS)
+libs:
+	cd $(DEP)/glad && $(CXX) -o glad.o -Iinclude -c glad.c && ar -rc glad.a glad.o
+
+$(APP_NAME): $(FILES)
+	$(CXX) -o $(APP_NAME) $^ $(GLAD_PATH)/glad.o $(INCLUDE) $(LIBS) $(LDFLAGS)
 
 $(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h
 	$(CXX) $(CXXFLAGS) -o $@ -c $< $(INCLUDE)
@@ -36,11 +38,8 @@ $(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h
 $(BUILD)/%.o: $(SRC)/**/%.cpp $(SRC)/**/%.h
 	$(CXX) $(CXXFLAGS) -o $@ -c $< $(INCLUDE)
 
-libs:
-	cd $(DEP)/glad && $(CXX) -o glad.o -Iinclude -c glad.c && ar -rc glad.a glad.o
-
-main.o: main.cpp EngineSettings.h
-	$(CXX) $(CXXFLAGS) -c main.cpp $(INCLUDE)
+$(BUILD)/main.o: $(SRC)/main.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $< $(INCLUDE)
 
 run: all
 	./$(APP_NAME)
