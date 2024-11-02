@@ -24,10 +24,10 @@ LIBS :=  -L$(GLFW_LIB_PATH)
 SRC_FILES := $(shell find $(SRC) -name '*.cpp')
 FILES := $(patsubst %.cpp, $(BUILD)/%.o, $(notdir $(SRC_FILES))) $(BUILD)/main.o
 
-all: libs $(APP_NAME)
+all: $(APP_NAME)
 
-libs:
-	cd $(DEP)/glad && $(CXX) -o glad.o -Iinclude -c glad.c && ar -rc glad.a glad.o
+libs: $(GLAD_PATH)/glad.c $(GLAD_PATH)/glad.h
+	cd $(GLAD_PATH) && $(CXX) -o glad.o -Iinclude -c glad.c    # && ar -rc glad.a glad.o
 
 $(APP_NAME): $(FILES)
 	$(CXX) -o $(APP_NAME) $^ $(GLAD_PATH)/glad.o $(INCLUDE) $(LIBS) $(LDFLAGS)
