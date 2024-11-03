@@ -74,7 +74,7 @@ int main()
     glfwSetFramebufferSizeCallback(window, SetViewportSize); 
 
     // Init
-    s.LoadShader("", "");
+    s.LoadShader("shader.vs", "shader.fs");
     unsigned int shaderProgram = s.GetShaderProgram();
 
     while(!glfwWindowShouldClose(window))

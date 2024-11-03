@@ -7,14 +7,14 @@ class Shader
 {
 public:
     Shader();
-    void LoadShader(std::string vShaderPath, std::string fShaderPath);
+    void LoadShader(std::string vShaderName, std::string fShaderName);
     void Use();
     bool GetStatus();
 
     unsigned int GetShaderProgram();
 
 private:
-    std::string ReadShaderFile(std::string shaderPath);
+    std::string ReadShaderFile(std::string shaderName);
 
 private:
     unsigned int m_shaderProgram;

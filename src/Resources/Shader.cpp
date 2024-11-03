@@ -3,27 +3,30 @@
 #include <../../dep/glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <fstream>
+
 //#include "Debug.h"
+#include <stdlib.h>
+#include <stdio.h>
+
+#include <iostream>
 
 Shader::Shader()
 {
 
 }
 
-void Shader::LoadShader(std::string vShaderPath, std::string fShaderPath)
+void Shader::LoadShader(std::string vShaderName, std::string fShaderName)
 {
+    std::string shaderData;
+
     unsigned int vertexShader; 
 
-    const char *vertexShaderSource = "#version 330 core\n"
-    "layout (location = 0) in vec3 aPos;\n"
-    "void main()\n"
-    "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-    "}\0";
+    shaderData = ReadShaderFile(vShaderName);
+    const char* vsSource = shaderData.c_str();
 
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+    glShaderSource(vertexShader, 1, &vsSource, NULL);
     glCompileShader(vertexShader);
 
     //Debug::CheckError(vertexShader, ResourceType::SHADER);
@@ -31,15 +34,11 @@ void Shader::LoadShader(std::string vShaderPath, std::string fShaderPath)
     // Fragment Shader
     unsigned int fragmentShader;
 
-    const char *fragmentShaderSource = "#version 330 core\n"
-    "out vec4 FragColor;\n"
-    "void main()\n"
-    "{\n"
-    "    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-    "}\0";
+    shaderData = ReadShaderFile(fShaderName);
+    const char* fsSource = shaderData.c_str();
 
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    glShaderSource(fragmentShader, 1, &fsSource, NULL);
     glCompileShader(fragmentShader);
 
     // Check compilation
@@ -64,9 +63,21 @@ void Shader::Use()
     glUseProgram(m_shaderProgram);
 }
 
-std::string Shader::ReadShaderFile(std::string shaderPath)
+std::string Shader::ReadShaderFile(std::string shaderName)
 {
+    std::ifstream file("res/Shaders/" + shaderName, std::ios::binary | std::ios::ate);
 
+    if (!file.is_open())
+        return "";
+
+    std::streamsize size = file.tellg();
+    file.seekg(0);
+
+    std::string buffer(size, '\0');
+    if (!file.read(&buffer[0], size))
+        return "";
+
+    return buffer;
 }
 
 bool Shader::GetStatus()
