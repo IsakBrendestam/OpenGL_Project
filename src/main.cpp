@@ -13,6 +13,8 @@ float vertices[] = {
      0.0f,  0.5f, 0.0f
 };  
 
+Shader s;
+
 void SetViewportSize(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
@@ -24,7 +26,7 @@ void processInput(GLFWwindow *window)
         glfwSetWindowShouldClose(window, true);
 }
 
-void Render(unsigned int shaderProgram)
+void Render()
 {
     unsigned int VBO;
     glGenBuffers(1, &VBO);  
@@ -40,78 +42,7 @@ void Render(unsigned int shaderProgram)
 
     glBindVertexArray(VAO);
 
-    glUseProgram(shaderProgram);
     glDrawArrays(GL_TRIANGLES, 0, 3);
-}
-
-void LoadShader(unsigned int& shaderProgram)
-{
-    // Vertex Shader
-    unsigned int vertexShader; 
-
-    const char *vertexShaderSource = "#version 330 core\n"
-    "layout (location = 0) in vec3 aPos;\n"
-    "void main()\n"
-    "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-    "}\0";
-
-    vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    glCompileShader(vertexShader);
-
-    // Check compilation
-    int  success;
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if(!success)
-    {
-        char infoLog[512];
-        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        printf("Failed compiling vertex shader: %s\n", infoLog);
-    }
-
-    // Fragment Shader
-    unsigned int fragmentShader;
-
-    const char *fragmentShaderSource = "#version 330 core\n"
-    "out vec4 FragColor;\n"
-    "void main()\n"
-    "{\n"
-    "    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-    "}\0";
-
-    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    glCompileShader(fragmentShader);
-
-    // Check compilation
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    if(!success)
-    {
-        char infoLog[512];
-        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        printf("Failed compiling fragment shader: %s\n", infoLog);
-    }
-
-    // Create shader program
-    shaderProgram = glCreateProgram();
-
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    if(!success) 
-    {
-        char infoLog[512];
-        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        printf("Failed creating shader program: %s\n", infoLog);
-    }
-
-    // Destory shaders
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader); 
 }
 
 int main()
@@ -143,8 +74,8 @@ int main()
     glfwSetFramebufferSizeCallback(window, SetViewportSize); 
 
     // Init
-    unsigned int shaderProgram;
-    LoadShader(shaderProgram);
+    s.LoadShader("", "");
+    unsigned int shaderProgram = s.GetShaderProgram();
 
     while(!glfwWindowShouldClose(window))
     {
@@ -158,7 +89,8 @@ int main()
         else
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-        Render(shaderProgram);
+        s.Use();
+        Render();
 
         glfwSwapBuffers(window);
         glfwPollEvents();    
