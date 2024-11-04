@@ -5,7 +5,7 @@
 
 #include <stdio.h>
 
-bool CheckError(unsigned int resource, ResourceType type)
+bool Debug::CheckError(unsigned int resource, ResourceType type)
 {
     int success;
     char infoLog[512];
