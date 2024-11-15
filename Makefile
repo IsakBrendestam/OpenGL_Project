@@ -1,9 +1,15 @@
 
+OPTIMIZE := false
+
 APP_NAME := hello_triangle
 
 CXX := clang++
 CXXFLAGS := -std=c++17
 LDFLAGS := -lglfw
+
+ifeq ($(OPTIMIZE), true)
+	LDFLAGS += -O2
+endif
 
 # Directories
 BUILD := build
