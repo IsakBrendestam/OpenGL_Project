@@ -14,3 +14,13 @@ int Engine::Run()
 {
 
 }
+
+void Engine::Update()
+{
+
+}
+
+void Engine::Render()
+{
+
+}

@@ -14,7 +14,8 @@ protected:
     virtual void Draw() = 0;
 
 private:
-
+    void Render();
+    void Update();
 };
 
 #endif

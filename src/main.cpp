@@ -20,7 +20,7 @@ void SetViewportSize(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
-void processInput(GLFWwindow *window)
+void ProcessInput(GLFWwindow *window)
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
@@ -80,7 +80,7 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        processInput(window);
+        ProcessInput(window);
 
         if (EngineSettings::g_wireframeOn)
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
