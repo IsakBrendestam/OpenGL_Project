@@ -12,10 +12,6 @@ protected:
     virtual void Initialize() = 0;
     virtual void Update(double deltaTime) = 0;
     virtual void Draw() = 0;
-
-private:
-    void Render();
-    void Update();
 };
 
 #endif
