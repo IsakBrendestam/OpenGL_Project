@@ -5,11 +5,12 @@ class Engine
 {
 public:
     Engine();
-    ~Engine();
+    virtual ~Engine();
     int Run();
 
 protected:
     virtual void Initialize() = 0;
+    virtual void Exit() = 0;
     virtual void Update(double deltaTime) = 0;
     virtual void Draw() = 0;
 };

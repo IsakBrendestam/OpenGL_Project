@@ -1,9 +1,11 @@
 #include <stdio.h>
 
+#include "Application.h"
+
 #include "../dep/glad/glad.h"
 #include <GLFW/glfw3.h>
 
-#include "EngineSettings.h"
+#include "Engine/EngineSettings.h"
 
 #include "Resources/Shader.h"
 
@@ -45,6 +47,10 @@ void Render()
 
 int main()
 {
+    Application* app = new Application();
+    int ret = app->Run();
+    delete app;
+
     // Init GLFW
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
