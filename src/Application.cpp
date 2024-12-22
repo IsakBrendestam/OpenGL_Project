@@ -1,23 +1,23 @@
 #include "Application.h"
 
-#include "stdio.h"
+#include "Utilities/Debug.h"
 
 void Application::Initialize()
 {
-    printf("Initialize\n");
+    DebugLog("Initialize");
 }
 
 void Application::Exit()
 {
-    printf("Exit\n");
+    DebugLog("Exit");
 }
 
 void Application::Update(double deltaTime)
 {
-    printf("Update\n");
+    DebugLog("Update");
 }
 
 void Application::Draw()
 {
-    printf("Draw\n");
+    DebugLog("Draw");
 }
