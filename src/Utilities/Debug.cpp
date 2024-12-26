@@ -35,7 +35,7 @@ bool CheckError(unsigned int resource, ResourceType type)
         if(!success)
         {
             glGetShaderInfoLog(resource, 512, NULL, infoLog);
-            DebugLog("ERROR: Failed compiling vertex shader: " + infoLog)
+            DebugLog("ERROR: Failed compiling vertex shader: " + std::string(infoLog));
         }
         break;
 
@@ -44,7 +44,7 @@ bool CheckError(unsigned int resource, ResourceType type)
         if (!success)
         {
             glGetProgramInfoLog(resource, 1024, NULL, infoLog);
-            DebugLog("ERROR: Failed creating program: " + infoLog)
+            DebugLog("ERROR: Failed creating program: " + std::string(infoLog));
         }
         break;
     

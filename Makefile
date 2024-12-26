@@ -1,14 +1,24 @@
 
+# Settings
 OPTIMIZE := false
+OPT_FLAG := O2
+
+DEBUG := true
+DEBUG_MACRO := DEBUG
 
 APP_NAME := hello_triangle
 
+# Compiling
 CXX := clang++
-CXXFLAGS := -std=c++17
-LDFLAGS := -lglfw
 
+CXXFLAGS := -std=c++17
+ifeq ($(DEBUG), true)
+	CXXFLAGS += -D$(DEBUG_MACRO)
+endif
+
+LDFLAGS := -lglfw
 ifeq ($(OPTIMIZE), true)
-	LDFLAGS += -O2
+	LDFLAGS += -$(OPT_FLAG)
 endif
 
 # Directories
@@ -52,6 +62,8 @@ $(BUILD)/main.o: $(SRC)/main.cpp
 
 run: all
 	./$(APP_NAME)
+
+restart: clean run
 
 clean:
 	rm -f $(APP_NAME) *.o $(BUILD)/*.o
