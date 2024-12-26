@@ -16,6 +16,11 @@ Shader::Shader()
 
 }
 
+Shader::~Shader()
+{
+    glDeleteProgram(m_shaderProgram);
+}
+
 void Shader::LoadShader(std::string vShaderName, std::string fShaderName)
 {
     std::string shaderData;

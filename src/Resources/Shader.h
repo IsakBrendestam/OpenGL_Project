@@ -7,6 +7,7 @@ class Shader
 {
 public:
     Shader();
+    ~Shader();
     void LoadShader(std::string vShaderName, std::string fShaderName);
     void Use();
     bool GetStatus();

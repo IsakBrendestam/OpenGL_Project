@@ -5,6 +5,8 @@
 void Application::Initialize()
 {
     DebugLog("Initialize");
+
+    m_shader.LoadShader("shader.vs", "shader.fs");
 }
 
 void Application::Exit()
@@ -19,5 +21,6 @@ void Application::Update(double deltaTime)
 
 void Application::Draw()
 {
+    m_shader.Use();
     DebugLog("Draw");
 }
