@@ -1,6 +1,8 @@
 #ifndef OBJECT_HEADER
 #define OBJECT_HEADER
 
+#include "Resources/Shader.h"
+
 class Object
 {
 public:
@@ -13,6 +15,8 @@ public:
 private:
     unsigned int m_VBO;
     unsigned int m_VAO;
+
+    Shader m_shader;
 };
 
 #endif

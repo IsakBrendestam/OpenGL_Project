@@ -16,6 +16,9 @@ BUILD := build
 DEP := dep
 SRC := src
 
+# Engine paths
+ENGINE := $(SRC)/Engine
+
 # GLFW paths
 GLFW_PAHT := $(DEP)/glfw
 GLFW_INCLUDE_PATH := $(GLFW_PAHT)/include
@@ -24,7 +27,7 @@ GLFW_LIB_PATH := $(GLFW_PAHT)/lib
 # GLAD paths
 GLAD_PATH := $(DEP)/glad
 
-INCLUDE := -I$(GLFW_INCLUDE_PATH) -I$(GLAD_PATH)
+INCLUDE := -I$(GLFW_INCLUDE_PATH) -I$(GLAD_PATH) -I$(SRC)
 LIBS :=  -L$(GLFW_LIB_PATH)
 
 SRC_FILES := $(shell find $(SRC) -name '*.cpp')
