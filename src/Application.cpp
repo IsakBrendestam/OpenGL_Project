@@ -2,24 +2,22 @@
 
 #include "Utilities/Debug.h"
 
+#include "Objects/Rectangle.h"
+
 void Application::Initialize()
 {
-    DebugLog("Initialize");
-    m_object = new Object();
+    m_object = new Rectangle();
 }
 
 void Application::Exit()
 {
-    DebugLog("Exit");
 }
 
 void Application::Update(double deltaTime)
 {
-    DebugLog("Update");
 }
 
 void Application::Draw()
 {
     m_object->Draw();
-    DebugLog("Draw");
 }
