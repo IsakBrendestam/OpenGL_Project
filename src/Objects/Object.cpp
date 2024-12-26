@@ -18,6 +18,17 @@ Object::Object()
     memcpy(m_vertices, vertices, sizeof(float) * 9);
 
     m_shader.LoadShader("shader.vs", "shader.fs");
+
+    glGenBuffers(1, &m_VBO);  
+    glGenVertexArrays(1, &m_VAO);  
+
+    glBindVertexArray(m_VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+    glBufferData(GL_ARRAY_BUFFER, m_nVertices * sizeof(float), m_vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);  
 }
 
 Object::~Object()
@@ -33,18 +44,7 @@ void Object::Update()
 void Object::Draw()
 {
     m_shader.Use();
-
-    unsigned int VBO;
-    glGenBuffers(1, &VBO);  
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, m_nVertices * sizeof(float), m_vertices, GL_STATIC_DRAW);
-
-    unsigned int VAO;
-    glGenVertexArrays(1, &VAO);  
-    glBindVertexArray(VAO);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);  
+    glBindVertexArray(m_VAO);
 
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
