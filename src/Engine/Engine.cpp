@@ -47,6 +47,8 @@ int Engine::Init()
     }   
 
     glfwSetFramebufferSizeCallback(m_window, SetViewportSize); 
+
+    return 0;
 }
 
 void Engine::Render()
@@ -103,4 +105,6 @@ int Engine::Run()
     }
 
     Exit();
+
+    return 1;
 }

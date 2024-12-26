@@ -8,7 +8,7 @@
 #define DEBUG
 
 #ifdef DEBUG
-    inline void DebugLog(char* msg)
+    inline void DebugLog(std::string msg)
     {
         time_t now = std::time(0);
         tm* ltm = std::localtime(&now);
