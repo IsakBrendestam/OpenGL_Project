@@ -47,6 +47,8 @@ int Engine::Init()
 
 void Engine::Render()
 {
+    if (EngineSettings::g_wireframeOn)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     Draw();
 }
 
