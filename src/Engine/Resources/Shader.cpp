@@ -25,6 +25,7 @@ void Shader::LoadShader(std::string vShaderName, std::string fShaderName)
 {
     std::string shaderData;
 
+    // Vertex Shader
     unsigned int vertexShader; 
 
     shaderData = ReadShaderFile(vShaderName);
@@ -34,6 +35,7 @@ void Shader::LoadShader(std::string vShaderName, std::string fShaderName)
     glShaderSource(vertexShader, 1, &vsSource, NULL);
     glCompileShader(vertexShader);
 
+    // Check compilation
     CheckError(vertexShader, ResourceType::SHADER);
 
     // Fragment Shader

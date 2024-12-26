@@ -6,6 +6,5 @@ int main()
     int ret = app->Run();
     delete app;
 
-
     return 0;
 }
