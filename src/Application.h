@@ -2,7 +2,8 @@
 #define APPLICATION_HEADER
 
 #include "Engine/Engine.h"
-#include "Resources/Shader.h"
+
+#include "Objects/Object.h"
 
 class Application : public Engine
 {
@@ -16,7 +17,7 @@ public:
     void Draw() override;
 
 private:
-    Shader m_shader;
+    Object* m_object;
 };
 
 #endif

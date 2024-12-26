@@ -57,6 +57,9 @@ $(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h
 $(BUILD)/%.o: $(SRC)/**/%.cpp $(SRC)/**/%.h
 	$(CXX) $(CXXFLAGS) -o $@ -c $< $(INCLUDE)
 
+$(BUILD)/%.o: $(SRC)/**/**/%.cpp $(SRC)/**/**/%.h
+	$(CXX) $(CXXFLAGS) -o $@ -c $< $(INCLUDE)
+
 $(BUILD)/main.o: $(SRC)/main.cpp
 	$(CXX) $(CXXFLAGS) -o $@ -c $< $(INCLUDE)
 

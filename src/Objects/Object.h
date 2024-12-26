@@ -1,7 +1,7 @@
 #ifndef OBJECT_HEADER
 #define OBJECT_HEADER
 
-#include "Resources/Shader.h"
+#include "Engine/Resources/Shader.h"
 
 class Object
 {

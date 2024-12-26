@@ -19,6 +19,8 @@ Object::Object()
     // Vertex Array
     glGenVertexArrays(1, &m_VAO);  
     glBindVertexArray(m_VAO);
+
+    m_shader.LoadShader("shader.vs", "shader.fs");
 }
 
 Object::~Object()
@@ -33,5 +35,5 @@ void Object::Update()
 
 void Object::Draw()
 {
-
+    m_shader.Use();
 }
