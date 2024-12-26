@@ -5,7 +5,7 @@
 
 #include <fstream>
 
-#include "Debug.h"
+#include "Utilities/Debug.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -34,7 +34,7 @@ void Shader::LoadShader(std::string vShaderName, std::string fShaderName)
     glShaderSource(vertexShader, 1, &vsSource, NULL);
     glCompileShader(vertexShader);
 
-    Debug::CheckError(vertexShader, ResourceType::SHADER);
+    CheckError(vertexShader, ResourceType::SHADER);
 
     // Fragment Shader
     unsigned int fragmentShader;
@@ -47,7 +47,7 @@ void Shader::LoadShader(std::string vShaderName, std::string fShaderName)
     glCompileShader(fragmentShader);
 
     // Check compilation
-    Debug::CheckError(fragmentShader, ResourceType::SHADER);
+    CheckError(fragmentShader, ResourceType::SHADER);
 
     // Create shader program
     m_shaderProgram = glCreateProgram();
@@ -56,7 +56,7 @@ void Shader::LoadShader(std::string vShaderName, std::string fShaderName)
     glAttachShader(m_shaderProgram, fragmentShader);
     glLinkProgram(m_shaderProgram);
 
-    Debug::CheckError(m_shaderProgram, ResourceType::PROGRAM);
+    CheckError(m_shaderProgram, ResourceType::PROGRAM);
 
     // Destory shaders
     glDeleteShader(vertexShader);

@@ -5,7 +5,25 @@
 
 #include <stdio.h>
 
-bool Debug::CheckError(unsigned int resource, ResourceType type)
+#include <iostream>
+#include <ctime>
+
+#ifdef DEBUG
+
+void DebugLog(std::string msg)
+{
+    time_t now = std::time(0);
+    tm* ltm = std::localtime(&now);
+
+    std::string timestamp = "[" + std::to_string(5 + ltm->tm_hour) + ":" + std::to_string(ltm->tm_min) + ":" + std::to_string(ltm->tm_sec) + "] ";
+
+    std::cout << timestamp << msg << std::endl;
+
+}
+
+#endif
+
+bool CheckError(unsigned int resource, ResourceType type)
 {
     int success;
     char infoLog[512];
@@ -17,8 +35,7 @@ bool Debug::CheckError(unsigned int resource, ResourceType type)
         if(!success)
         {
             glGetShaderInfoLog(resource, 512, NULL, infoLog);
-            printf("ERROR: Failed compiling vertex shader: %s\n", infoLog);
-            return true;
+            DebugLog("ERROR: Failed compiling vertex shader: " + infoLog)
         }
         break;
 
@@ -27,8 +44,7 @@ bool Debug::CheckError(unsigned int resource, ResourceType type)
         if (!success)
         {
             glGetProgramInfoLog(resource, 1024, NULL, infoLog);
-            printf("ERROR: Failed creating program: %s\n", infoLog);
-            return true;
+            DebugLog("ERROR: Failed creating program: " + infoLog)
         }
         break;
     
@@ -36,5 +52,5 @@ bool Debug::CheckError(unsigned int resource, ResourceType type)
         break;
     }
 
-    return false;
+    return !success;
 }

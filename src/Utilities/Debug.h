@@ -2,25 +2,22 @@
 #define DEBUG_HEADER
 
 #include <string>
-#include <iostream>
-#include <ctime>
 
-#define DEBUG
+//#define DEBUG
 
 #ifdef DEBUG
-    inline void DebugLog(std::string msg)
-    {
-        time_t now = std::time(0);
-        tm* ltm = std::localtime(&now);
-
-        std::string timestamp = "[" + std::to_string(5 + ltm->tm_hour) + ":" + std::to_string(ltm->tm_min) + ":" + std::to_string(ltm->tm_sec) + "] ";
-
-        std::cout << timestamp << msg << std::endl;
-
-    }
+    void DebugLog(std::string msg);
 #else
     #define DebugLog(msg)
 #endif
 
+enum ResourceType
+{
+    SHADER,
+    PROGRAM
+};
+
+// Returns true if error is detected
+bool CheckError(unsigned int resource, ResourceType type);
 
 #endif
