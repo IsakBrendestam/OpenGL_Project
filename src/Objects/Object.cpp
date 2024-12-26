@@ -13,10 +13,6 @@ Object::Object()
         0.0f,  0.5f, 0.0f
     };  
 
-    m_nVertices = 9;
-    m_vertices = (float*)malloc(sizeof(float) * 9);
-    memcpy(m_vertices, vertices, sizeof(float) * 9);
-
     m_shader.LoadShader("shader.vs", "shader.fs");
 
     glGenBuffers(1, &m_VBO);  
@@ -25,7 +21,7 @@ Object::Object()
     glBindVertexArray(m_VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-    glBufferData(GL_ARRAY_BUFFER, m_nVertices * sizeof(float), m_vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);  
@@ -33,7 +29,6 @@ Object::Object()
 
 Object::~Object()
 {
-    free(m_vertices);
 }
 
 void Object::Update()
