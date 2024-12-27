@@ -1,5 +1,6 @@
 #include "Engine.h"
 
+#include <chrono>
 
 #include "Utilities/Debug.h"
 
@@ -68,6 +69,11 @@ int Engine::Run()
 {
     Initialize();
 
+    double deltaTime = 0;
+    double fps = 0;
+
+    auto start { std::chrono::steady_clock::now() };
+
     while(!glfwWindowShouldClose(m_window))
     {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -75,11 +81,16 @@ int Engine::Run()
 
         ProcessInput();
 
-        Update(0);
+        Update(deltaTime);
         Render();
 
         glfwSwapBuffers(m_window);
-        glfwPollEvents();    
+        glfwPollEvents();
+
+        const auto end {std::chrono::steady_clock::now() };
+        deltaTime = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>( end - start).count();
+        start = end;
+        fps = 1000/deltaTime;
     }
 
     Exit();

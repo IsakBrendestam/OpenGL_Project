@@ -18,7 +18,7 @@ void Application::Exit()
 void Application::Update(double deltaTime)
 {
     for (auto& object : m_objects)
-        object->Update();
+        object->Update(deltaTime);
 }
 
 void Application::Draw()

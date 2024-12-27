@@ -22,7 +22,7 @@ public:
     void Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
     void Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
-    virtual void Update();
+    virtual void Update(double deltaTime);
     virtual void Draw() = 0;
 
 protected:

@@ -108,7 +108,7 @@ void Object::GenerateTexture(const std::string& textureName)
     stbi_image_free(data);
 }
 
-void Object::Update()
+void Object::Update(double deltaTime)
 {
     m_transformMat = glm::identity<glm::mat4>();
 
