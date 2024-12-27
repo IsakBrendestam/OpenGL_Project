@@ -1,15 +1,15 @@
 #include "Cube.h"
 
-Cube::Cube(): Object()
+Cube::Cube(glm::vec3 position): Object()
 {
     VertexColor vertices[] = {
-        {-1.0f, -1.0f,  1.0,  0.0f, 0.0f, 0.0f}, //0
+        {-1.0f, -1.0f,  1.0,  0.0f, 0.0f, 1.0f}, //0
         { 1.0f, -1.0f,  1.0,  1.0f, 0.0f, 0.0f}, //1
-        {-1.0f,  1.0f,  1.0,  0.0f, 0.0f, 0.0f}, //2
+        {-1.0f,  1.0f,  1.0,  0.0f, 0.0f, 1.0f}, //2
         { 1.0f,  1.0f,  1.0,  1.0f, 1.0f, 0.0f}, //3
         {-1.0f, -1.0f, -1.0,  1.0f, 1.0f, 0.0f}, //4
         { 1.0f, -1.0f, -1.0,  1.0f, 0.0f, 0.0f}, //5
-        {-1.0f,  1.0f, -1.0,  0.0f, 0.0f, 0.0f}, //6
+        {-1.0f,  1.0f, -1.0,  0.0f, 0.0f, 1.0f}, //6
         { 1.0f,  1.0f, -1.0,  0.0f, 1.0f, 0.0f}, //7
     };
 
@@ -53,7 +53,7 @@ Cube::Cube(): Object()
     MeshTexture mesh = MeshTexture(texVertices, 8, indices, 36, "rust.png");
     MeshColor meshCol = MeshColor(vertices, 8, indices, 36);
 
-    Object::Init(meshCol, {-3.0f, 0.0f, -4.0f}, {0.0f, 0.0f, 90.0f}, {0.5f, 0.5f, 0.5f});
+    Object::Init(meshCol, position, {0.0f, 0.0f, 90.0f}, {0.5f, 0.5f, 0.5f});
 
     m_shader.Use();
 }

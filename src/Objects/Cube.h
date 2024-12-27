@@ -6,7 +6,7 @@
 class Cube : public Object
 {
 public:
-    Cube();
+    Cube(glm::vec3 position);
     ~Cube();
 
     void Update(double deltaTime) override;

@@ -7,8 +7,8 @@
 
 void Application::Initialize()
 {
-    m_objects.push_back(new Rectangle());
-    m_objects.push_back(new Cube());
+    m_objects.push_back(new Cube({-3.0f, 0.0f, -4.0f}));
+    m_objects.push_back(new Cube({2.0f, 0.0f, -2.0f}));
 }
 
 void Application::Exit()
