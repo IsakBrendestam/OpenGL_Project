@@ -14,13 +14,13 @@ class Object
 {
 public:
     Object() = default;
-    Object(const MeshColor& mesh);
-    Object(const MeshTexture& mesh);
+    Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+    Object(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
     virtual ~Object();
 
-    void Init(const MeshColor& mesh);
-    void Init(const MeshTexture& mesh);
+    void Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+    void Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
     virtual void Update();
     virtual void Draw() = 0;
@@ -36,6 +36,10 @@ protected:
     unsigned int m_texture;
 
     Shader m_shader;
+
+    glm::vec3 m_position;
+    glm::vec3 m_rotation;
+    glm::vec3 m_scale;
 
     glm::mat4 m_transformMat;
 };

@@ -5,22 +5,26 @@
 
 #include "Utilities/Debug.h"
 
-Object::Object(const MeshColor& mesh)
+Object::Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
-    Init(mesh);
+    Init(mesh, position, rotation, scale);
 }
 
-Object::Object(const MeshTexture& mesh)
+Object::Object(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
-    Init(mesh);
+    Init(mesh, position, rotation, scale);
 }
 
 Object::~Object()
 {
 }
 
-void Object::Init(const MeshColor& mesh)
+void Object::Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
+    m_position = position;
+    m_rotation = rotation;
+    m_scale = scale;
+
     m_shader.LoadShader("ColorShader.vs", "ColorShader.fs");
 
     glGenBuffers(1, &m_VBO);  
@@ -42,8 +46,12 @@ void Object::Init(const MeshColor& mesh)
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.p_nIndices * sizeof(unsigned int), mesh.p_indices, GL_STATIC_DRAW);
 }
 
-void Object::Init(const MeshTexture& mesh)
+void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
+    m_position = position;
+    m_rotation = rotation;
+    m_scale = scale;
+
     m_shader.LoadShader("TextureShader.vs", "TextureShader.fs");
 
     glGenBuffers(1, &m_VBO);  
@@ -104,9 +112,11 @@ void Object::Update()
 {
     m_transformMat = glm::identity<glm::mat4>();
 
-    m_transformMat = glm::translate(m_transformMat, glm::vec3(0.0f, 0.25f, 0.0f));
-    m_transformMat = glm::rotate(m_transformMat, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-    m_transformMat = glm::scale(m_transformMat, glm::vec3(0.5f, 0.5f, 0.5f));  
+    m_transformMat = glm::translate(m_transformMat, m_position);
+    m_transformMat = glm::rotate(m_transformMat, glm::radians(m_rotation.x), glm::vec3(0.1f, 0.0f, 0.0f));
+    m_transformMat = glm::rotate(m_transformMat, glm::radians(m_rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+    m_transformMat = glm::rotate(m_transformMat, glm::radians(m_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+    m_transformMat = glm::scale(m_transformMat, m_scale);  
 
     m_shader.SetMat4("transform", m_transformMat);
 }
