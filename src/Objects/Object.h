@@ -11,7 +11,7 @@ class Object
 public:
     Object() = default;
     Object(float* vertices, unsigned int nVertices, unsigned int* indices, unsigned int nIndices);
-    ~Object();
+    virtual ~Object();
 
     void Init(float* vertices, unsigned int nVertices, unsigned int* indices, unsigned int nIndices);
 
