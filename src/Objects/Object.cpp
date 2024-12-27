@@ -1,22 +1,25 @@
 #include "Object.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "Utilities/Debug.h"
 
-Object::Object(const VertexColor* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices)
+Object::Object(const MeshColor& mesh)
 {
-    Init(vertices, nVertices, indices, nIndices);
+    Init(mesh);
 }
 
-Object::Object(const VertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices, const std::string& textureName)
+Object::Object(const MeshTexture& mesh)
 {
-    Init(vertices, nVertices, indices, nIndices, textureName);
+    Init(mesh);
 }
 
 Object::~Object()
 {
 }
 
-void Object::Init(const VertexColor* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices)
+void Object::Init(const MeshColor& mesh)
 {
     m_shader.LoadShader("ColorShader.vs", "ColorShader.fs");
 
@@ -27,7 +30,7 @@ void Object::Init(const VertexColor* vertices, unsigned int nVertices, const uns
     glBindVertexArray(m_VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-    glBufferData(GL_ARRAY_BUFFER, nVertices * sizeof(VertexColor), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, mesh.p_nVertices * sizeof(VertexColor), mesh.p_vertices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexColor), (void*)0);
     glEnableVertexAttribArray(0);  
@@ -36,10 +39,10 @@ void Object::Init(const VertexColor* vertices, unsigned int nVertices, const uns
     glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, nIndices * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.p_nIndices * sizeof(unsigned int), mesh.p_indices, GL_STATIC_DRAW);
 }
 
-void Object::Init(const VertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices, const std::string& textureName)
+void Object::Init(const MeshTexture& mesh)
 {
     m_shader.LoadShader("TextureShader.vs", "TextureShader.fs");
 
@@ -51,7 +54,7 @@ void Object::Init(const VertexTexture* vertices, unsigned int nVertices, const u
     glBindVertexArray(m_VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-    glBufferData(GL_ARRAY_BUFFER, nVertices * sizeof(VertexTexture), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, mesh.p_nVertices * sizeof(VertexTexture), mesh.p_vertices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTexture), (void*)0);
     glEnableVertexAttribArray(0);  
@@ -60,9 +63,9 @@ void Object::Init(const VertexTexture* vertices, unsigned int nVertices, const u
     glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, nIndices * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.p_nIndices * sizeof(unsigned int), mesh.p_indices, GL_STATIC_DRAW);
 
-    GenerateTexture(textureName);
+    GenerateTexture(mesh.p_textureName);
 }
 
 void Object::GenerateTexture(const std::string& textureName)
@@ -95,4 +98,15 @@ void Object::GenerateTexture(const std::string& textureName)
     glGenerateMipmap(GL_TEXTURE_2D);
 
     stbi_image_free(data);
+}
+
+void Object::Update()
+{
+    m_transformMat = glm::identity<glm::mat4>();
+
+    m_transformMat = glm::translate(m_transformMat, glm::vec3(0.0f, 0.25f, 0.0f));
+    m_transformMat = glm::rotate(m_transformMat, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    m_transformMat = glm::scale(m_transformMat, glm::vec3(0.5f, 0.5f, 0.5f));  
+
+    m_shader.SetMat4("transform", m_transformMat);
 }

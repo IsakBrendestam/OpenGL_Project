@@ -3,14 +3,14 @@
 
 struct VertexColor
 {
-    float position[3];
-    float color[3];
+    float p_position[3];
+    float p_color[3];
 };
 
 struct VertexTexture
 {
-    float position[3];
-    float uv[2];
+    float p_position[3];
+    float p_stCoord[2];
 };
 
 

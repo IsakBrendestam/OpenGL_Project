@@ -105,6 +105,11 @@ void Shader::SetFlot(const std::string& name, float value)
     glUniform1f(glGetUniformLocation(m_shaderProgram, name.c_str()), value);
 }
 
+void Shader::SetMat4(const std::string& name, glm::mat4 value)
+{
+    glUniformMatrix4fv(glGetUniformLocation(m_shaderProgram, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
+}
+
 Status Shader::GetStatus() const
 {
     return m_status;

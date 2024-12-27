@@ -20,8 +20,10 @@ Rectangle::Rectangle(): Object()
         0, 1, 3,
         1, 2, 3
     };
+
+    MeshTexture mesh = MeshTexture(texVertices, 4, indices, 6, "rust.png");
     
-    Object::Init(texVertices, 4, indices, 6, "rust.png");
+    Object::Init(mesh);
 
     m_shader.Use();
     m_shader.SetFlot("scalar", 1.0f);
@@ -34,7 +36,7 @@ Rectangle::~Rectangle()
 
 void Rectangle::Update()
 {
-
+    Object::Update();
 }
 
 void Rectangle::Draw()
