@@ -7,7 +7,7 @@
 
 #include <stb_image/stb_image.h>
 
-#include "Engine/Resources/Shader.h"
+#include "Engine/OpenGL/ShaderGL.h"
 #include "Engine/Resources/Mesh.h"
 
 class Object
@@ -35,7 +35,7 @@ protected:
 
     unsigned int m_texture;
 
-    Shader m_shader;
+    ShaderGL m_shader;
 
     glm::vec3 m_position;
     glm::vec3 m_rotation;

@@ -1,4 +1,4 @@
-#include "Shader.h"
+#include "ShaderGL.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -11,18 +11,18 @@
 
 #include <iostream>
 
-Shader::Shader():
+ShaderGL::ShaderGL():
     m_status(Status::OK)
 {
 
 }
 
-Shader::~Shader()
+ShaderGL::~ShaderGL()
 {
     glDeleteProgram(m_shaderProgram);
 }
 
-void Shader::LoadShader(std::string vShaderName, std::string fShaderName)
+void ShaderGL::LoadShader(std::string vShaderName, std::string fShaderName)
 {
     std::string shaderData;
 
@@ -68,12 +68,12 @@ void Shader::LoadShader(std::string vShaderName, std::string fShaderName)
     glDeleteShader(fragmentShader); 
 }
 
-void Shader::Use()
+void ShaderGL::Use()
 {
     glUseProgram(m_shaderProgram);
 }
 
-std::string Shader::ReadShaderFile(std::string shaderName)
+std::string ShaderGL::ReadShaderFile(std::string shaderName)
 {
     std::ifstream file("res/Shaders/" + shaderName, std::ios::binary | std::ios::ate);
 
@@ -90,32 +90,32 @@ std::string Shader::ReadShaderFile(std::string shaderName)
     return buffer;
 }
 
-void Shader::SetBool(const std::string& name, bool value)
+void ShaderGL::SetBool(const std::string& name, bool value)
 {
     glUniform1i(glGetUniformLocation(m_shaderProgram, name.c_str()), (int)value);
 }
 
-void Shader::SetInt(const std::string& name, int value)
+void ShaderGL::SetInt(const std::string& name, int value)
 {
     glUniform1i(glGetUniformLocation(m_shaderProgram, name.c_str()), value);
 }
 
-void Shader::SetFlot(const std::string& name, float value)
+void ShaderGL::SetFlot(const std::string& name, float value)
 {
     glUniform1f(glGetUniformLocation(m_shaderProgram, name.c_str()), value);
 }
 
-void Shader::SetMat4(const std::string& name, glm::mat4 value)
+void ShaderGL::SetMat4(const std::string& name, glm::mat4 value)
 {
     glUniformMatrix4fv(glGetUniformLocation(m_shaderProgram, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }
 
-Status Shader::GetStatus() const
+Status ShaderGL::GetStatus() const
 {
     return m_status;
 }
 
-unsigned int Shader::GetShaderProgram() const
+unsigned int ShaderGL::GetShaderProgram() const
 {
     return m_shaderProgram;
 }

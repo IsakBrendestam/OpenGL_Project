@@ -1,5 +1,5 @@
-#ifndef SHADER_HEADER
-#define SHADER_HEADER
+#ifndef SHADERGL_HEADER
+#define SHADERGL_HEADER
 
 #include <string>
 
@@ -11,11 +11,11 @@ enum Status
     ERROR
 };
 
-class Shader
+class ShaderGL
 {
 public:
-    Shader();
-    ~Shader();
+    ShaderGL();
+    ~ShaderGL();
     void LoadShader(std::string vShaderName, std::string fShaderName);
     void Use();
 
