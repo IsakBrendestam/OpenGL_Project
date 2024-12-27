@@ -15,6 +15,9 @@ Rectangle::Rectangle(): Object()
     };
     
     Object::Init(vertices, 4, indices, 6);
+
+    m_shader.Use();
+    m_shader.SetFlot("scalar", 0.5f);
 }
 
 Rectangle::~Rectangle()

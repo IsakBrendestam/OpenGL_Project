@@ -90,12 +90,27 @@ std::string Shader::ReadShaderFile(std::string shaderName)
     return buffer;
 }
 
-Status Shader::GetStatus()
+void Shader::SetBool(const std::string& name, bool value)
+{
+    glUniform1i(glGetUniformLocation(m_shaderProgram, name.c_str()), (int)value);
+}
+
+void Shader::SetInt(const std::string& name, int value)
+{
+    glUniform1i(glGetUniformLocation(m_shaderProgram, name.c_str()), value);
+}
+
+void Shader::SetFlot(const std::string& name, float value)
+{
+    glUniform1f(glGetUniformLocation(m_shaderProgram, name.c_str()), value);
+}
+
+Status Shader::GetStatus() const
 {
     return m_status;
 }
 
-unsigned int Shader::GetShaderProgram()
+unsigned int Shader::GetShaderProgram() const
 {
     return m_shaderProgram;
 }

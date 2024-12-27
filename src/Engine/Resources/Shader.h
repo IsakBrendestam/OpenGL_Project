@@ -16,9 +16,13 @@ public:
     ~Shader();
     void LoadShader(std::string vShaderName, std::string fShaderName);
     void Use();
-    Status GetStatus();
 
-    unsigned int GetShaderProgram();
+    void SetBool(const std::string& name, bool value);
+    void SetInt(const std::string& name, int value);
+    void SetFlot(const std::string& name, float value);
+
+    Status GetStatus() const;
+    unsigned int GetShaderProgram() const;
 
 private:
     std::string ReadShaderFile(std::string shaderName);

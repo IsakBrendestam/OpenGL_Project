@@ -4,7 +4,9 @@ out vec4 FragColor;
 
 in vec4 vertexColor;
 
+uniform float scalar;
+
 void main()
 {
-    FragColor = vertexColor;
+    FragColor = scalar * vertexColor;
 }
