@@ -4,8 +4,6 @@ out vec4 FragColor;
 
 in vec2 textureCoord;
 
-uniform float scalar;
-
 uniform sampler2D textureSampler;
 
 void main()

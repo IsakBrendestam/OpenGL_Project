@@ -26,7 +26,6 @@ Rectangle::Rectangle(): Object()
     Object::Init(mesh, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 90.0f}, {0.5f, 0.5f, 0.5f});
 
     m_shader.Use();
-    m_shader.SetFlot("scalar", 1.0f);
 }
 
 Rectangle::~Rectangle()
