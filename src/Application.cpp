@@ -6,18 +6,23 @@
 
 void Application::Initialize()
 {
-    m_object = new Rectangle();
+    m_objects.push_back(new Rectangle());
 }
 
 void Application::Exit()
 {
+    for (auto& object : m_objects)
+        delete object;
 }
 
 void Application::Update(double deltaTime)
 {
+    for (auto& object : m_objects)
+        object->Update();
 }
 
 void Application::Draw()
 {
-    m_object->Draw();
+    for (auto& object : m_objects)
+        object->Draw();
 }

@@ -1,6 +1,8 @@
 #ifndef APPLICATION_HEADER
 #define APPLICATION_HEADER
 
+#include <vector>
+
 #include "Engine/Engine.h"
 
 #include "Objects/Object.h"
@@ -17,7 +19,7 @@ public:
     void Draw() override;
 
 private:
-    Object* m_object;
+    std::vector<Object*> m_objects;
 };
 
 #endif
