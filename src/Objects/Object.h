@@ -5,15 +5,16 @@
 #include <GLFW/glfw3.h>
 
 #include "Engine/Resources/Shader.h"
+#include "Engine/Resources/Vertex.h"
 
 class Object
 {
 public:
     Object() = default;
-    Object(float* vertices, unsigned int nVertices, unsigned int* indices, unsigned int nIndices);
+    Object(const Vertex* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices);
     virtual ~Object();
 
-    void Init(float* vertices, unsigned int nVertices, unsigned int* indices, unsigned int nIndices);
+    void Init(const Vertex* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices);
 
     virtual void Update() = 0;
     virtual void Draw() = 0;
