@@ -1,7 +1,7 @@
 #ifndef ENGINE_HEADER
 #define ENGINE_HEADER
 
-#include "../../dep/glad/glad.h"
+#include "glad/glad.h"
 #include <GLFW/glfw3.h>
 
 class Engine
