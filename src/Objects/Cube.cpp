@@ -15,28 +15,28 @@ Cube::Cube(glm::vec3 position): Object()
 
     unsigned int indices[] = {
         //Top
-        2, 6, 7,
+        6, 2, 7,
         2, 3, 7,
 
         //Bottom
         0, 4, 5,
-        0, 1, 5,
+        1, 0, 5,
 
         //Left
         0, 2, 6,
-        0, 4, 6,
+        4, 0, 6,
 
         //Right
-        1, 3, 7,
+        3, 1, 7,
         1, 5, 7,
 
         //Front
-        0, 2, 3,
+        2, 0, 3,
         0, 1, 3,
 
         //Back
         4, 6, 7,
-        4, 5, 7
+        5, 4, 7
     };
 
     VertexTexture texVertices[] = {
@@ -107,7 +107,7 @@ Cube::Cube(glm::vec3 position): Object()
     MeshTexture mesh = MeshTexture(texVertices, 24, texIndices, 36, "tiles.jpg");
     MeshColor meshCol = MeshColor(vertices, 8, indices, 36);
 
-    Object::Init(mesh, position, {0.0f, 0.0f, 90.0f}, {0.5f, 0.5f, 0.5f});
+    Object::Init(meshCol, position, {0.0f, 0.0f, 90.0f}, {0.5f, 0.5f, 0.5f});
 
     m_shader.Use();
 }

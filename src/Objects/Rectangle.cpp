@@ -24,8 +24,8 @@ Rectangle::Rectangle(): Object()
     MeshColor meshCol = MeshColor(vertices, 4, indices, 6);
     MeshTexture mesh = MeshTexture(texVertices, 4, indices, 6, "grid.jpg");
 
-    //Object::Init(mesh, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 90.0f}, {0.5f, 0.5f, 0.5f});
-    Object::Init(mesh, {0.0f, -1.0f, -5.0f}, {90.0f, 0.0f, 0.0f}, {5.0f, 5.0f, 5.0f});
+    Object::Init(meshCol, {0.0f, -1.0f, -1.0f}, {90.0f, 0.0f, 0.0f}, {1.5f, 1.5f, 1.5f});
+    //Object::Init(mesh, {0.0f, -1.0f, -5.0f}, {90.0f, 0.0f, 0.0f}, {5.0f, 5.0f, 5.0f});
 
     m_shader.Use();
 }
@@ -36,7 +36,11 @@ Rectangle::~Rectangle()
 }
 
 void Rectangle::Update(double deltaTime)
-{
+{    
+    m_rotation.x += glm::radians(2.0f) * deltaTime;
+    m_rotation.y += glm::radians(2.0f) * deltaTime;
+    m_rotation.z += glm::radians(2.0f) * deltaTime;
+
     Object::Update(deltaTime);
 }
 
