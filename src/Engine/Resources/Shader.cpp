@@ -11,7 +11,8 @@
 
 #include <iostream>
 
-Shader::Shader()
+Shader::Shader():
+    m_status(Status::OK)
 {
 
 }
@@ -49,7 +50,8 @@ void Shader::LoadShader(std::string vShaderName, std::string fShaderName)
     glCompileShader(fragmentShader);
 
     // Check compilation
-    CheckError(fragmentShader, ResourceType::SHADER);
+    if (CheckError(fragmentShader, ResourceType::SHADER))
+        m_status = Status::ERROR;
 
     // Create shader program
     m_shaderProgram = glCreateProgram();
@@ -58,7 +60,8 @@ void Shader::LoadShader(std::string vShaderName, std::string fShaderName)
     glAttachShader(m_shaderProgram, fragmentShader);
     glLinkProgram(m_shaderProgram);
 
-    CheckError(m_shaderProgram, ResourceType::PROGRAM);
+    if (CheckError(m_shaderProgram, ResourceType::PROGRAM))
+        m_status = Status::ERROR;
 
     // Destory shaders
     glDeleteShader(vertexShader);
@@ -87,7 +90,7 @@ std::string Shader::ReadShaderFile(std::string shaderName)
     return buffer;
 }
 
-bool Shader::GetStatus()
+Status Shader::GetStatus()
 {
     return m_status;
 }

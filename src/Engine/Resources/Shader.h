@@ -3,6 +3,12 @@
 
 #include <string>
 
+enum Status
+{
+    OK,
+    ERROR
+};
+
 class Shader
 {
 public:
@@ -10,7 +16,7 @@ public:
     ~Shader();
     void LoadShader(std::string vShaderName, std::string fShaderName);
     void Use();
-    bool GetStatus();
+    Status GetStatus();
 
     unsigned int GetShaderProgram();
 
@@ -19,7 +25,7 @@ private:
 
 private:
     unsigned int m_shaderProgram;
-    bool m_status;
+    Status m_status;
 };
 
 #endif
