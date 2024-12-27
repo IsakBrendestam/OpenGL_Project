@@ -14,12 +14,12 @@ class Object
 public:
     Object() = default;
     Object(const VertexColor* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices);
-    Object(const VertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices);
+    Object(const VertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices, const std::string& textureName);
 
     virtual ~Object();
 
     void Init(const VertexColor* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices);
-    void Init(const VertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices);
+    void Init(const VertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices, const std::string& textureName);
 
     virtual void Update() = 0;
     virtual void Draw() = 0;

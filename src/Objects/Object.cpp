@@ -7,9 +7,9 @@ Object::Object(const VertexColor* vertices, unsigned int nVertices, const unsign
     Init(vertices, nVertices, indices, nIndices);
 }
 
-Object::Object(const VertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices)
+Object::Object(const VertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices, const std::string& textureName)
 {
-    Init(vertices, nVertices, indices, nIndices);
+    Init(vertices, nVertices, indices, nIndices, textureName);
 }
 
 Object::~Object()
@@ -39,10 +39,9 @@ void Object::Init(const VertexColor* vertices, unsigned int nVertices, const uns
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, nIndices * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 }
 
-void Object::Init(const VertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices)
+void Object::Init(const VertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices, const std::string& textureName)
 {
     m_shader.LoadShader("TextureShader.vs", "TextureShader.fs");
-
 
     glGenBuffers(1, &m_VBO);  
     glGenBuffers(1, &m_EBO);
@@ -63,7 +62,7 @@ void Object::Init(const VertexTexture* vertices, unsigned int nVertices, const u
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, nIndices * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 
-    GenerateTexture("container.jpg");
+    GenerateTexture(textureName);
 }
 
 void Object::GenerateTexture(const std::string& textureName)
@@ -78,9 +77,9 @@ void Object::GenerateTexture(const std::string& textureName)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     std::string texturePath = "res/Textures/" + textureName;
-    int width, height, nrChannels;
+    int width, height, nChannels;
     stbi_set_flip_vertically_on_load(true);  
-    unsigned char *data = stbi_load(texturePath.c_str(), &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load(texturePath.c_str(), &width, &height, &nChannels, 0);
 
     if (!data)
     {
@@ -88,7 +87,11 @@ void Object::GenerateTexture(const std::string& textureName)
         return;
     }
     
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    if (nChannels == 4)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    else
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
     glGenerateMipmap(GL_TEXTURE_2D);
 
     stbi_image_free(data);

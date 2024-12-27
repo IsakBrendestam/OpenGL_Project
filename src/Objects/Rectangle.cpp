@@ -21,7 +21,7 @@ Rectangle::Rectangle(): Object()
         1, 2, 3
     };
     
-    Object::Init(texVertices, 4, indices, 6);
+    Object::Init(texVertices, 4, indices, 6, "rust.png");
 
     m_shader.Use();
     m_shader.SetFlot("scalar", 1.0f);
