@@ -13,17 +13,6 @@ Cube::Cube(glm::vec3 position): Object()
         { 1.0f,  1.0f, -1.0,  0.0f, 1.0f, 0.0f}, //7
     };
 
-    VertexTexture texVertices[] = {
-        {-1.0f, -1.0f,  1.0f,  0.0f, 0.0f}, //0
-        { 1.0f, -1.0f,  1.0f,  1.0f, 0.0f}, //1
-        {-1.0f,  1.0f,  1.0f,  0.0f, 0.0f}, //2
-        { 1.0f,  1.0f,  1.0f,  1.0f, 1.0f}, //3
-        {-1.0f, -1.0f, -1.0f,  1.0f, 1.0f}, //4
-        { 1.0f, -1.0f, -1.0f,  1.0f, 0.0f}, //5
-        {-1.0f,  1.0f, -1.0f,  0.0f, 0.0f}, //6
-        { 1.0f,  1.0f, -1.0f,  0.0f, 1.0f}, //7
-    };
-
     unsigned int indices[] = {
         //Top
         2, 6, 7,
@@ -50,10 +39,75 @@ Cube::Cube(glm::vec3 position): Object()
         4, 5, 7
     };
 
-    MeshTexture mesh = MeshTexture(texVertices, 8, indices, 36, "rust.png");
+    VertexTexture texVertices[] = {
+        // Front face
+        {{-1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}}, // Bottom-left
+        {{ 1.0f, -1.0f,  1.0f}, {1.0f, 0.0f}}, // Bottom-right
+        {{ 1.0f,  1.0f,  1.0f}, {1.0f, 1.0f}}, // Top-right
+        {{-1.0f,  1.0f,  1.0f}, {0.0f, 1.0f}}, // Top-left
+
+        // Back face
+        {{ 1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}}, // Bottom-left
+        {{-1.0f, -1.0f, -1.0f}, {1.0f, 0.0f}}, // Bottom-right
+        {{-1.0f,  1.0f, -1.0f}, {1.0f, 1.0f}}, // Top-right
+        {{ 1.0f,  1.0f, -1.0f}, {0.0f, 1.0f}}, // Top-left
+
+        // Left face
+        {{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}}, // Bottom-left
+        {{-1.0f, -1.0f,  1.0f}, {1.0f, 0.0f}}, // Bottom-right
+        {{-1.0f,  1.0f,  1.0f}, {1.0f, 1.0f}}, // Top-right
+        {{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f}}, // Top-left
+
+        // Right face
+        {{ 1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}}, // Bottom-left
+        {{ 1.0f, -1.0f, -1.0f}, {1.0f, 0.0f}}, // Bottom-right
+        {{ 1.0f,  1.0f, -1.0f}, {1.0f, 1.0f}}, // Top-right
+        {{ 1.0f,  1.0f,  1.0f}, {0.0f, 1.0f}}, // Top-left
+
+        // Top face
+        {{-1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}}, // Bottom-left
+        {{ 1.0f,  1.0f,  1.0f}, {1.0f, 0.0f}}, // Bottom-right
+        {{ 1.0f,  1.0f, -1.0f}, {1.0f, 1.0f}}, // Top-right
+        {{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f}}, // Top-left
+
+        // Bottom face
+        {{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}}, // Bottom-left
+        {{ 1.0f, -1.0f, -1.0f}, {1.0f, 0.0f}}, // Bottom-right
+        {{ 1.0f, -1.0f,  1.0f}, {1.0f, 1.0f}}, // Top-right
+        {{-1.0f, -1.0f,  1.0f}, {0.0f, 1.0f}}, // Top-left
+    };
+
+    unsigned int texIndices[] = {
+        // Front face
+        0, 1, 2,  
+        2, 3, 0,
+
+        // Back face
+        4, 5, 6,  
+        6, 7, 4,
+
+        // Left face
+        8, 9, 10, 
+        10, 11, 8,
+
+        // Right face
+        12, 13, 14, 
+        14, 15, 12,
+
+        // Top face
+        16, 17, 18, 
+        18, 19, 16,
+
+        // Bottom face
+        20, 21, 22, 
+        22, 23, 20,
+    };
+
+
+    MeshTexture mesh = MeshTexture(texVertices, 24, texIndices, 36, "tiles.jpg");
     MeshColor meshCol = MeshColor(vertices, 8, indices, 36);
 
-    Object::Init(meshCol, position, {0.0f, 0.0f, 90.0f}, {0.5f, 0.5f, 0.5f});
+    Object::Init(mesh, position, {0.0f, 0.0f, 90.0f}, {0.5f, 0.5f, 0.5f});
 
     m_shader.Use();
 }
