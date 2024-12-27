@@ -5,6 +5,7 @@
 #include "Utilities/Debug.h"
 
 #include "EngineSettings.h"
+#include "CameraManager.h"
 
 Engine::Engine()
 {
@@ -14,6 +15,8 @@ Engine::Engine()
 Engine::~Engine()
 {
     glfwTerminate();
+
+    CameraManager::Deconstruct();
 }
 
 int Engine::Init()
@@ -23,6 +26,8 @@ int Engine::Init()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Create GLFW Window
     m_window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
@@ -42,6 +47,11 @@ int Engine::Init()
     }   
 
     glfwSetFramebufferSizeCallback(m_window, SetViewportSize); 
+
+    glEnable(GL_DEPTH_TEST);
+
+    ProjectionInfo projInfo = {glm::radians(45.0f), (float)EngineSettings::g_windowWidth / (float)EngineSettings::g_windowHeight, 0.1f, 100.0f};
+    CameraManager::AddCamera(projInfo, {0.0f, 0.0f, -3.0f}, {0.0f, 0.0f, 0.0f});
 
     return 0;
 }
@@ -77,7 +87,7 @@ int Engine::Run()
     while(!glfwWindowShouldClose(m_window))
     {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         ProcessInput();
 

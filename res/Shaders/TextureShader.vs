@@ -5,10 +5,11 @@ layout (location = 1) in vec2 aST;
 
 out vec2 textureCoord;
 
-uniform mat4 transform;
+uniform mat4 worldMat;
+uniform mat4 viewProjectionMat;
 
 void main()
 {
-    gl_Position = transform * vec4(aPos, 1.0f);
+    gl_Position = viewProjectionMat * worldMat * vec4(aPos, 1.0f);
     textureCoord = aST;
 }

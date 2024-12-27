@@ -3,10 +3,13 @@
 #include "Utilities/Debug.h"
 
 #include "Objects/Rectangle.h"
+#include "Objects/Cube.h"
 
 void Application::Initialize()
 {
-    m_objects.push_back(new Rectangle());
+    //m_objects.push_back(new Rectangle());
+    //m_objects.push_back(new Rectangle());
+    m_objects.push_back(new Cube());
 }
 
 void Application::Exit()
@@ -25,4 +28,5 @@ void Application::Draw()
 {
     for (auto& object : m_objects)
         object->Draw();
+
 }

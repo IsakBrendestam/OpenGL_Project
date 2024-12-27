@@ -5,6 +5,8 @@
 
 #include "Utilities/Debug.h"
 
+#include "Engine/CameraManager.h"
+
 Object::Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
     Init(mesh, position, rotation, scale);
@@ -113,10 +115,12 @@ void Object::Update(double deltaTime)
     m_transformMat = glm::identity<glm::mat4>();
 
     m_transformMat = glm::translate(m_transformMat, m_position);
-    m_transformMat = glm::rotate(m_transformMat, glm::radians(m_rotation.x), glm::vec3(0.1f, 0.0f, 0.0f));
+    m_transformMat = glm::rotate(m_transformMat, glm::radians(m_rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
     m_transformMat = glm::rotate(m_transformMat, glm::radians(m_rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
     m_transformMat = glm::rotate(m_transformMat, glm::radians(m_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
     m_transformMat = glm::scale(m_transformMat, m_scale);  
 
-    m_shader.SetMat4("transform", m_transformMat);
+    m_shader.SetMat4("worldMat", m_transformMat);
+
+    m_shader.SetMat4("viewProjectionMat", CameraManager::GetCamera(0).GetViewProjectionMatrix());
 }
