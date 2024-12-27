@@ -7,8 +7,7 @@
 
 void Application::Initialize()
 {
-    //m_objects.push_back(new Rectangle());
-    //m_objects.push_back(new Rectangle());
+    m_objects.push_back(new Rectangle());
     m_objects.push_back(new Cube());
 }
 
@@ -28,5 +27,4 @@ void Application::Draw()
 {
     for (auto& object : m_objects)
         object->Draw();
-
 }

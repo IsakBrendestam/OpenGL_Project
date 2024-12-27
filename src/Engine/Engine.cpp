@@ -58,6 +58,9 @@ int Engine::Init()
 
 void Engine::Render()
 {
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     if (EngineSettings::g_wireframeOn)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -86,8 +89,6 @@ int Engine::Run()
 
     while(!glfwWindowShouldClose(m_window))
     {
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         ProcessInput();
 

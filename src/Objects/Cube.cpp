@@ -53,7 +53,7 @@ Cube::Cube(): Object()
     MeshTexture mesh = MeshTexture(texVertices, 8, indices, 36, "rust.png");
     MeshColor meshCol = MeshColor(vertices, 8, indices, 36);
 
-    Object::Init(meshCol, {0.0f, 0.0f, -2.0f}, {0.0f, 0.0f, 90.0f}, {0.5f, 0.5f, 0.5f});
+    Object::Init(meshCol, {-3.0f, 0.0f, -4.0f}, {0.0f, 0.0f, 90.0f}, {0.5f, 0.5f, 0.5f});
 
     m_shader.Use();
 }

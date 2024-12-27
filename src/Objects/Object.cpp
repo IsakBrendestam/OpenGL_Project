@@ -120,7 +120,7 @@ void Object::Update(double deltaTime)
     m_transformMat = glm::rotate(m_transformMat, glm::radians(m_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
     m_transformMat = glm::scale(m_transformMat, m_scale);  
 
+    m_shader.Use();
     m_shader.SetMat4("worldMat", m_transformMat);
-
     m_shader.SetMat4("viewProjectionMat", CameraManager::GetCamera(0).GetViewProjectionMatrix());
 }
