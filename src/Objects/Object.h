@@ -1,10 +1,9 @@
 #ifndef OBJECT_HEADER
 #define OBJECT_HEADER
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
-#include "stb_image/stb_image.h"
+#include <stb_image/stb_image.h>
 
 #include "Engine/Resources/Shader.h"
 #include "Engine/Resources/Vertex.h"

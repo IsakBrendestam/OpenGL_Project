@@ -45,7 +45,10 @@ GLFW_LIB_PATH := $(GLFW_PAHT)/lib
 # GLAD paths
 GLAD_PATH := $(DEP)/glad
 
-INCLUDE := -I$(GLFW_INCLUDE_PATH) -I$(GLAD_PATH) -I$(DEP) -I$(SRC)
+# GLM paths
+GLM_PATH := $(DEP)/glm
+
+INCLUDE := -I$(DEP) -I$(GLFW_INCLUDE_PATH) -I$(GLAD_PATH) -I$(GLM_PATH) -I$(SRC)
 LIBS :=  -L$(GLFW_LIB_PATH)
 
 SRC_FILES := $(shell find $(SRC) -name '*.cpp')
