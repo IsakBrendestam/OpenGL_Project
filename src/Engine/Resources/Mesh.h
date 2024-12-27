@@ -11,44 +11,44 @@
 
 struct MeshColor
 {
-    VertexColor* p_vertices;
-    unsigned int p_nVertices;
-    unsigned int* p_indices;
-    unsigned int p_nIndices;
+    VertexColor* g_vertices;
+    unsigned int g_nVertices;
+    unsigned int* g_indices;
+    unsigned int g_nIndices;
 
     MeshColor(const VertexColor* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices):
-        p_nVertices(nVertices), p_nIndices(nIndices)
+        g_nVertices(nVertices), g_nIndices(nIndices)
     {
-        p_vertices = (VertexColor*)std::malloc(p_nVertices * sizeof(VertexColor));
-        std::memcpy(p_vertices, vertices, p_nVertices * sizeof(VertexColor));
+        g_vertices = (VertexColor*)std::malloc(g_nVertices * sizeof(VertexColor));
+        std::memcpy(g_vertices, vertices, g_nVertices * sizeof(VertexColor));
 
-        p_indices = (unsigned int*)std::malloc(p_nIndices * sizeof(unsigned int));
-        std::memcpy(p_indices, indices, p_nIndices * sizeof(unsigned int));
+        g_indices = (unsigned int*)std::malloc(g_nIndices * sizeof(unsigned int));
+        std::memcpy(g_indices, indices, g_nIndices * sizeof(unsigned int));
     }
 };
 
 struct MeshTexture
 {
-    VertexTexture* p_vertices;
-    unsigned int p_nVertices;
-    unsigned int* p_indices;
-    unsigned int p_nIndices;
-    std::string p_textureName;
+    VertexTexture* g_vertices;
+    unsigned int g_nVertices;
+    unsigned int* g_indices;
+    unsigned int g_nIndices;
+    std::string g_textureName;
 
     MeshTexture(const VertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices, const std::string& textureName):
-        p_nVertices(nVertices), p_nIndices(nIndices), p_textureName(textureName)
+        g_nVertices(nVertices), g_nIndices(nIndices), g_textureName(textureName)
     {
-        p_vertices = (VertexTexture*)std::malloc(p_nVertices * sizeof(VertexTexture));
-        std::memcpy(p_vertices, vertices, p_nVertices * sizeof(VertexTexture));
+        g_vertices = (VertexTexture*)std::malloc(g_nVertices * sizeof(VertexTexture));
+        std::memcpy(g_vertices, vertices, g_nVertices * sizeof(VertexTexture));
 
-        p_indices = (unsigned int*)std::malloc(p_nIndices * sizeof(unsigned int));
-        std::memcpy(p_indices, indices, p_nIndices * sizeof(unsigned int));
+        g_indices = (unsigned int*)std::malloc(g_nIndices * sizeof(unsigned int));
+        std::memcpy(g_indices, indices, g_nIndices * sizeof(unsigned int));
     }
 
     ~MeshTexture()
     {
-        free(p_vertices);
-        free(p_indices);
+        free(g_vertices);
+        free(g_indices);
     }
 };
 

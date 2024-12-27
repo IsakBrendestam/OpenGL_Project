@@ -34,7 +34,7 @@ void Object::Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation,
     glBindVertexArray(m_VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-    glBufferData(GL_ARRAY_BUFFER, mesh.p_nVertices * sizeof(VertexColor), mesh.p_vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, mesh.g_nVertices * sizeof(VertexColor), mesh.g_vertices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexColor), (void*)0);
     glEnableVertexAttribArray(0);  
@@ -43,7 +43,7 @@ void Object::Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation,
     glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.p_nIndices * sizeof(unsigned int), mesh.p_indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.g_nIndices * sizeof(unsigned int), mesh.g_indices, GL_STATIC_DRAW);
 }
 
 void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
@@ -62,7 +62,7 @@ void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotatio
     glBindVertexArray(m_VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-    glBufferData(GL_ARRAY_BUFFER, mesh.p_nVertices * sizeof(VertexTexture), mesh.p_vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, mesh.g_nVertices * sizeof(VertexTexture), mesh.g_vertices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTexture), (void*)0);
     glEnableVertexAttribArray(0);  
@@ -71,9 +71,9 @@ void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotatio
     glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.p_nIndices * sizeof(unsigned int), mesh.p_indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.g_nIndices * sizeof(unsigned int), mesh.g_indices, GL_STATIC_DRAW);
 
-    GenerateTexture(mesh.p_textureName);
+    GenerateTexture(mesh.g_textureName);
 }
 
 void Object::GenerateTexture(const std::string& textureName)
