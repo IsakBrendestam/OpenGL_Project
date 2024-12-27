@@ -49,6 +49,7 @@ void Engine::Render()
 {
     if (EngineSettings::g_wireframeOn)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
     Draw();
 }
 
@@ -73,11 +74,6 @@ int Engine::Run()
         glClear(GL_COLOR_BUFFER_BIT);
 
         ProcessInput();
-
-        if (EngineSettings::g_wireframeOn)
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        else
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         Update(0);
         Render();
