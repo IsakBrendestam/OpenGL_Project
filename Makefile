@@ -6,17 +6,25 @@ OPT_FLAG := O2
 DEBUG := true
 DEBUG_MACRO := DEBUG
 
+ANALYZE := false
+ANALYZE_FLAG := analyze
+
 APP_NAME := hello_triangle
 
 # Compiling
 CXX := clang++
 
+LDFLAGS := -lglfw
 CXXFLAGS := -std=c++17
+
 ifeq ($(DEBUG), true)
 	CXXFLAGS += -D$(DEBUG_MACRO)
+	ifeq ($(ANALYZE), true)
+		CXXFLAGS += --$(ANALYZE_FLAG)
+		LDFLAGS += --$(ANALYZE_FLAG)
+	endif
 endif
 
-LDFLAGS := -lglfw
 ifeq ($(OPTIMIZE), true)
 	LDFLAGS += -$(OPT_FLAG)
 endif
@@ -43,13 +51,15 @@ LIBS :=  -L$(GLFW_LIB_PATH)
 SRC_FILES := $(shell find $(SRC) -name '*.cpp')
 FILES := $(patsubst %.cpp, $(BUILD)/%.o, $(notdir $(SRC_FILES))) $(BUILD)/main.o
 
-all: $(APP_NAME)
+all: build
 
 libs:
 	cd $(GLAD_PATH) && $(CXX) -o glad.o -Iinclude -c glad.c    # && ar -rc glad.a glad.o
 
+build: $(APP_NAME)
+
 $(APP_NAME): $(FILES)
-	$(CXX) -o $(APP_NAME) $^ $(GLAD_PATH)/glad.o $(INCLUDE) $(LIBS) $(LDFLAGS)
+	$(CXX) $(LDFLAGS) -o $@ $^ $(GLAD_PATH)/glad.o $(INCLUDE) $(LIBS)
 
 $(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h
 	$(CXX) $(CXXFLAGS) -o $@ -c $< $(INCLUDE)
@@ -63,10 +73,12 @@ $(BUILD)/%.o: $(SRC)/**/**/%.cpp $(SRC)/**/**/%.h
 $(BUILD)/main.o: $(SRC)/main.cpp
 	$(CXX) $(CXXFLAGS) -o $@ -c $< $(INCLUDE)
 
+rebuild: clean build
+
 run: all
 	./$(APP_NAME)
 
-restart: clean run
+refresh: clean run
 
 clean:
 	rm -f $(APP_NAME) *.o $(BUILD)/*.o
