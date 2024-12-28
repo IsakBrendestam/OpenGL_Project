@@ -1,5 +1,7 @@
 #include "Cube.h"
 
+#include "Engine/Resources/Light.h"
+
 Cube::Cube(glm::vec3 position): Object()
 {
     VertexColor vertices[] = {
@@ -41,40 +43,40 @@ Cube::Cube(glm::vec3 position): Object()
 
     VertexTexture texVertices[] = {
         // Front face
-        {{-1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}}, // Bottom-left
-        {{ 1.0f, -1.0f,  1.0f}, {1.0f, 0.0f}}, // Bottom-right
-        {{ 1.0f,  1.0f,  1.0f}, {1.0f, 1.0f}}, // Top-right
-        {{-1.0f,  1.0f,  1.0f}, {0.0f, 1.0f}}, // Top-left
+        {{-1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}, {0.0f,  0.0f, -1.0f}}, // Bottom-left
+        {{ 1.0f, -1.0f,  1.0f}, {1.0f, 0.0f}, {0.0f,  0.0f, -1.0f}}, // Bottom-right
+        {{ 1.0f,  1.0f,  1.0f}, {1.0f, 1.0f}, {0.0f,  0.0f, -1.0f}}, // Top-right
+        {{-1.0f,  1.0f,  1.0f}, {0.0f, 1.0f}, {0.0f,  0.0f, -1.0f}}, // Top-left
 
         // Back face
-        {{ 1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}}, // Bottom-left
-        {{-1.0f, -1.0f, -1.0f}, {1.0f, 0.0f}}, // Bottom-right
-        {{-1.0f,  1.0f, -1.0f}, {1.0f, 1.0f}}, // Top-right
-        {{ 1.0f,  1.0f, -1.0f}, {0.0f, 1.0f}}, // Top-left
+        {{ 1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}, { 0.0f,  0.0f,  1.0f}}, // Bottom-left
+        {{-1.0f, -1.0f, -1.0f}, {1.0f, 0.0f}, { 0.0f,  0.0f,  1.0f}}, // Bottom-right
+        {{-1.0f,  1.0f, -1.0f}, {1.0f, 1.0f}, { 0.0f,  0.0f,  1.0f}}, // Top-right
+        {{ 1.0f,  1.0f, -1.0f}, {0.0f, 1.0f}, { 0.0f,  0.0f,  1.0f}}, // Top-left
 
         // Left face
-        {{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}}, // Bottom-left
-        {{-1.0f, -1.0f,  1.0f}, {1.0f, 0.0f}}, // Bottom-right
-        {{-1.0f,  1.0f,  1.0f}, {1.0f, 1.0f}}, // Top-right
-        {{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f}}, // Top-left
+        {{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}, {-1.0f,  0.0f,  0.0f}}, // Bottom-left
+        {{-1.0f, -1.0f,  1.0f}, {1.0f, 0.0f}, {-1.0f,  0.0f,  0.0f}}, // Bottom-right
+        {{-1.0f,  1.0f,  1.0f}, {1.0f, 1.0f}, {-1.0f,  0.0f,  0.0f}}, // Top-right
+        {{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f}, {-1.0f,  0.0f,  0.0f}}, // Top-left
 
         // Right face
-        {{ 1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}}, // Bottom-left
-        {{ 1.0f, -1.0f, -1.0f}, {1.0f, 0.0f}}, // Bottom-right
-        {{ 1.0f,  1.0f, -1.0f}, {1.0f, 1.0f}}, // Top-right
-        {{ 1.0f,  1.0f,  1.0f}, {0.0f, 1.0f}}, // Top-left
+        {{ 1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}, { 1.0f,  0.0f,  0.0f}}, // Bottom-left
+        {{ 1.0f, -1.0f, -1.0f}, {1.0f, 0.0f}, { 1.0f,  0.0f,  0.0f}}, // Bottom-right
+        {{ 1.0f,  1.0f, -1.0f}, {1.0f, 1.0f}, { 1.0f,  0.0f,  0.0f}}, // Top-right
+        {{ 1.0f,  1.0f,  1.0f}, {0.0f, 1.0f}, { 1.0f,  0.0f,  0.0f}}, // Top-left
 
         // Top face
-        {{-1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}}, // Bottom-left
-        {{ 1.0f,  1.0f,  1.0f}, {1.0f, 0.0f}}, // Bottom-right
-        {{ 1.0f,  1.0f, -1.0f}, {1.0f, 1.0f}}, // Top-right
-        {{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f}}, // Top-left
+        {{-1.0f,  1.0f,  1.0f}, {0.0f, 0.0f}, { 0.0f, -1.0f,  0.0f}}, // Bottom-left
+        {{ 1.0f,  1.0f,  1.0f}, {1.0f, 0.0f}, { 0.0f, -1.0f,  0.0f}}, // Bottom-right
+        {{ 1.0f,  1.0f, -1.0f}, {1.0f, 1.0f}, { 0.0f, -1.0f,  0.0f}}, // Top-right
+        {{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f}, { 0.0f, -1.0f,  0.0f}}, // Top-left
 
         // Bottom face
-        {{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}}, // Bottom-left
-        {{ 1.0f, -1.0f, -1.0f}, {1.0f, 0.0f}}, // Bottom-right
-        {{ 1.0f, -1.0f,  1.0f}, {1.0f, 1.0f}}, // Top-right
-        {{-1.0f, -1.0f,  1.0f}, {0.0f, 1.0f}}, // Top-left
+        {{-1.0f, -1.0f, -1.0f}, {0.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}}, // Bottom-left
+        {{ 1.0f, -1.0f, -1.0f}, {1.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}}, // Bottom-right
+        {{ 1.0f, -1.0f,  1.0f}, {1.0f, 1.0f}, { 0.0f,  1.0f,  0.0f}}, // Top-right
+        {{-1.0f, -1.0f,  1.0f}, {0.0f, 1.0f}, { 0.0f,  1.0f,  0.0f}}, // Top-left
     };
 
     unsigned int texIndices[] = {
@@ -123,6 +125,11 @@ void Cube::Update(double deltaTime)
     m_rotation.z += glm::radians(2.0f) * deltaTime;
 
     Object::Update(deltaTime);
+
+    LightData lightData = {{0, 0, 0}, {1.0f, 1.0f, 1.0f}, 0.75f};
+    m_shader.Setvec3("lightData.position", lightData.position);
+    m_shader.Setvec3("lightData.color", lightData.color);
+    m_shader.SetFlot("lightData.ambientIntencity", lightData.ambientIntencity);
 }
 
 void Cube::Draw()

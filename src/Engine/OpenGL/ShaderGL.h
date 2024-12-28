@@ -22,6 +22,7 @@ public:
     void SetBool(const std::string& name, bool value);
     void SetInt(const std::string& name, int value);
     void SetFlot(const std::string& name, float value);
+    void Setvec3(const std::string& name, glm::vec3 value);
     void SetMat4(const std::string& name, glm::mat4 value);
 
     Status GetStatus() const;

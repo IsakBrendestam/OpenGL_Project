@@ -3,11 +3,24 @@
 out vec4 FragColor;
 
 in vec2 textureCoord;
+in vec3 normal;
 
 uniform sampler2D textureSampler;
 
+// Light Data
+struct LightData 
+{
+    vec3 position;
+    vec3 color;
+    float ambientIntencity;
+};
+
+uniform LightData lightData;
+
 void main()
 {
-    //FragColor = vec4(textureCoord, 0, 1);
-    FragColor = texture(textureSampler, textureCoord);
+    vec3 sampleColor = texture(textureSampler, textureCoord).xyz;
+
+    vec3 res = sampleColor * lightData.ambientIntencity;
+    FragColor = vec4(res, 1.0f);
 }
