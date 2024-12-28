@@ -4,7 +4,6 @@
 CameraGL::CameraGL(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation):
     m_position(position), m_rotation(rotation)
 {
-    m_rotation = {0.0f, -90.0f, 0.0f};
     m_projectionMat = glm::perspective(projectionInfo.fovAngleY,
                                        projectionInfo.aspectRatio,
                                        projectionInfo.nearZ,
@@ -14,10 +13,14 @@ CameraGL::CameraGL(const ProjectionInfo& projectionInfo, glm::vec3 position, glm
 
 void CameraGL::Update(double deltaTime, GLFWwindow* window)
 {
-    /*
-    m_rotation.y -= 0.01f * deltaTime;
-    m_rotation.x -= 0.01f * deltaTime;
-    */
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+        m_rotation.x += m_rotSpeed * deltaTime;
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+        m_rotation.x -= m_rotSpeed * deltaTime;
+    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+        m_rotation.y += m_rotSpeed * deltaTime;
+    if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+        m_rotation.y -= m_rotSpeed * deltaTime;
 
     m_direction.x = cos(glm::radians(m_rotation.y)) * cos(glm::radians(m_rotation.x));
     m_direction.y = sin(glm::radians(m_rotation.x));

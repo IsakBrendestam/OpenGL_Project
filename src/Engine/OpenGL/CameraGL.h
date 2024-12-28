@@ -36,8 +36,8 @@ private:
     glm::vec3 m_direction;
     const glm::vec3 m_up = {0.0f, 1.0f, 0.0f};
 
-    const float m_moveSpeed = 0.001f;
-    const float m_rotSpeed = 0.01f;
+    const float m_moveSpeed = 0.0025f;
+    const float m_rotSpeed = 0.025f;
 };
 
 #endif
