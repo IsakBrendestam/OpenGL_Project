@@ -72,6 +72,9 @@ void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotatio
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(VertexTexture), (void*)(3*sizeof(float)));
     glEnableVertexAttribArray(1);
 
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTexture), (void*)(5*sizeof(float)));
+    glEnableVertexAttribArray(2);
+
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.g_nIndices * sizeof(unsigned int), mesh.g_indices, GL_STATIC_DRAW);
 
