@@ -7,7 +7,8 @@ struct LightData
 {
     glm::vec3 position;
     glm::vec3 color;
-    float ambientIntencity;
+    float ambientIntensity;
+    float lightIntensity;
 };
 
 
