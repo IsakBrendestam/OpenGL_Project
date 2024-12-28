@@ -103,11 +103,10 @@ Cube::Cube(glm::vec3 position): Object()
         22, 23, 20,
     };
 
-
     MeshTexture mesh = MeshTexture(texVertices, 24, texIndices, 36, "tiles.jpg");
     MeshColor meshCol = MeshColor(vertices, 8, indices, 36);
 
-    Object::Init(meshCol, position, {0.0f, 0.0f, 90.0f}, {0.5f, 0.5f, 0.5f});
+    Object::Init(mesh, position, {0.0f, 0.0f, 90.0f}, {0.5f, 0.5f, 0.5f});
 
     m_shader.Use();
 }
