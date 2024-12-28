@@ -8,10 +8,10 @@ void CameraManager::Deconstruct()
         delete camera;
 }
 
-void CameraManager::Update(double deltaTime)
+void CameraManager::Update(double deltaTime, GLFWwindow* window)
 {
     for (auto& camera : m_cameras)
-        camera->Update(deltaTime);
+        camera->Update(deltaTime, window);
 }
 
 void CameraManager::AddCamera(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation)

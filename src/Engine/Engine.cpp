@@ -95,7 +95,7 @@ int Engine::Run()
 
         ProcessInput();
 
-        CameraManager::Update(deltaTime);
+        CameraManager::Update(deltaTime, m_window);
         Update(deltaTime);
         Render();
 

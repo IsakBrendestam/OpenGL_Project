@@ -3,6 +3,7 @@
 
 #include "Engine/EngineSettings.h"
 
+#include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
 
 struct ProjectionInfo
@@ -19,7 +20,7 @@ public:
     CameraGL() = default;
     CameraGL(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation);
 
-    void Update(double deltaTime);
+    void Update(double deltaTime, GLFWwindow* window);
 
     glm::mat4 GetViewProjectionMatrix() const;
     glm::mat4 GetViewMatrix() const;
@@ -32,7 +33,11 @@ private:
     glm::vec3 m_rotation;
 
     glm::vec3 m_target;
+    glm::vec3 m_direction;
     const glm::vec3 m_up = {0.0f, 1.0f, 0.0f};
+
+    const float m_moveSpeed = 0.001f;
+    const float m_rotSpeed = 0.01f;
 };
 
 #endif
