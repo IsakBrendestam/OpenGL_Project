@@ -4,6 +4,7 @@
 namespace EngineSettings
 {
     static bool g_wireframeOn = false;
+    static bool g_backFaceCullingOn = true;
     static int g_windowWidth = 800;
     static int g_windowHeight = 600;
 }
