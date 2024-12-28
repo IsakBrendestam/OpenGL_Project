@@ -8,6 +8,12 @@ void CameraManager::Deconstruct()
         delete camera;
 }
 
+void CameraManager::Update(double deltaTime)
+{
+    for (auto& camera : m_cameras)
+        camera->Update(deltaTime);
+}
+
 void CameraManager::AddCamera(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation)
 {
     m_cameras.push_back(new CameraGL(projectionInfo, position, rotation));

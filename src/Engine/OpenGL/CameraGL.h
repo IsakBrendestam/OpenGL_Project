@@ -19,6 +19,8 @@ public:
     CameraGL() = default;
     CameraGL(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation);
 
+    void Update(double deltaTime);
+
     glm::mat4 GetViewProjectionMatrix() const;
     glm::mat4 GetViewMatrix() const;
     glm::mat4 GetProjectionMatrix() const;
@@ -28,6 +30,9 @@ private:
 
     glm::vec3 m_position;
     glm::vec3 m_rotation;
+
+    glm::vec3 m_target;
+    const glm::vec3 m_up = {0.0f, 1.0f, 0.0f};
 };
 
 #endif

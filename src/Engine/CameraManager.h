@@ -10,6 +10,8 @@ class CameraManager
 public:
     static void Deconstruct();
 
+    static void Update(double deltaTime);
+
     static void AddCamera(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation);
     static CameraGL GetCamera(unsigned int index);
 
