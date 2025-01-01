@@ -7,9 +7,7 @@
 #include "EngineSettings.h"
 #include "CameraManager.h"
 
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
+#include "Managers/ImGuiManager.h"
 
 Engine::Engine()
 {
@@ -36,7 +34,6 @@ int Engine::Init()
     if (!glfwInit())
         return 1;
 
-    const char* glsl_version = "#version 330";
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -54,18 +51,7 @@ int Engine::Init()
     glfwMakeContextCurrent(m_window);
     //glfwSwapInterval(1); // vsync
 
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-
-    // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
-
-    ImGui_ImplGlfw_InitForOpenGL(m_window, true);
-    ImGui_ImplOpenGL3_Init(glsl_version);
+    ImGuiManager::Initialize(m_window, "#version 330");
 
     // Init GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -125,26 +111,19 @@ int Engine::Run()
 
         if (glfwGetWindowAttrib(m_window, GLFW_ICONIFIED) != 0)
         {
-            ImGui_ImplGlfw_Sleep(10);
+            ImGuiManager::Sleep(10);
             continue;
         }
 
-        // New ImGui frame
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-        
-        ImGui::Begin("Test Window");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-        ImGui::Text("Hello from test window!");
-        ImGui::End();
+        ImGuiManager::NewFrame();
 
         CameraManager::Update(deltaTime, m_window);
 
         Update(deltaTime);
         Render();
 
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        ImGuiManager::Update();
+        ImGuiManager::Render();
 
         glfwSwapBuffers(m_window);
 
