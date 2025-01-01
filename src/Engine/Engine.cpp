@@ -125,7 +125,7 @@ int Engine::Run()
         Update(deltaTime);
         Render();
 
-        ImGuiManager::Update();
+        ImGuiManager::Update(deltaTime);
         ImGuiManager::Render();
 
         glfwSwapBuffers(m_window);

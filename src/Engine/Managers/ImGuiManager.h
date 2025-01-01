@@ -8,11 +8,12 @@ class ImGuiManager
 {
 public:
     static void Initialize(GLFWwindow* window, const std::string& glslVersion);
-    static void Update();
+    static void Update(double deltaTime);
     static void Sleep(int milliseconds);
     static void NewFrame();
     static void Render();
 
+    static void ScreenStatistics(double deltaTime);
 };
 
 #endif

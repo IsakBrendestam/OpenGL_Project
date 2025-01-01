@@ -1,5 +1,7 @@
 #include "ImGuiManager.h"
 
+#include <vector>
+
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -20,11 +22,9 @@ void ImGuiManager::Initialize(GLFWwindow* window, const std::string& glslVersion
     ImGui_ImplOpenGL3_Init(glslVersion.c_str());
 }
 
-void ImGuiManager::Update()
+void ImGuiManager::Update(double deltaTime)
 {
-    ImGui::Begin("Test Window");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-    ImGui::Text("Hello from test window!");
-    ImGui::End();
+    ScreenStatistics(deltaTime);
 }
 
 void ImGuiManager::Sleep(int milliseconds)
@@ -43,4 +43,51 @@ void ImGuiManager::Render()
 {
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+static int timeSinceFpsAdd = 0;
+static double deltaSum = 0;
+static int deltaCount = 0;
+static double averageDelta = 0;
+static std::vector<float> fpsData;
+void ImGuiManager::ScreenStatistics(double deltaTime)
+{
+    deltaSum += deltaTime;
+    deltaCount++;
+
+    if (averageDelta == 0)
+        averageDelta = deltaTime;
+
+    const double fps = 1000.0f / averageDelta;
+
+    ImGui::Begin("Screen Statistics");
+    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", averageDelta, fps);
+
+    timeSinceFpsAdd += deltaTime;
+
+    if (deltaSum > 100.0f)
+    {
+        averageDelta = (double)deltaSum / (double)deltaCount;
+        deltaSum = 0;
+        deltaCount = 0;
+    }
+
+    if (timeSinceFpsAdd > 500)
+    {
+        if (fpsData.size() < 20)
+        {
+            fpsData.push_back(fps);
+        }
+        else
+        {
+            fpsData.erase(fpsData.begin());
+            fpsData.push_back(fps);
+        }
+
+        timeSinceFpsAdd = 0;
+    }
+
+    ImGui::PlotLines("FPS rates", fpsData.data(), fpsData.size());
+
+    ImGui::End();
 }
