@@ -49,7 +49,7 @@ int Engine::Init()
         return -1;
     }
     glfwMakeContextCurrent(m_window);
-    //glfwSwapInterval(1); // vsync
+
 
     ImGuiManager::Initialize(m_window, "#version 330");
 
@@ -114,6 +114,9 @@ int Engine::Run()
             ImGuiManager::Sleep(10);
             continue;
         }
+
+        if (EngineSettings::g_vsyncOn)
+            glfwSwapInterval(1);
 
         ImGuiManager::NewFrame();
 

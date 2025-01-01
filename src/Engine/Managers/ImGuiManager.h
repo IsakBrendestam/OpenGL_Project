@@ -9,7 +9,7 @@ class ImGuiManager
 public:
     static void Initialize(GLFWwindow* window, const std::string& glslVersion);
     static void Update();
-    static void Sleep(unsigned int milliseconds);
+    static void Sleep(int milliseconds);
     static void NewFrame();
     static void Render();
 

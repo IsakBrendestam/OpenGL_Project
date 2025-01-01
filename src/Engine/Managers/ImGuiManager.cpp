@@ -27,7 +27,7 @@ void ImGuiManager::Update()
     ImGui::End();
 }
 
-void ImGuiManager::Sleep(unsigned int milliseconds)
+void ImGuiManager::Sleep(int milliseconds)
 {
     ImGui_ImplGlfw_Sleep(milliseconds);
 }
