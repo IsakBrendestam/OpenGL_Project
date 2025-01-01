@@ -48,7 +48,12 @@ GLAD_PATH := $(DEP)/glad
 # GLM paths
 GLM_PATH := $(DEP)/glm
 
-INCLUDE := -I$(DEP) -I$(GLFW_INCLUDE_PATH) -I$(GLAD_PATH) -I$(GLM_PATH) -I$(SRC)
+# ImGui paths
+IMGUI_PATH := $(DEP)/imgui
+IMGUI_BACKEND_PATH := $(DEP)/imgui/backends
+
+# Libraries
+INCLUDE := -I$(DEP) -I$(GLFW_INCLUDE_PATH) -I$(GLAD_PATH) -I$(GLM_PATH) -I$(IMGUI_PATH) -I$(IMGUI_BACKEND_PATH) -I$(SRC)
 LIBS :=  -L$(GLFW_LIB_PATH)
 
 SRC_FILES := $(shell find $(SRC) -name '*.cpp')
@@ -56,13 +61,21 @@ FILES := $(patsubst %.cpp, $(BUILD)/%.o, $(notdir $(SRC_FILES))) $(BUILD)/main.o
 
 all: build
 
-libs:
+IMGUI_FILES := $(IMGUI_PATH)/imgui.o $(IMGUI_PATH)/imgui_draw.o $(IMGUI_PATH)/imgui_tables.o $(IMGUI_PATH)/imgui_widgets.o 
+IMGUI_FILES += $(IMGUI_BACKEND_PATH)/imgui_impl_glfw.o $(IMGUI_BACKEND_PATH)/imgui_impl_opengl3.o
+libs: $(IMGUI_FILES)
 	cd $(GLAD_PATH) && $(CXX) -o glad.o -Iinclude -c glad.c    # && ar -rc glad.a glad.o
 
-build: $(APP_NAME)
+$(IMGUI_PATH)/%.o: $(IMGUI_PATH)/%.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $< $(INCLUDE)
+
+$(IMGUI_BACKEND_PATH)/%.o: $(IMGUI_BACKEND_PATH)/%.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $< $(INCLUDE)
+
+build: $(libs) $(APP_NAME)
 
 $(APP_NAME): $(FILES)
-	$(CXX) $(LDFLAGS) -o $@ $^ $(GLAD_PATH)/glad.o $(INCLUDE) $(LIBS)
+	$(CXX) $(LDFLAGS) -o $@ $^ $(IMGUI_FILES) $(GLAD_PATH)/glad.o $(INCLUDE) $(LIBS)
 
 $(BUILD)/%.o: $(SRC)/%.cpp $(SRC)/%.h
 	$(CXX) $(CXXFLAGS) -o $@ -c $< $(INCLUDE)
