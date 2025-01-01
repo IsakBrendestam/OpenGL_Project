@@ -1,7 +1,7 @@
 #ifndef LIGHT_HEADER
 #define LIGHT_HEADER
 
-#include <glm/gtc/type_ptr.hpp>
+#include "glm/gtc/type_ptr.hpp"
 
 struct LightData
 {

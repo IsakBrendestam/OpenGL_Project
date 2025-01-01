@@ -1,9 +1,9 @@
 #ifndef OBJECT_HEADER
 #define OBJECT_HEADER
 
-#include <glad/glad.h>
+#include "glad.h"
 #include <GLFW/glfw3.h>
-#include <glm/gtc/type_ptr.hpp>
+#include "glm/gtc/type_ptr.hpp"
 
 #include <stb_image/stb_image.h>
 
