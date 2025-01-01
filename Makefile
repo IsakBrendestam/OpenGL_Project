@@ -1,15 +1,14 @@
-
 # Settings
+APP_NAME := application
+
 OPTIMIZE := false
-OPT_FLAG := O2
+OPT_FLAG := -O2
 
 DEBUG := true
-DEBUG_MACRO := DEBUG
+DEBUG_MACRO := -DDEBUG
 
 ANALYZE := false
-ANALYZE_FLAG := analyze
-
-APP_NAME := hello_triangle
+ANALYZE_FLAG := --analyze
 
 # Compiling
 CXX := clang++
@@ -18,15 +17,15 @@ LDFLAGS := -lglfw
 CXXFLAGS := -std=c++17
 
 ifeq ($(DEBUG), true)
-	CXXFLAGS += -D$(DEBUG_MACRO)
+	CXXFLAGS += $(DEBUG_MACRO)
 	ifeq ($(ANALYZE), true)
-		CXXFLAGS += --$(ANALYZE_FLAG)
-		LDFLAGS += --$(ANALYZE_FLAG)
+		CXXFLAGS += $(ANALYZE_FLAG)
+		LDFLAGS += $(ANALYZE_FLAG)
 	endif
 endif
 
 ifeq ($(OPTIMIZE), true)
-	LDFLAGS += -$(OPT_FLAG)
+	CXXFLAGS += $(OPT_FLAG)
 endif
 
 # Directories
