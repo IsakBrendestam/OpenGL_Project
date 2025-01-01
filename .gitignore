@@ -3,3 +3,4 @@
 *.a
 hello_triangle
 .vscode/settings.json
+.vscode/c_cpp_properties.json
