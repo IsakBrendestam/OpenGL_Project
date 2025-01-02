@@ -8,7 +8,6 @@
 
 void Application::Initialize()
 {
-    m_objects.push_back(new Line({{0, 0, 0}, {0, 5, 0}, {5, 5, 0}, {5, 5, 5}}, {0, 1, 0}));
     m_objects.push_back(new Cube({0.0f, 0.0f, 0.0f}, {0.1f, 0.1f, 0.1f}));
     //m_objects.push_back(new Rectangle());
     m_objects.push_back(new Cube({2.0f, 0.0f, -2.0f}, {0.5f, 0.5f, 0.5f}));

@@ -3,6 +3,7 @@
 
 #include "glad.h"
 #include <GLFW/glfw3.h>
+#include "Objects/Grid.h"
 
 class Engine
 {
@@ -19,6 +20,7 @@ private:
 
 private:
     GLFWwindow* m_window;
+    Grid* m_grid;
 
 protected:
     virtual void Initialize() = 0;

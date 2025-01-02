@@ -22,6 +22,7 @@ void ImGuiManager::Initialize(GLFWwindow* window, const std::string& glslVersion
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glslVersion.c_str());
+
 }
 
 void ImGuiManager::Deconstruct()
@@ -35,6 +36,9 @@ void ImGuiManager::Update(double deltaTime)
 {
     ScreenStatistics(deltaTime);
     EngineSettings();
+
+    if (ImGui::GetFrameCount() == 1)
+        ImGui::SetWindowFocus(nullptr);
 }
 
 void ImGuiManager::Sleep(int milliseconds)

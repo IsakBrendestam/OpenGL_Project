@@ -16,6 +16,8 @@ Engine::Engine()
 
 Engine::~Engine()
 {
+    delete m_grid;
+
     CameraManager::Deconstruct();
     ImGuiManager::Deconstruct();
 
@@ -70,6 +72,8 @@ int Engine::Init()
     ProjectionInfo projInfo = {glm::radians(45.0f), (float)EngineSettings::g_windowWidth / (float)EngineSettings::g_windowHeight, 0.1f, 100.0f};
     CameraManager::AddCamera(projInfo, {0.0f, 3.0f, 10.0f}, {0.0f, -90.0f, 0.0f});
 
+    m_grid = new Grid(20, 10);
+
     return 0;
 }
 
@@ -88,6 +92,12 @@ void Engine::Render()
     else
         glDisable(GL_CULL_FACE);
 
+    if (EngineSettings::g_smoothLinesOn)
+        glEnable(GL_LINE_SMOOTH);
+    else
+        glDisable(GL_LINE_SMOOTH);
+
+    m_grid->Draw();
     Draw();
 }
 
@@ -133,6 +143,7 @@ int Engine::Run()
         CameraManager::Update(deltaTime, m_window);
 
         Update(deltaTime);
+        m_grid->Update(deltaTime);
         Render();
 
         ImGuiManager::Update(deltaTime);
