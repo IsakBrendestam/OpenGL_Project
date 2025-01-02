@@ -28,6 +28,7 @@ void Object::Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation,
     m_scale = scale;
 
     m_shader.LoadShader("ColorShader.vs", "ColorShader.fs");
+    m_shader.Use();
 
     glGenBuffers(1, &m_VBO);  
     glGenBuffers(1, &m_EBO);

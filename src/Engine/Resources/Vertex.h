@@ -1,6 +1,13 @@
 #ifndef VERTEX_HEADER
 #define VERTEX_HEADER
 
+struct VertexLine
+{
+    float g_position[3];
+    float g_color[3];
+};
+
+
 struct VertexColor
 {
     float p_position[3];

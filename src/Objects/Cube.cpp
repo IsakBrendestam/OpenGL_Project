@@ -4,42 +4,43 @@
 
 Cube::Cube(glm::vec3 position, glm::vec3 scale): Object()
 {
+    const glm::vec3 color = {0.6f, 0.6f, 0.6f};
     VertexColor colVertices[] = {
         // Front face
-        {{-1.0f, -1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, {0.0f,  0.0f,  1.0f}}, // Bottom-left
-        {{ 1.0f, -1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, {0.0f,  0.0f,  1.0f}}, // Bottom-right
-        {{ 1.0f,  1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, {0.0f,  0.0f,  1.0f}}, // Top-right
-        {{-1.0f,  1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, {0.0f,  0.0f,  1.0f}}, // Top-left
+        {{-1.0f, -1.0f,  1.0f}, {color.r, color.g, color.b}, {0.0f,  0.0f,  1.0f}}, // Bottom-left
+        {{ 1.0f, -1.0f,  1.0f}, {color.r, color.g, color.b}, {0.0f,  0.0f,  1.0f}}, // Bottom-right
+        {{ 1.0f,  1.0f,  1.0f}, {color.r, color.g, color.b}, {0.0f,  0.0f,  1.0f}}, // Top-right
+        {{-1.0f,  1.0f,  1.0f}, {color.r, color.g, color.b}, {0.0f,  0.0f,  1.0f}}, // Top-left
 
         // Back face
-        {{ 1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  0.0f, -1.0f}}, // Bottom-left
-        {{-1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  0.0f, -1.0f}}, // Bottom-right
-        {{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  0.0f, -1.0f}}, // Top-right
-        {{ 1.0f,  1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  0.0f, -1.0f}}, // Top-left
+        {{ 1.0f, -1.0f, -1.0f}, {color.r, color.g, color.b}, { 0.0f,  0.0f, -1.0f}}, // Bottom-left
+        {{-1.0f, -1.0f, -1.0f}, {color.r, color.g, color.b}, { 0.0f,  0.0f, -1.0f}}, // Bottom-right
+        {{-1.0f,  1.0f, -1.0f}, {color.r, color.g, color.b}, { 0.0f,  0.0f, -1.0f}}, // Top-right
+        {{ 1.0f,  1.0f, -1.0f}, {color.r, color.g, color.b}, { 0.0f,  0.0f, -1.0f}}, // Top-left
 
         // Left face
-        {{-1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, {-1.0f,  0.0f,  0.0f}}, // Bottom-left
-        {{-1.0f, -1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, {-1.0f,  0.0f,  0.0f}}, // Bottom-right
-        {{-1.0f,  1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, {-1.0f,  0.0f,  0.0f}}, // Top-right
-        {{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, {-1.0f,  0.0f,  0.0f}}, // Top-left
+        {{-1.0f, -1.0f, -1.0f}, {color.r, color.g, color.b}, {-1.0f,  0.0f,  0.0f}}, // Bottom-left
+        {{-1.0f, -1.0f,  1.0f}, {color.r, color.g, color.b}, {-1.0f,  0.0f,  0.0f}}, // Bottom-right
+        {{-1.0f,  1.0f,  1.0f}, {color.r, color.g, color.b}, {-1.0f,  0.0f,  0.0f}}, // Top-right
+        {{-1.0f,  1.0f, -1.0f}, {color.r, color.g, color.b}, {-1.0f,  0.0f,  0.0f}}, // Top-left
 
         // Right face
-        {{ 1.0f, -1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, { 1.0f,  0.0f,  0.0f}}, // Bottom-left
-        {{ 1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 1.0f,  0.0f,  0.0f}}, // Bottom-right
-        {{ 1.0f,  1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 1.0f,  0.0f,  0.0f}}, // Top-right
-        {{ 1.0f,  1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, { 1.0f,  0.0f,  0.0f}}, // Top-left
+        {{ 1.0f, -1.0f,  1.0f}, {color.r, color.g, color.b}, { 1.0f,  0.0f,  0.0f}}, // Bottom-left
+        {{ 1.0f, -1.0f, -1.0f}, {color.r, color.g, color.b}, { 1.0f,  0.0f,  0.0f}}, // Bottom-right
+        {{ 1.0f,  1.0f, -1.0f}, {color.r, color.g, color.b}, { 1.0f,  0.0f,  0.0f}}, // Top-right
+        {{ 1.0f,  1.0f,  1.0f}, {color.r, color.g, color.b}, { 1.0f,  0.0f,  0.0f}}, // Top-left
 
         // Top face
-        {{-1.0f,  1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}}, // Bottom-left
-        {{ 1.0f,  1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}}, // Bottom-right
-        {{ 1.0f,  1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}}, // Top-right
-        {{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}}, // Top-left
+        {{-1.0f,  1.0f,  1.0f}, {color.r, color.g, color.b}, { 0.0f,  1.0f,  0.0f}}, // Bottom-left
+        {{ 1.0f,  1.0f,  1.0f}, {color.r, color.g, color.b}, { 0.0f,  1.0f,  0.0f}}, // Bottom-right
+        {{ 1.0f,  1.0f, -1.0f}, {color.r, color.g, color.b}, { 0.0f,  1.0f,  0.0f}}, // Top-right
+        {{-1.0f,  1.0f, -1.0f}, {color.r, color.g, color.b}, { 0.0f,  1.0f,  0.0f}}, // Top-left
 
         // Bottom face
-        {{-1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f, -1.0f,  0.0f}}, // Bottom-left
-        {{ 1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f, -1.0f,  0.0f}}, // Bottom-right
-        {{ 1.0f, -1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f, -1.0f,  0.0f}}, // Top-right
-        {{-1.0f, -1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f, -1.0f,  0.0f}}, // Top-left
+        {{-1.0f, -1.0f, -1.0f}, {color.r, color.g, color.b}, { 0.0f, -1.0f,  0.0f}}, // Bottom-left
+        {{ 1.0f, -1.0f, -1.0f}, {color.r, color.g, color.b}, { 0.0f, -1.0f,  0.0f}}, // Bottom-right
+        {{ 1.0f, -1.0f,  1.0f}, {color.r, color.g, color.b}, { 0.0f, -1.0f,  0.0f}}, // Top-right
+        {{-1.0f, -1.0f,  1.0f}, {color.r, color.g, color.b}, { 0.0f, -1.0f,  0.0f}}, // Top-left
     };
 
     VertexTexture texVertices[] = {
