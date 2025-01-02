@@ -16,9 +16,11 @@ Engine::Engine()
 
 Engine::~Engine()
 {
-    glfwTerminate();
-
     CameraManager::Deconstruct();
+    ImGuiManager::Deconstruct();
+
+    glfwDestroyWindow(m_window);
+    glfwTerminate();
 }
 
 static void glfw_error_callback(int error, const char* description)

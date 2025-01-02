@@ -8,6 +8,7 @@ class ImGuiManager
 {
 public:
     static void Initialize(GLFWwindow* window, const std::string& glslVersion);
+    static void Deconstruct();
     static void Update(double deltaTime);
     static void Sleep(int milliseconds);
     static void NewFrame();

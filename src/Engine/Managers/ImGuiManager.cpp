@@ -24,6 +24,13 @@ void ImGuiManager::Initialize(GLFWwindow* window, const std::string& glslVersion
     ImGui_ImplOpenGL3_Init(glslVersion.c_str());
 }
 
+void ImGuiManager::Deconstruct()
+{
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+}
+
 void ImGuiManager::Update(double deltaTime)
 {
     ScreenStatistics(deltaTime);
