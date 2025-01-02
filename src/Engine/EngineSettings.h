@@ -10,6 +10,7 @@ public:
     static bool g_backFaceCullingOn;
     static bool g_vsyncOn;
     static bool g_smoothLinesOn;
+    static bool g_renderGrid;
     static int g_windowWidth;
     static int g_windowHeight;
     static glm::vec3 g_clearColor;

@@ -97,7 +97,11 @@ void Engine::Render()
     else
         glDisable(GL_LINE_SMOOTH);
 
-    m_grid->Draw();
+    if (EngineSettings::g_renderGrid)
+    {
+        m_grid->Update(0);
+        m_grid->Draw();
+    }
     Draw();
 }
 
@@ -143,7 +147,6 @@ int Engine::Run()
         CameraManager::Update(deltaTime, m_window);
 
         Update(deltaTime);
-        m_grid->Update(deltaTime);
         Render();
 
         ImGuiManager::Update(deltaTime);
