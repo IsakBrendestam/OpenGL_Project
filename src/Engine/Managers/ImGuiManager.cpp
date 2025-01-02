@@ -109,6 +109,7 @@ void ImGuiManager::EngineSettings()
     ImGui::Checkbox("Wireframe On", &EngineSettings::g_wireframeOn);
     ImGui::Checkbox("Vsync On", &EngineSettings::g_vsyncOn);
     ImGui::Checkbox("Backface Culling On", &EngineSettings::g_backFaceCullingOn);
+    ImGui::ColorEdit3("clear color", (float*)&EngineSettings::g_clearColor);
 
     ImGui::End();
 }
