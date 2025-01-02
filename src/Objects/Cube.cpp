@@ -4,41 +4,42 @@
 
 Cube::Cube(glm::vec3 position, glm::vec3 scale): Object()
 {
-    VertexColor vertices[] = {
-        {-1.0f, -1.0f,  1.0,  0.0f, 0.0f, 1.0f}, //0
-        { 1.0f, -1.0f,  1.0,  1.0f, 0.0f, 0.0f}, //1
-        {-1.0f,  1.0f,  1.0,  0.0f, 0.0f, 1.0f}, //2
-        { 1.0f,  1.0f,  1.0,  1.0f, 1.0f, 0.0f}, //3
-        {-1.0f, -1.0f, -1.0,  1.0f, 1.0f, 0.0f}, //4
-        { 1.0f, -1.0f, -1.0,  1.0f, 0.0f, 0.0f}, //5
-        {-1.0f,  1.0f, -1.0,  0.0f, 0.0f, 1.0f}, //6
-        { 1.0f,  1.0f, -1.0,  0.0f, 1.0f, 0.0f}, //7
-    };
+    VertexColor colVertices[] = {
+        // Front face
+        {{-1.0f, -1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, {0.0f,  0.0f,  1.0f}}, // Bottom-left
+        {{ 1.0f, -1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, {0.0f,  0.0f,  1.0f}}, // Bottom-right
+        {{ 1.0f,  1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, {0.0f,  0.0f,  1.0f}}, // Top-right
+        {{-1.0f,  1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, {0.0f,  0.0f,  1.0f}}, // Top-left
 
-    unsigned int indices[] = {
-        //Top
-        6, 2, 7,
-        2, 3, 7,
+        // Back face
+        {{ 1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  0.0f, -1.0f}}, // Bottom-left
+        {{-1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  0.0f, -1.0f}}, // Bottom-right
+        {{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  0.0f, -1.0f}}, // Top-right
+        {{ 1.0f,  1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  0.0f, -1.0f}}, // Top-left
 
-        //Bottom
-        0, 4, 5,
-        1, 0, 5,
+        // Left face
+        {{-1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, {-1.0f,  0.0f,  0.0f}}, // Bottom-left
+        {{-1.0f, -1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, {-1.0f,  0.0f,  0.0f}}, // Bottom-right
+        {{-1.0f,  1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, {-1.0f,  0.0f,  0.0f}}, // Top-right
+        {{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, {-1.0f,  0.0f,  0.0f}}, // Top-left
 
-        //Left
-        0, 2, 6,
-        4, 0, 6,
+        // Right face
+        {{ 1.0f, -1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, { 1.0f,  0.0f,  0.0f}}, // Bottom-left
+        {{ 1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 1.0f,  0.0f,  0.0f}}, // Bottom-right
+        {{ 1.0f,  1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 1.0f,  0.0f,  0.0f}}, // Top-right
+        {{ 1.0f,  1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, { 1.0f,  0.0f,  0.0f}}, // Top-left
 
-        //Right
-        3, 1, 7,
-        1, 5, 7,
+        // Top face
+        {{-1.0f,  1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}}, // Bottom-left
+        {{ 1.0f,  1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}}, // Bottom-right
+        {{ 1.0f,  1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}}, // Top-right
+        {{-1.0f,  1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f,  1.0f,  0.0f}}, // Top-left
 
-        //Front
-        2, 0, 3,
-        0, 1, 3,
-
-        //Back
-        4, 6, 7,
-        5, 4, 7
+        // Bottom face
+        {{-1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f, -1.0f,  0.0f}}, // Bottom-left
+        {{ 1.0f, -1.0f, -1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f, -1.0f,  0.0f}}, // Bottom-right
+        {{ 1.0f, -1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f, -1.0f,  0.0f}}, // Top-right
+        {{-1.0f, -1.0f,  1.0f}, {0.0f, 1.0f, 0.0f}, { 0.0f, -1.0f,  0.0f}}, // Top-left
     };
 
     VertexTexture texVertices[] = {
@@ -79,7 +80,7 @@ Cube::Cube(glm::vec3 position, glm::vec3 scale): Object()
         {{-1.0f, -1.0f,  1.0f}, {0.0f, 1.0f}, { 0.0f, -1.0f,  0.0f}}, // Top-left
     };
 
-    unsigned int texIndices[] = {
+    unsigned int indices[] = {
         // Front face
         0, 1, 2,  
         2, 3, 0,
@@ -102,13 +103,13 @@ Cube::Cube(glm::vec3 position, glm::vec3 scale): Object()
 
         // Bottom face
         20, 21, 22, 
-        22, 23, 20,
+        22, 23, 20
     };
 
-    MeshTexture mesh = MeshTexture(texVertices, 24, texIndices, 36, "tiles.jpg");
-    MeshColor meshCol = MeshColor(vertices, 8, indices, 36);
+    MeshTexture mesh = MeshTexture(texVertices, 24, indices, 36, "tiles.jpg");
+    MeshColor meshCol = MeshColor(colVertices, 24, indices, 36);
 
-    Object::Init(mesh, position, {0.0f, 0.0f, 90.0f}, scale);
+    Object::Init(meshCol, position, {0.0f, 0.0f, 90.0f}, scale);
 
     m_shader.Use();
 }

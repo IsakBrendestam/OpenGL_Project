@@ -21,7 +21,6 @@ uniform LightData lightData;
 
 void main()
 {
-
     vec4 sampleColor = texture(textureSampler, textureCoord);
 
     // Ambient Lighting

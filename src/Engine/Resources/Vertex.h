@@ -5,6 +5,7 @@ struct VertexColor
 {
     float p_position[3];
     float p_color[3];
+    float p_normal[3];
 };
 
 struct VertexTexture
