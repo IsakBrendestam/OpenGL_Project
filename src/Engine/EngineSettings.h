@@ -1,13 +1,14 @@
 #ifndef ENGINESETTINGS_HEADER
 #define ENGINESETTINGS_HEADER
 
-namespace EngineSettings
+class EngineSettings
 {
-    static bool g_wireframeOn = false;
-    static bool g_backFaceCullingOn = true;
-    static bool g_vsyncOn = false;
-    static int g_windowWidth = 800;
-    static int g_windowHeight = 600;
-}
+public:
+    static bool g_wireframeOn;
+    static bool g_backFaceCullingOn;
+    static bool g_vsyncOn;
+    static int g_windowWidth;
+    static int g_windowHeight;
+};
 
 #endif

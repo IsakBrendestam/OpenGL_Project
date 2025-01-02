@@ -64,8 +64,6 @@ int Engine::Init()
 
     glEnable(GL_DEPTH_TEST);
 
-    if (EngineSettings::g_backFaceCullingOn)
-        glEnable(GL_CULL_FACE);
 
     ProjectionInfo projInfo = {glm::radians(45.0f), (float)EngineSettings::g_windowWidth / (float)EngineSettings::g_windowHeight, 0.1f, 100.0f};
     CameraManager::AddCamera(projInfo, {0.0f, 3.0f, 10.0f}, {0.0f, -90.0f, 0.0f});
@@ -80,6 +78,13 @@ void Engine::Render()
 
     if (EngineSettings::g_wireframeOn)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    else
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    if (EngineSettings::g_backFaceCullingOn)
+        glEnable(GL_CULL_FACE);
+    else
+        glDisable(GL_CULL_FACE);
 
     Draw();
 }
