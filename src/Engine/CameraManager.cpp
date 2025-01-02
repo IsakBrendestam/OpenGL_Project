@@ -1,6 +1,7 @@
 #include "CameraManager.h"
 
 std::vector<CameraGL*> CameraManager::m_cameras;
+unsigned int CameraManager::m_currentCamera = 0;
 
 void CameraManager::Deconstruct()
 {
@@ -24,4 +25,14 @@ CameraGL CameraManager::GetCamera(unsigned int index)
     if (index < m_cameras.size())
         return *m_cameras[index];
     return CameraGL();
+}
+
+CameraGL CameraManager::GetCurrentCamera()
+{
+    return GetCamera(m_currentCamera);
+}
+
+void CameraManager::SetCurrentCamera(unsigned int index)
+{
+    m_currentCamera = index;
 }

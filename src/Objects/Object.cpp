@@ -125,5 +125,5 @@ void Object::Update(double deltaTime)
 
     m_shader.Use();
     m_shader.SetMat4("worldMat", m_transformMat);
-    m_shader.SetMat4("viewProjectionMat", CameraManager::GetCamera(0).GetViewProjectionMatrix());
+    m_shader.SetMat4("viewProjectionMat", CameraManager::GetCurrentCamera().GetViewProjectionMatrix());
 }

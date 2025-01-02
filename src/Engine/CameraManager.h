@@ -16,8 +16,12 @@ public:
     static void AddCamera(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation);
     static CameraGL GetCamera(unsigned int index);
 
+    static CameraGL GetCurrentCamera();
+    static void SetCurrentCamera(unsigned int index);
+
 private:
     static std::vector<CameraGL*> m_cameras;
+    static unsigned int m_currentCamera;
 };
 
 #endif
