@@ -48,7 +48,7 @@ void ImGuiManager::Render()
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-static int timeSinceFpsAdd = 0;
+static double timeSinceFpsAdd = 0;
 static double deltaSum = 0;
 static int deltaCount = 0;
 static double averageDelta = 0;

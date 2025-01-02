@@ -122,6 +122,9 @@ int Engine::Run()
 
         if (EngineSettings::g_vsyncOn)
             glfwSwapInterval(1);
+        else
+            glfwSwapInterval(0);
+
 
         ImGuiManager::NewFrame();
 
