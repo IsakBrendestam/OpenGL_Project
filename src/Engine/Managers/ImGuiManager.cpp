@@ -6,6 +6,8 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
+#include "Engine/EngineSettings.h"
+
 void ImGuiManager::Initialize(GLFWwindow* window, const std::string& glslVersion)
 {
     IMGUI_CHECKVERSION();
@@ -25,6 +27,7 @@ void ImGuiManager::Initialize(GLFWwindow* window, const std::string& glslVersion
 void ImGuiManager::Update(double deltaTime)
 {
     ScreenStatistics(deltaTime);
+    EngineSettings();
 }
 
 void ImGuiManager::Sleep(int milliseconds)
@@ -88,6 +91,17 @@ void ImGuiManager::ScreenStatistics(double deltaTime)
     }
 
     ImGui::PlotLines("FPS rates", fpsData.data(), fpsData.size());
+
+    ImGui::End();
+}
+
+void ImGuiManager::EngineSettings()
+{
+    ImGui::Begin("Engine Settings");
+
+    ImGui::Checkbox("Wireframe On", &EngineSettings::g_wireframeOn);
+    ImGui::Checkbox("Vsync On", &EngineSettings::g_vsyncOn);
+    ImGui::Checkbox("Backface Culling On", &EngineSettings::g_backFaceCullingOn);
 
     ImGui::End();
 }

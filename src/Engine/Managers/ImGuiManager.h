@@ -14,6 +14,7 @@ public:
     static void Render();
 
     static void ScreenStatistics(double deltaTime);
+    static void EngineSettings();
 };
 
 #endif
