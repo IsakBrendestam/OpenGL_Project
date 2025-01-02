@@ -73,7 +73,7 @@ int Engine::Init()
 
 void Engine::Render()
 {
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(EngineSettings::g_clearColor.r/255, EngineSettings::g_clearColor.g/255, EngineSettings::g_clearColor.b/255, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     if (EngineSettings::g_wireframeOn)

@@ -1,6 +1,8 @@
 #ifndef ENGINESETTINGS_HEADER
 #define ENGINESETTINGS_HEADER
 
+#include "glm/gtc/type_ptr.hpp"
+
 class EngineSettings
 {
 public:
@@ -9,6 +11,7 @@ public:
     static bool g_vsyncOn;
     static int g_windowWidth;
     static int g_windowHeight;
+    static glm::vec3 g_clearColor;
 };
 
 #endif
