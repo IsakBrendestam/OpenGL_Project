@@ -1,0 +1,17 @@
+newmtl lambert3SG
+illum 4
+Kd 0.80 0.00 0.00
+Ka 0.40 0.00 0.00
+Tf 1.00 1.00 1.00
+Ks 0.50 0.00 0.00
+Ns 10
+map_Kd 8k_earth_daymap.jpg
+Ni 1.00
+newmtl pasted__lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ns 10
+map_Kd DarkMarble.png
+Ni 1.00

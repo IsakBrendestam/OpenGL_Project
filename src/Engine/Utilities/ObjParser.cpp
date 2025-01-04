@@ -1,6 +1,6 @@
 #include "ObjParser.h"
 
-//#if 0
+#include "Debug.h"
 
 ObjParser::ObjParser(std::string folderPath, std::string fileName, bool inverseY):
 	m_folderPath(folderPath), m_inverseY(inverseY)
@@ -110,10 +110,9 @@ void ObjParser::FileHandler(std::string filePath)
 	}
 
 	std::string line;
-
 	while (std::getline(file, line))
 		LineParser(line);
-
+			
 	file.close();
 }
 
@@ -493,5 +492,3 @@ glm::vec3 ObjParser::GetBoundingBoxMin()
 
 	return minPos;
 }
-
-//#endif

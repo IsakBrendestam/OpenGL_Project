@@ -15,9 +15,9 @@ void Application::Initialize()
     //m_objects.push_back(new Rectangle());
     m_objects.push_back(new Cube({-2.0f, 0.0f, -2.0f}, {0.5f, 0.5f, 0.5f}));
 
-    ObjParser object("res/Objects/", "teapot.obj");
+    ObjParser* object = new ObjParser("res/Objects/", "Sphere.obj");
 
-    m_objects.push_back(new MeshObject(object.GetMeshData(), "tiles.jpg", {2.0f, 0.5f, -2.0f}, {0.0f, 0.0f, 0.0f}, {0.05f, 0.05f, 0.05f}));
+    m_objects.push_back(new MeshObject(object->GetMeshData(), "tiles.jpg", {2.0f, 0.5f, -2.0f}, {0.0f, 0.0f, 0.0f}, {0.5f, 0.5f, 0.5f}));
 }
 
 void Application::Exit()
