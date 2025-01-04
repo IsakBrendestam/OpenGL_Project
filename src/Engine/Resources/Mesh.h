@@ -7,7 +7,7 @@
 #include <cstring>
 #include <cstdlib>
 
-#include "Utilities/Debug.h"
+#include "Engine/Utilities/Debug.h"
 
 struct MeshColor
 {

@@ -1,6 +1,6 @@
 #include "Application.h"
 
-#include "Utilities/Debug.h"
+#include "Engine/Utilities/Debug.h"
 
 #include "Objects/Rectangle.h"
 #include "Objects/Cube.h"

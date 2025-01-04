@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Utilities/Debug.h"
+#include "Engine/Utilities/Debug.h"
 
 #include "Engine/CameraManager.h"
 
