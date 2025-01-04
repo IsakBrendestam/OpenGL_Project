@@ -83,13 +83,14 @@ void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotatio
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexTexture), (void*)0);
     glEnableVertexAttribArray(0);  
 
-    // Normal
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexTexture), (void*)(3*sizeof(float)));
+    // ST
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexTexture), (void*)(3*sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    // ST
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexTexture), (void*)(5*sizeof(float)));
+    // Normal
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexTexture), (void*)(5*sizeof(float)));
     glEnableVertexAttribArray(2);
+
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.g_nIndices * sizeof(unsigned int), mesh.g_indices, GL_STATIC_DRAW);
@@ -124,12 +125,12 @@ void Object::Init(const MeshData& mesh, const std::string& textureName, glm::vec
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, mesh.vertexInfo.sizeOfVertex, (void*)0);
     glEnableVertexAttribArray(0);  
 
-    // Normal
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, mesh.vertexInfo.sizeOfVertex, (void*)(3*sizeof(float)));
+    // ST
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, mesh.vertexInfo.sizeOfVertex, (void*)(3*sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    // ST
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, mesh.vertexInfo.sizeOfVertex, (void*)(5*sizeof(float)));
+    // Normal
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, mesh.vertexInfo.sizeOfVertex, (void*)(5*sizeof(float)));
     glEnableVertexAttribArray(2);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
