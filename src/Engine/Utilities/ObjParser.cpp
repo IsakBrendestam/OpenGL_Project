@@ -58,6 +58,7 @@ void ObjParser::AddObject()
 	std::vector<ShaderVertexTexture> vertices;
 	std::vector<uint32_t> indices;
 
+
 	for (int i = 0; i < m_faces.size(); i++)
 	{
 		for (int j = 0; j < m_faces[i].nSets; j++)
@@ -67,15 +68,23 @@ void ObjParser::AddObject()
 
 			// Creating vertex normal
 			VertexNormal vn;
-			if (m_faces[i].ivn.size() > 0)
-				vn = m_vertexNormals[m_faces[i].ivn[j]];
+			if (m_faces[i].ivn.size() > 0 && j < m_faces[i].ivn.size())
+			{
+				unsigned int index = m_faces[i].ivn[j];
+				if (index < m_vertexNormals.size())
+					vn = m_vertexNormals[m_faces[i].ivn[j]];
+			}
 			else
 				vn = VertexNormal();
 
 			// Creating vertex texture
 			VertexTexture vt;
-			if (m_faces[i].ivn.size() > 0)
-				vt = m_vertexTextures[m_faces[i].ivt[j]];
+			if (m_faces[i].ivt.size() > 0 && j < m_faces[i].ivt.size())
+			{
+				unsigned int index = m_faces[i].ivt[j];
+				if (index < m_vertexTextures.size())
+					vt = m_vertexTextures[index];
+			}
 			else
 				vt = VertexTexture();
 
@@ -243,7 +252,7 @@ Face ObjParser::ParseFace(std::string line)
 
 			while (std::getline(ssSet, sSet, '/'))
 			{
-				int value = static_cast<uint32_t>(std::stoul(sSet));
+				int value = std::atoi(sSet.c_str());
 				if (setIndex == 0)
 					vertexIndex.push_back(value);
 				else if (setIndex == 1)
