@@ -104,8 +104,6 @@ void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotatio
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.g_nIndices * sizeof(unsigned int), mesh.g_indices, GL_STATIC_DRAW);
 
     GenerateTexture(mesh.g_textureName);
-
-    UpdateLight();
 }
 
 void Object::Init(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
@@ -150,8 +148,6 @@ void Object::Init(const MeshData& mesh, const std::string& textureName, glm::vec
                  GL_STATIC_DRAW);
 
     GenerateTexture(textureName);
-
-    UpdateLight();
 }
 
 void Object::Init(const MeshData& mesh, glm::vec3 color, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
@@ -192,8 +188,6 @@ void Object::Init(const MeshData& mesh, glm::vec3 color, glm::vec3 position, glm
                  GL_STATIC_DRAW);
                 
     m_shader.Setvec3("aColor", color);
-
-    UpdateLight();
 }
 
 void Object::GenerateTexture(const std::string& textureName)
