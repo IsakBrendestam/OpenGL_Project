@@ -228,7 +228,18 @@ void Object::GenerateTexture(const std::string& textureName)
     stbi_image_free(data);
 }
 
-void Object::Update(double deltaTime)
+void Object::UpdateLight()
+{
+    m_shader.Use();
+
+    LightData lightData = {{-1, 1, 2}, {1.0f, 1.0f, 1.0f}, 0.75f, 2.0f};
+    m_shader.Setvec3("lightData.position", lightData.position);
+    m_shader.Setvec3("lightData.color", lightData.color);
+    m_shader.SetFlot("lightData.ambientIntensity", lightData.ambientIntensity);
+    m_shader.SetFlot("lightData.lightIntensity", lightData.lightIntensity);
+}
+
+void Object::UpdateMatrices()
 {
     m_transformMat = glm::identity<glm::mat4>();
 
@@ -243,13 +254,9 @@ void Object::Update(double deltaTime)
     m_shader.SetMat4("viewProjectionMat", CameraManager::GetCurrentCamera().GetViewProjectionMatrix());
 }
 
-void Object::UpdateLight()
+void Object::Render()
 {
-    m_shader.Use();
-
-    LightData lightData = {{-1, 1, 2}, {1.0f, 1.0f, 1.0f}, 0.75f, 2.0f};
-    m_shader.Setvec3("lightData.position", lightData.position);
-    m_shader.Setvec3("lightData.color", lightData.color);
-    m_shader.SetFlot("lightData.ambientIntensity", lightData.ambientIntensity);
-    m_shader.SetFlot("lightData.lightIntensity", lightData.lightIntensity);
+    UpdateMatrices();
+    UpdateLight();
+    Draw();
 }

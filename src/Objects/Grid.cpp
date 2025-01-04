@@ -29,5 +29,5 @@ void Grid::Update(double deltaTime)
 void Grid::Draw()
 {
     for(auto& line : m_lines) 
-        line->Draw();
+        line->Render();
 }

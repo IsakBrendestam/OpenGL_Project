@@ -125,8 +125,6 @@ void Cube::Update(double deltaTime)
     m_rotation.x += glm::radians(2.0f) * deltaTime;
     m_rotation.y += glm::radians(2.0f) * deltaTime;
     m_rotation.z += glm::radians(2.0f) * deltaTime;
-
-    Object::Update(deltaTime);
 }
 
 void Cube::Draw()

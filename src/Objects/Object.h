@@ -26,12 +26,15 @@ public:
     void Init(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
     void Init(const MeshData& mesh, glm::vec3 color, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
-    virtual void Update(double deltaTime);
-    virtual void UpdateLight();
-    virtual void Draw() = 0;
+    virtual void Update(double deltaTime) = 0;
+    virtual void Render();
 
 
 protected:
+    virtual void Draw() = 0;
+    virtual void UpdateLight();
+    virtual void UpdateMatrices();
+
     void GenerateTexture(const std::string& textureName);
 
 protected:

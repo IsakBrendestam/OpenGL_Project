@@ -37,7 +37,7 @@ Rectangle::~Rectangle()
 
 void Rectangle::Update(double deltaTime)
 {    
-    Object::Update(deltaTime);
+
 }
 
 void Rectangle::Draw()

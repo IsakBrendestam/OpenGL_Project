@@ -49,7 +49,7 @@ Line::~Line()
 
 void Line::Update(double deltaTime)
 {
-    Object::Update(deltaTime);
+
 }
 
 void Line::Draw()
