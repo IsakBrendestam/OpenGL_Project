@@ -17,7 +17,9 @@ void Application::Initialize()
 
     ObjParser* object = new ObjParser("res/Objects/", "Sphere.obj");
 
-    m_objects.push_back(new MeshObject(object->GetMeshData(), "tiles.jpg", {2.0f, 0.5f, -2.0f}, {0.0f, 0.0f, 0.0f}, {0.5f, 0.5f, 0.5f}));
+    //m_objects.push_back(new MeshObject(object->GetMeshData(), {1.0f, 0.0f, 0.0f}, {2.0f, 0.5f, -2.0f}, {0.0f, 0.0f, 0.0f}, {0.5f, 0.5f, 0.5f}));
+
+    m_objects.push_back(new MeshObject({0.5f, 0.0f, 0.0f}, object->GetMeshData(), {2.0f, 0.5f, -2.0f}, {0.0f, 0.0f, 0.0f}, {0.5f, 0.5f, 0.5f}));
 }
 
 void Application::Exit()

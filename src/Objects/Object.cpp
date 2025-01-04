@@ -22,6 +22,11 @@ Object::Object(const MeshData& mesh, const std::string& textureName, glm::vec3 p
     Init(mesh, textureName, position, rotation, scale);
 }
 
+Object::Object(const MeshData& mesh, glm::vec3 color, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+{
+    Init(mesh, color, position, rotation, scale);
+}
+
 Object::~Object()
 {
 }
@@ -140,6 +145,46 @@ void Object::Init(const MeshData& mesh, const std::string& textureName, glm::vec
                  GL_STATIC_DRAW);
 
     GenerateTexture(textureName);
+}
+
+void Object::Init(const MeshData& mesh, glm::vec3 color, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+{
+    m_position = position;
+    m_rotation = rotation;
+    m_scale = scale;
+
+    m_shader.LoadShader("SolidColorShader.vs", "ColorShader.fs");
+    m_shader.Use();
+
+    glGenBuffers(1, &m_VBO);  
+    glGenBuffers(1, &m_EBO);
+    glGenVertexArrays(1, &m_VAO);  
+
+
+    glBindVertexArray(m_VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+
+    glBufferData(GL_ARRAY_BUFFER, 
+                 mesh.vertexInfo.nrOfVerticesInBuffer * mesh.vertexInfo.sizeOfVertex, 
+                 mesh.vertexInfo.vertexData, 
+                 GL_STATIC_DRAW);
+
+    // Position
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, mesh.vertexInfo.sizeOfVertex, (void*)0);
+    glEnableVertexAttribArray(0);  
+
+    // Normal
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, mesh.vertexInfo.sizeOfVertex, (void*)(5*sizeof(float)));
+    glEnableVertexAttribArray(1);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 
+                 mesh.indexInfo.nrOfIndicesInBuffer * sizeof(unsigned int),
+                 mesh.indexInfo.indexData, 
+                 GL_STATIC_DRAW);
+                
+    m_shader.Setvec3("aColor", color);
 }
 
 void Object::GenerateTexture(const std::string& textureName)

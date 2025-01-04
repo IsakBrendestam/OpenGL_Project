@@ -17,12 +17,14 @@ public:
     Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
     Object(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
     Object(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+    Object(const MeshData& mesh, glm::vec3 color, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
     virtual ~Object();
 
     void Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
     void Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
     void Init(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
+    void Init(const MeshData& mesh, glm::vec3 color, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
     virtual void Update(double deltaTime);
     virtual void Draw() = 0;
