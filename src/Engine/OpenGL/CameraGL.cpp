@@ -36,7 +36,7 @@ void CameraGL::Update(double deltaTime, GLFWwindow* window)
         m_position -= (m_moveSpeed * (float)deltaTime) * glm::cross(m_direction, m_up);
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
         m_position += (m_moveSpeed * (float)deltaTime) * m_up;
-    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS)
         m_position -= (m_moveSpeed * (float)deltaTime) * m_up;
 
     m_target = m_position + glm::normalize(m_direction);

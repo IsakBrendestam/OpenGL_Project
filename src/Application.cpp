@@ -15,11 +15,11 @@ void Application::Initialize()
     //m_objects.push_back(new Rectangle());
     m_objects.push_back(new Cube({-2.0f, 0.0f, -2.0f}, {0.5f, 0.5f, 0.5f}));
 
-    ObjParser* object = new ObjParser("res/Objects/", "Sphere.obj");
+    ObjParser* object = new ObjParser("res/Objects/", "Dragon.obj");
 
     //m_objects.push_back(new MeshObject(object->GetMeshData(), {1.0f, 0.0f, 0.0f}, {2.0f, 0.5f, -2.0f}, {0.0f, 0.0f, 0.0f}, {0.5f, 0.5f, 0.5f}));
 
-    m_objects.push_back(new MeshObject({0.5f, 0.0f, 0.0f}, object->GetMeshData(), {2.0f, 0.5f, -2.0f}, {0.0f, 0.0f, 0.0f}, {0.5f, 0.5f, 0.5f}));
+    m_objects.push_back(new MeshObject({1.0f, 0.85f, 0.0f}, object->GetMeshData(), {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {0.2f, 0.2f, 0.2f}));
 }
 
 void Application::Exit()

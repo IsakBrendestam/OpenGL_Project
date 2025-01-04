@@ -127,13 +127,6 @@ void Cube::Update(double deltaTime)
     m_rotation.z += glm::radians(2.0f) * deltaTime;
 
     Object::Update(deltaTime);
-
-    m_shader.Use();
-    LightData lightData = {{-1, 1, -1}, {1.0f, 1.0f, 1.0f}, 0.75f, 3.0f};
-    m_shader.Setvec3("lightData.position", lightData.position);
-    m_shader.Setvec3("lightData.color", lightData.color);
-    m_shader.SetFlot("lightData.ambientIntensity", lightData.ambientIntensity);
-    m_shader.SetFlot("lightData.lightIntensity", lightData.lightIntensity);
 }
 
 void Cube::Draw()
