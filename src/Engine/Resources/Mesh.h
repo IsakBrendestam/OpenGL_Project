@@ -1,13 +1,14 @@
 #ifndef MESH_HEADER
 #define MESH_HEADER
 
-#include "Vertex.h"
-
 #include <string>
 #include <cstring>
 #include <cstdlib>
 
-#include "Engine/Utilities/Debug.h"
+#include "glm/gtc/type_ptr.hpp"
+
+#include "Vertex.h"
+#include "Material.h"
 
 struct MeshColor
 {
@@ -50,6 +51,33 @@ struct MeshTexture
         free(g_vertices);
         free(g_indices);
     }
+};
+
+struct MeshData
+{
+	struct VertexInfo
+	{
+		size_t sizeOfVertex;
+		size_t nrOfVerticesInBuffer;
+		void* vertexData;
+	} vertexInfo;
+
+	struct IndexInfo
+	{
+		size_t nrOfIndicesInBuffer;
+		unsigned int* indexData;
+	} indexInfo;
+
+	struct SubMeshInfo
+	{
+		Material material;
+		size_t startIndexValue;
+		size_t nrOfIndicesInSubMesh;
+	};
+
+	std::vector<SubMeshInfo> subMeshInfo;
+
+    glm::vec3 BBMin, BBMax;    
 };
 
 #endif
