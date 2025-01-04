@@ -11,16 +11,16 @@
 
 struct MeshColor
 {
-    VertexColor* g_vertices;
+    ShaderVertexColor* g_vertices;
     unsigned int g_nVertices;
     unsigned int* g_indices;
     unsigned int g_nIndices;
 
-    MeshColor(const VertexColor* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices):
+    MeshColor(const ShaderVertexColor* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices):
         g_nVertices(nVertices), g_nIndices(nIndices)
     {
-        g_vertices = (VertexColor*)std::malloc(g_nVertices * sizeof(VertexColor));
-        std::memcpy(g_vertices, vertices, g_nVertices * sizeof(VertexColor));
+        g_vertices = (ShaderVertexColor*)std::malloc(g_nVertices * sizeof(ShaderVertexColor));
+        std::memcpy(g_vertices, vertices, g_nVertices * sizeof(ShaderVertexColor));
 
         g_indices = (unsigned int*)std::malloc(g_nIndices * sizeof(unsigned int));
         std::memcpy(g_indices, indices, g_nIndices * sizeof(unsigned int));
@@ -29,17 +29,17 @@ struct MeshColor
 
 struct MeshTexture
 {
-    VertexTexture* g_vertices;
+    ShaderVertexTexture* g_vertices;
     unsigned int g_nVertices;
     unsigned int* g_indices;
     unsigned int g_nIndices;
     std::string g_textureName;
 
-    MeshTexture(const VertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices, const std::string& textureName):
+    MeshTexture(const ShaderVertexTexture* vertices, unsigned int nVertices, const unsigned int* indices, unsigned int nIndices, const std::string& textureName):
         g_nVertices(nVertices), g_nIndices(nIndices), g_textureName(textureName)
     {
-        g_vertices = (VertexTexture*)std::malloc(g_nVertices * sizeof(VertexTexture));
-        std::memcpy(g_vertices, vertices, g_nVertices * sizeof(VertexTexture));
+        g_vertices = (ShaderVertexTexture*)std::malloc(g_nVertices * sizeof(ShaderVertexTexture));
+        std::memcpy(g_vertices, vertices, g_nVertices * sizeof(ShaderVertexTexture));
 
         g_indices = (unsigned int*)std::malloc(g_nIndices * sizeof(unsigned int));
         std::memcpy(g_indices, indices, g_nIndices * sizeof(unsigned int));

@@ -5,7 +5,7 @@ Line::Line(const std::vector<glm::vec3>& positions, const glm::vec3& color): Obj
     m_nVertices = positions.size();
     m_nIndices = (m_nVertices-1) * 2;
 
-    VertexLine vertices[positions.size()-1];
+    ShaderVertexLine vertices[positions.size()-1];
     unsigned int indices[m_nIndices];
     for (int i = 0; i < positions.size(); i++)
     {
@@ -31,14 +31,14 @@ Line::Line(const std::vector<glm::vec3>& positions, const glm::vec3& color): Obj
     glBindVertexArray(m_VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-    glBufferData(GL_ARRAY_BUFFER, m_nVertices * sizeof(VertexLine), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, m_nVertices * sizeof(ShaderVertexLine), vertices, GL_STATIC_DRAW);
 
     // Position
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexLine), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexLine), (void*)0);
     glEnableVertexAttribArray(0);  
 
     // Color
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexLine), (void*)(3*sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexLine), (void*)(3*sizeof(float)));
     glEnableVertexAttribArray(1);
 }
 

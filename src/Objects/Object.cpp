@@ -37,18 +37,18 @@ void Object::Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation,
     glBindVertexArray(m_VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-    glBufferData(GL_ARRAY_BUFFER, mesh.g_nVertices * sizeof(VertexColor), mesh.g_vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, mesh.g_nVertices * sizeof(ShaderVertexColor), mesh.g_vertices, GL_STATIC_DRAW);
 
     // Position
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexColor), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexColor), (void*)0);
     glEnableVertexAttribArray(0);  
 
     // Color
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexColor), (void*)(3*sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexColor), (void*)(3*sizeof(float)));
     glEnableVertexAttribArray(1);
 
     // Normal
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(VertexColor), (void*)(6*sizeof(float)));
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexColor), (void*)(6*sizeof(float)));
     glEnableVertexAttribArray(2);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
@@ -62,6 +62,7 @@ void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotatio
     m_scale = scale;
 
     m_shader.LoadShader("TextureShader.vs", "TextureShader.fs");
+    m_shader.Use();
 
     glGenBuffers(1, &m_VBO);  
     glGenBuffers(1, &m_EBO);
@@ -71,18 +72,18 @@ void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotatio
     glBindVertexArray(m_VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-    glBufferData(GL_ARRAY_BUFFER, mesh.g_nVertices * sizeof(VertexTexture), mesh.g_vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, mesh.g_nVertices * sizeof(ShaderVertexTexture), mesh.g_vertices, GL_STATIC_DRAW);
 
     // Position
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTexture), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexTexture), (void*)0);
     glEnableVertexAttribArray(0);  
 
-    // ST
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(VertexTexture), (void*)(3*sizeof(float)));
+    // Normal
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexTexture), (void*)(3*sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    // Normal
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTexture), (void*)(5*sizeof(float)));
+    // ST
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(ShaderVertexTexture), (void*)(5*sizeof(float)));
     glEnableVertexAttribArray(2);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);

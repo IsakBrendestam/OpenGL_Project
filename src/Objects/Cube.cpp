@@ -5,7 +5,7 @@
 Cube::Cube(glm::vec3 position, glm::vec3 scale): Object()
 {
     const glm::vec3 color = {0.6f, 0.6f, 0.6f};
-    VertexColor colVertices[] = {
+    ShaderVertexColor colVertices[] = {
         // Front face
         {{-1.0f, -1.0f,  1.0f}, {color.r, color.g, color.b}, {0.0f,  0.0f,  1.0f}}, // Bottom-left
         {{ 1.0f, -1.0f,  1.0f}, {color.r, color.g, color.b}, {0.0f,  0.0f,  1.0f}}, // Bottom-right
@@ -43,7 +43,7 @@ Cube::Cube(glm::vec3 position, glm::vec3 scale): Object()
         {{-1.0f, -1.0f,  1.0f}, {color.r, color.g, color.b}, { 0.0f, -1.0f,  0.0f}}, // Top-left
     };
 
-    VertexTexture texVertices[] = {
+    ShaderVertexTexture texVertices[] = {
         // Front face
         {{-1.0f, -1.0f,  1.0f}, {0.0f, 0.0f}, {0.0f,  0.0f,  1.0f}}, // Bottom-left
         {{ 1.0f, -1.0f,  1.0f}, {1.0f, 0.0f}, {0.0f,  0.0f,  1.0f}}, // Bottom-right
@@ -110,7 +110,7 @@ Cube::Cube(glm::vec3 position, glm::vec3 scale): Object()
     MeshTexture mesh = MeshTexture(texVertices, 24, indices, 36, "tiles.jpg");
     MeshColor meshCol = MeshColor(colVertices, 24, indices, 36);
 
-    Object::Init(meshCol, position, {0.0f, 0.0f, 90.0f}, scale);
+    Object::Init(mesh, position, {0.0f, 0.0f, 90.0f}, scale);
 
     m_shader.Use();
 }
