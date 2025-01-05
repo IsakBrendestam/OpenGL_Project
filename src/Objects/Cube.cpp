@@ -144,7 +144,6 @@ void Cube::OnCollision(const Collider& other)
 {
     m_shader.Use();
     UpdateColor({1.0f, 0.0f, 0.0f});
-    DebugLog("TEST");
 }
 
 void Cube::Draw()

@@ -23,7 +23,7 @@ void Application::Initialize()
     m_objects.push_back(new Sphere({0, 0.5f, 0}, 0.3f));
     m_objects.push_back(new Sphere({1.7f, 0.5f, 0}, 0.5f));
     m_objects.push_back(new Box({-1.5f, 0.5f, 0}, {0, 0, 0}, {1.0f, 0.5f, 0.5f}));
-    m_objects.push_back(new Cube({0.5f, 0.5f, -1.5f}, {0, 0, 0}, 0.5));
+    m_objects.push_back(new Cube({0.5f, 0.5f, -1.5f}, {0, 0, 0}, 0.5f));
     //m_spheres[0] = new Sphere({0, 0.5f, 0}, 0.5f);
     //m_spheres[1] = new Sphere({0.8f, 0.5f, 0}, 0.5f);
 }

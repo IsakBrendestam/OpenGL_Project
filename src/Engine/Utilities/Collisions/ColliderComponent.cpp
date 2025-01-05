@@ -28,10 +28,7 @@ void ColliderComponent::CheckIntersection(const Collider& other)
 {
     if (m_collider)
         if (m_collider->Intersection(other)) 
-        {
-            DebugLog("Collision");
             OnCollision(other);
-        }
 }
 
 void ColliderComponent::OnCollision(const Collider& other)
