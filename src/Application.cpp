@@ -4,6 +4,7 @@
 
 #include "Objects/Rectangle.h"
 #include "Objects/Cube.h"
+#include "Objects/Box.h"
 #include "Objects/Line.h"
 #include "Objects/MeshObject.h"
 #include "Objects/Sphere.h"
@@ -21,7 +22,8 @@ void Application::Initialize()
     //m_objects.push_back(new MeshObject({1.0f, 0.85f, 0.0f}, obj.GetMeshData(), {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {0.2f, 0.2f, 0.2f}));
     m_objects.push_back(new Sphere({0, 0.5f, 0}, 0.3f));
     m_objects.push_back(new Sphere({1.7f, 0.5f, 0}, 0.5f));
-    m_objects.push_back(new Cube({-1.5f, 0.5f, 0}, {0.5f, 0.5f, 0.5f}));
+    m_objects.push_back(new Box({-1.5f, 0.5f, 0}, {0, 0, 0}, {1.0f, 0.5f, 0.5f}));
+    m_objects.push_back(new Cube({0.5f, 0.5f, -1.5f}, {0, 0, 0}, 0.5));
     //m_spheres[0] = new Sphere({0, 0.5f, 0}, 0.5f);
     //m_spheres[1] = new Sphere({0.8f, 0.5f, 0}, 0.5f);
 }
