@@ -3,10 +3,23 @@
 
 #include "glm/gtc/type_ptr.hpp"
 
+struct Sphere
+{
+    glm::vec3 position;
+    float radius;
+};
+
+struct AABB
+{
+    glm::vec3 position;
+    glm::vec3 dimensions;
+};
+
 class Collisions
 {
 public:
-    static bool SphereSphereCollision(glm::vec3 p1, float r1, glm::vec3 p2, float r2);
+    static bool SphereSphereCollision(const Sphere& s1, const Sphere& s2);
+    static bool SphereAABBCollision(const Sphere& s, const AABB& b);
 };
 
 #endif

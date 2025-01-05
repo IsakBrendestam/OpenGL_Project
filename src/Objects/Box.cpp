@@ -1,10 +1,10 @@
-#include "Cube.h"
+#include "Box.h"
 
 #include "Engine/Resources/Light.h"
 
 #include "Engine/Utilities/Debug.h"
 
-Cube::Cube(glm::vec3 position, glm::vec3 rotation, float scale): Object()
+Box::Box(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale): Object()
 {
     const glm::vec3 color = {0.6f, 0.6f, 0.6f};
     ShaderVertexColor colVertices[] = {
@@ -121,17 +121,17 @@ Cube::Cube(glm::vec3 position, glm::vec3 rotation, float scale): Object()
     md.indexInfo.indexData = indices;
     md.indexInfo.nrOfIndicesInBuffer = 36;
 
-    Object::Init({0.4f, 0.4f, 0.4f}, md, position, rotation, {scale, scale, scale});
+    Object::Init({0.4f, 0.4f, 0.4f}, md, position, rotation, scale);
 
     AssignAABBCollider(m_position, m_scale);
 }
 
-Cube::~Cube()
+Box::~Box()
 {
 
 }
 
-void Cube::Update(double deltaTime)
+void Box::Update(double deltaTime)
 {
     /*
     m_rotation.x += glm::radians(2.0f) * deltaTime;
@@ -140,13 +140,13 @@ void Cube::Update(double deltaTime)
     */
 }
 
-void Cube::OnCollision(const Collider& other)
+void Box::OnCollision(const Collider& other)
 {
     m_shader.Use();
     UpdateColor({1.0f, 0.0f, 0.0f});
 }
 
-void Cube::Draw()
+void Box::Draw()
 {
     m_shader.Use();
 
