@@ -3,7 +3,7 @@
 
 enum ColliderType {
     SPHERE,
-    BOX
+    BOX_AABB
 };
 
 class Collider
