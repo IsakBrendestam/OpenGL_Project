@@ -10,10 +10,12 @@
 #include "Engine/OpenGL/ShaderGL.h"
 #include "Engine/Resources/Mesh.h"
 
-class Object
+#include "Engine/Utilities/Collisions/ColliderComponent.h"
+
+class Object: public ColliderComponent
 {
 public:
-    Object() = default;
+    Object();
     Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
     Object(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
     Object(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);

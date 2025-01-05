@@ -8,22 +8,32 @@
 #include "Engine/CameraManager.h"
 #include "Engine/Resources/Light.h"
 
-Object::Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object():
+    ColliderComponent()
+{
+
+}
+
+Object::Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
+    ColliderComponent()
 {
     Init(mesh, position, rotation, scale);
 }
 
-Object::Object(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
+    ColliderComponent()
 {
     Init(mesh, position, rotation, scale);
 }
 
-Object::Object(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
+    ColliderComponent()
 {
     Init(mesh, textureName, position, rotation, scale);
 }
 
-Object::Object(glm::vec3 color, const MeshData& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object(glm::vec3 color, const MeshData& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
+    ColliderComponent()
 {
     Init(color, mesh, position, rotation, scale);
 }
