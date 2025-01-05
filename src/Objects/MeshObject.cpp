@@ -9,7 +9,7 @@ MeshObject::MeshObject(MeshData mesh, const std::string& textureName, glm::vec3 
 }
 
 MeshObject::MeshObject(glm::vec3 color, MeshData mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
-    Object(mesh, color, position, rotation, scale), m_mesh(mesh)
+    Object(color, mesh, position, rotation, scale), m_mesh(mesh)
 {
     m_shader.Use();
 }

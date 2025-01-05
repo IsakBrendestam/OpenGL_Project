@@ -6,6 +6,7 @@
 #include "Engine/Engine.h"
 
 #include "Objects/Object.h"
+#include "Objects/Sphere.h"
 
 class Application : public Engine
 {
@@ -20,6 +21,7 @@ public:
 
 private:
     std::vector<Object*> m_objects;
+    Sphere* m_spheres[2];
 };
 
 #endif

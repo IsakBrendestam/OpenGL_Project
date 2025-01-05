@@ -23,9 +23,9 @@ Object::Object(const MeshData& mesh, const std::string& textureName, glm::vec3 p
     Init(mesh, textureName, position, rotation, scale);
 }
 
-Object::Object(const MeshData& mesh, glm::vec3 color, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object(glm::vec3 color, const MeshData& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
-    Init(mesh, color, position, rotation, scale);
+    Init(color, mesh, position, rotation, scale);
 }
 
 Object::~Object()
@@ -150,7 +150,7 @@ void Object::Init(const MeshData& mesh, const std::string& textureName, glm::vec
     GenerateTexture(textureName);
 }
 
-void Object::Init(const MeshData& mesh, glm::vec3 color, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+void Object::Init(glm::vec3 color, const MeshData& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
     m_position = position;
     m_rotation = rotation;
@@ -220,6 +220,12 @@ void Object::GenerateTexture(const std::string& textureName)
     glGenerateMipmap(GL_TEXTURE_2D);
 
     stbi_image_free(data);
+}
+
+void Object::UpdateColor(const glm::vec3& color)
+{
+    m_shader.Use();
+    m_shader.Setvec3("aColor", color);
 }
 
 void Object::UpdateLight()
