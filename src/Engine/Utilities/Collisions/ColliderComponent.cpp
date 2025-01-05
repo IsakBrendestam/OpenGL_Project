@@ -49,11 +49,7 @@ void ColliderComponent::CheckIntersection(const ColliderComponent& other)
 {
     if (m_collider)
         if (m_collider->Intersection(*other.m_collider)) 
-        {
             OnCollision(other);
-            const ColliderComponent c(*this);
-            //other.OnCollision(c);
-        }
 }
 
 void ColliderComponent::OnCollision(const ColliderComponent& other)
