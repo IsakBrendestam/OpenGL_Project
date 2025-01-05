@@ -19,6 +19,8 @@ public:
     static CameraGL GetCurrentCamera();
     static void SetCurrentCamera(unsigned int index);
 
+    static void UpdatePorjections(const ProjectionInfo& projectionInfo);
+
 private:
     static std::vector<CameraGL*> m_cameras;
     static unsigned int m_currentCamera;

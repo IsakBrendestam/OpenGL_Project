@@ -36,3 +36,9 @@ void CameraManager::SetCurrentCamera(unsigned int index)
 {
     m_currentCamera = index;
 }
+
+void CameraManager::UpdatePorjections(const ProjectionInfo& projectionInfo)
+{
+    for (auto& camera : m_cameras)
+        camera->SetProjectionInfo(projectionInfo);
+}
