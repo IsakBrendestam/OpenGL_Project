@@ -13,6 +13,9 @@ public:
 
     bool Intersection(const Collider& other) override;
 
+    glm::vec3 GetPosition() const;
+    float GetRadius() const;
+
 private:
     glm::vec3 m_position;
     float m_radius;
