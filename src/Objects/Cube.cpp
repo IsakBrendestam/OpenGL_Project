@@ -2,6 +2,8 @@
 
 #include "Engine/Resources/Light.h"
 
+#include "Engine/Utilities/Debug.h"
+
 Cube::Cube(glm::vec3 position, glm::vec3 scale): Object()
 {
     const glm::vec3 color = {0.6f, 0.6f, 0.6f};
@@ -110,9 +112,18 @@ Cube::Cube(glm::vec3 position, glm::vec3 scale): Object()
     MeshTexture mesh = MeshTexture(texVertices, 24, indices, 36, "tiles.jpg");
     MeshColor meshCol = MeshColor(colVertices, 24, indices, 36);
 
-    Object::Init(mesh, position, {0.0f, 0.0f, 90.0f}, scale);
+    //Object::Init(meshCol, position, {0.0f, 0.0f, 90.0f}, scale);
 
-    m_shader.Use();
+    MeshData md;
+    md.vertexInfo.vertexData = colVertices;
+    md.vertexInfo.nrOfVerticesInBuffer = 24;
+    md.vertexInfo.sizeOfVertex = sizeof(ShaderVertexColor);
+    md.indexInfo.indexData = indices;
+    md.indexInfo.nrOfIndicesInBuffer = 36;
+
+    Object::Init({0.4f, 0.4f, 0.4f}, md, position, {0, 0, 0}, scale);
+
+    AssignAABBCollider(m_position, m_scale);
 }
 
 Cube::~Cube()
@@ -122,9 +133,18 @@ Cube::~Cube()
 
 void Cube::Update(double deltaTime)
 {
+    /*
     m_rotation.x += glm::radians(2.0f) * deltaTime;
     m_rotation.y += glm::radians(2.0f) * deltaTime;
     m_rotation.z += glm::radians(2.0f) * deltaTime;
+    */
+}
+
+void Cube::OnCollision(const Collider& other)
+{
+    m_shader.Use();
+    UpdateColor({1.0f, 0.0f, 0.0f});
+    DebugLog("TEST");
 }
 
 void Cube::Draw()
