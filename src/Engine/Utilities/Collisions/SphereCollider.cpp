@@ -15,7 +15,7 @@ bool SphereCollider::Intersection(const Collider& other)
         case ColliderType::SPHERE:
         {
             const SphereCollider* o = dynamic_cast<const SphereCollider*>(&other);
-            return Collisions::SphereSphereCollision(m_position, m_radius, o->m_position, o->m_radius);
+            return Collisions::SphereSphereCollision({m_position, m_radius}, {o->m_position, o->m_radius});
         }
         break;
 
