@@ -3,12 +3,14 @@
 #include "Engine/Utilities/ObjParser.h"
 
 Sphere::Sphere(glm::vec3 position, float radius):
-    Object(), SphereCollider(position, radius), m_radius(radius)
+    Object(), m_radius(radius)
 {
     m_color = {0.4f, 0.4f, 0.4f};
     ObjParser obj("res/Objects/", "Sphere.obj");
     m_mesh = obj.GetMeshData();
     Object::Init(m_color, m_mesh, position, {0, 0, 0}, {radius, radius, radius});
+
+    AssignSphereCollider(position, radius);
 }
 
 void Sphere::Update(double deltaTime)

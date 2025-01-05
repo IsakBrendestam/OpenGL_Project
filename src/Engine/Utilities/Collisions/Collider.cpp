@@ -13,15 +13,6 @@ Collider::~Collider()
 
 }
 
-void Collider::CheckIntersection(const Collider& other)
-{
-    if (Intersection(other)) 
-    {
-        DebugLog("Colliding");
-        OnCollision(other);
-    }
-}
-
 ColliderType Collider::GetType() const
 {
     return m_type;

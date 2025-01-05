@@ -5,7 +5,7 @@
 
 #include "Engine/Utilities/Collisions/SphereCollider.h"
 
-class Sphere : public Object, public SphereCollider
+class Sphere : public Object
 {
 public:
     Sphere(glm::vec3 position, float radius);
@@ -14,7 +14,7 @@ public:
     void Update(double deltaTime) override;
     void Draw() override;
 
-    void OnCollision(const Collider& other);
+    void OnCollision(const Collider& other) override;
 
 private:
     float m_radius;
