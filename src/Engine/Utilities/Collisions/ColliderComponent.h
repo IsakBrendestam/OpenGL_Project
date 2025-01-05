@@ -9,14 +9,15 @@ class ColliderComponent
 {
 public:
     ColliderComponent() = default;
+    ColliderComponent(const ColliderComponent& other);
     virtual ~ColliderComponent();
 
     void AssignSphereCollider(glm::vec3 position, float radius);
+
     void AssignAABBCollider(glm::vec3 position, glm::vec3 dimensions);
 
-
-    void CheckIntersection(const Collider& other);
-    virtual void OnCollision(const Collider& other);
+    void CheckIntersection(const ColliderComponent& other);
+    virtual void OnCollision(const ColliderComponent& other);
 
     Collider* GetCollider() const;
 

@@ -18,7 +18,7 @@ void Sphere::Update(double deltaTime)
 
 }
 
-void Sphere::OnCollision(const Collider& other)
+void Sphere::OnCollision(const ColliderComponent& other)
 {
     UpdateColor({1.0f, 0.0f, 0.0f});
 }

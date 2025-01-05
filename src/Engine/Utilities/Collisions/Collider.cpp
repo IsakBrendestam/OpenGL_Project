@@ -8,6 +8,11 @@ Collider::Collider(ColliderType type):
 
 }
 
+Collider::Collider(const Collider& other)
+{
+    m_type = other.m_type;
+}
+
 Collider::~Collider()
 {
 

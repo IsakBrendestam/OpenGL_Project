@@ -10,6 +10,7 @@ class Collider
 {
 public:
     Collider(ColliderType type);
+    Collider(const Collider& other);
     virtual ~Collider();
 
     virtual bool Intersection(const Collider& other) = 0;

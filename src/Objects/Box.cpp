@@ -140,7 +140,7 @@ void Box::Update(double deltaTime)
     */
 }
 
-void Box::OnCollision(const Collider& other)
+void Box::OnCollision(const ColliderComponent& other)
 {
     m_shader.Use();
     UpdateColor({1.0f, 0.0f, 0.0f});
