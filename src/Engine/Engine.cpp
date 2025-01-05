@@ -45,7 +45,7 @@ int Engine::Init()
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
     // Create GLFW Window
-    m_window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+    m_window = glfwCreateWindow(EngineSettings::g_windowWidth, EngineSettings::g_windowHeight, "LearnOpenGL", NULL, NULL);
     if (m_window == NULL)
     {
         DebugLog("Failed creating window");
@@ -107,7 +107,12 @@ void Engine::Render()
 
 void Engine::SetViewportSize(GLFWwindow* window, int width, int height)
 {
-    glViewport(0, 0, width, height);
+    EngineSettings::g_windowWidth = width;
+    EngineSettings::g_windowHeight = height;
+    ProjectionInfo projInfo = {glm::radians(45.0f), (float)EngineSettings::g_windowWidth / (float)EngineSettings::g_windowHeight, 0.1f, 100.0f};
+    CameraManager::UpdatePorjections(projInfo);
+    
+    glViewport(0, 0, EngineSettings::g_windowWidth, EngineSettings::g_windowHeight);
 }
 
 void Engine::ProcessInput()

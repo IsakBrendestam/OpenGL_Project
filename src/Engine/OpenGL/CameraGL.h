@@ -26,6 +26,8 @@ public:
     glm::mat4 GetViewMatrix() const;
     glm::mat4 GetProjectionMatrix() const;
 
+    void SetProjectionInfo(const ProjectionInfo& projectionInfo);
+
 private:
     glm::mat4 m_viewMat, m_projectionMat;
 
