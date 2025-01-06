@@ -1,6 +1,7 @@
 #ifndef IMGUIMANAGER_HEADER
 #define IMGUIMANAGER_HEADER
 
+#include "glad.h"
 #include <GLFW/glfw3.h>
 #include <string>
 
@@ -16,6 +17,12 @@ public:
 
     static void ScreenStatistics(double deltaTime);
     static void EngineSettings();
+
+    static void SceneHierarchy();
+    static void ObjectInspector();
+
+private:
+    static int m_selectedObject;
 };
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef OBJECTMANAGER_HEADER
 #define OBJECTMANAGER_HEADER
 
-#include <map>
+#include <vector>
 #include <string>
 
 #include "Object.h"
@@ -17,8 +17,13 @@ public:
 
     static void AddObject(const std::string& name, Object* object);
 
+    static unsigned int GetObjectCount();
+    static std::string GetObjectName(unsigned int index);
+    static Object* GetObject(unsigned int index);
+
 private:
-    static std::map<std::string, Object*> m_objects;
+    static std::vector<std::string> m_names;
+    static std::vector<Object*> m_objects;
 };
 
 #endif
