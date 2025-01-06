@@ -11,51 +11,36 @@
 
 #include "Engine/Utilities/ObjParser.h"
 
+#include "Objects/ObjectManager.h"
+
 void Application::Initialize()
 {
     //m_objects.push_back(new Cube({0.0f, 0.0f, 0.0f}, {0.1f, 0.1f, 0.1f}));
     //m_objects.push_back(new Rectangle());
     //m_objects.push_back(new Cube({-2.0f, 0.0f, -2.0f}, {0.5f, 0.5f, 0.5f}));
 
-    ObjParser obj = ObjParser("res/Objects/", "Sphere.obj");
+    //ObjParser obj = ObjParser("res/Objects/", "Dragon.obj");
 
     //m_objects.push_back(new MeshObject({1.0f, 0.85f, 0.0f}, obj.GetMeshData(), {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {0.2f, 0.2f, 0.2f}));
-    m_objects.push_back(new Sphere({0, 0.5f, 0}, 0.3f));
-    m_objects.push_back(new Sphere({1.7f, 0.5f, 0}, 0.5f));
-    m_objects.push_back(new Box({-1.5f, 0.5f, 0}, {0, 0, 0}, {1.0f, 0.5f, 0.5f}));
-    m_objects.push_back(new Cube({0.5f, 0.5f, -1.5f}, {0, 0, 0}, 0.5f));
-    //m_spheres[0] = new Sphere({0, 0.5f, 0}, 0.5f);
-    //m_spheres[1] = new Sphere({0.8f, 0.5f, 0}, 0.5f);
+    ObjectManager::Initialize();
+
+    ObjectManager::AddObject("Sphere", new Sphere({0, 0.5f, 0}, 0.3f));
+    ObjectManager::AddObject("Sphere 2", new Sphere({1.7f, 0.5f, 0}, 0.5f));
+    ObjectManager::AddObject("Box", new Box({-1.5f, 0.5f, 0}, {0, 0, 0}, {1.5f, 0.5f, 0.5f}));
+    ObjectManager::AddObject("Box 2", new Cube({0.5f, 0.5f, -1.5f}, {0, 0, 0}, 0.5f));
 }
 
 void Application::Exit()
 {
-    for (auto& object : m_objects)
-        delete object;
+    ObjectManager::Deconstruct();
 }
 
 void Application::Update(double deltaTime)
 {
-    for (auto& object : m_objects)
-        object->Update(deltaTime);
-
-    for (int i = 0; i < m_objects.size(); i++)
-        for (int j = 0; j < m_objects.size(); j++)
-            if (i != j)
-                m_objects[i]->CheckIntersection(*m_objects[j]->GetCollider());
-
-    //m_spheres[0]->Update(deltaTime);
-    //m_spheres[1]->Update(deltaTime);
-
-    //m_spheres[0]->CheckIntersection(*m_spheres[1]);
-    //m_spheres[1]->CheckIntersection(*m_spheres[0]);
+    ObjectManager::Update(deltaTime);
 }
 
 void Application::Draw()
 {
-    for (auto& object : m_objects)
-        object->Render();
-
-    //m_spheres[0]->Render();
-    //m_spheres[1]->Render();
+    ObjectManager::Draw();
 }

@@ -12,7 +12,7 @@ public:
     void Update(double deltaTime) override;
     void Draw() override;
 
-    void OnCollision(const Collider& other) override;
+    void OnCollision(const ColliderComponent& other) override;
 
 private:
 };

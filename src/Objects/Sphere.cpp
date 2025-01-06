@@ -1,6 +1,7 @@
 #include "Sphere.h"
 
 #include "Engine/Utilities/ObjParser.h"
+#include "Engine/Utilities/Debug.h"
 
 Sphere::Sphere(glm::vec3 position, float radius):
     Object(), m_radius(radius)
@@ -18,7 +19,7 @@ void Sphere::Update(double deltaTime)
 
 }
 
-void Sphere::OnCollision(const Collider& other)
+void Sphere::OnCollision(const ColliderComponent& other)
 {
     UpdateColor({1.0f, 0.0f, 0.0f});
 }

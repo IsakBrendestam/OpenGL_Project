@@ -140,7 +140,7 @@ void Cube::Update(double deltaTime)
     */
 }
 
-void Cube::OnCollision(const Collider& other)
+void Cube::OnCollision(const ColliderComponent& other)
 {
     m_shader.Use();
     UpdateColor({1.0f, 0.0f, 0.0f});
