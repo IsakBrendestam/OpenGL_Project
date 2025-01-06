@@ -38,9 +38,14 @@ glm::mat4 TransformComponent::GetWorldMat()
 
 void TransformComponent::Draw()
 {
-    const float min = -100.0f;
-    const float max = 100.0f;
-    ImGui::DragFloat3("Position", (float*)&m_position, 0.1f, min, max);
-    ImGui::DragFloat3("Rotation", (float*)&m_rotation, 0.1f, min, max);
-    ImGui::DragFloat3("Scale", (float*)&m_scale, 0.1f, min, max);
+    if (ImGui::TreeNode("Transform"))
+    {
+        const float min = -100.0f;
+        const float max = 100.0f;
+        ImGui::DragFloat3("Position", (float*)&m_position, 0.1f, min, max);
+        ImGui::DragFloat3("Rotation", (float*)&m_rotation, 0.1f, min, max);
+        ImGui::DragFloat3("Scale", (float*)&m_scale, 0.1f, min, max);
+
+        ImGui::TreePop();
+    }
 }
