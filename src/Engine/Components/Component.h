@@ -5,7 +5,7 @@ class Component
 {
 public:
     Component() = default;
-    ~Component() = default;
+    virtual ~Component() = default;
 
     virtual void Update() = 0;
     virtual void Draw() = 0;

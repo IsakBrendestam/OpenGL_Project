@@ -123,7 +123,8 @@ Cube::Cube(glm::vec3 position, glm::vec3 rotation, float scale): Object()
 
     Object::Init({0.4f, 0.4f, 0.4f}, md, position, rotation, {scale, scale, scale});
 
-    AssignAABBCollider(m_position, m_scale);
+    AddComponent(new ColliderComponent());
+    GetComponent<ColliderComponent>()->AssignAABBCollider(m_position, m_scale);
 }
 
 Cube::~Cube()
@@ -140,7 +141,7 @@ void Cube::Update(double deltaTime)
     */
 }
 
-void Cube::OnCollision(const ColliderComponent& other)
+void Cube::OnCollision(const ComponentObject& other)
 {
     m_shader.Use();
     UpdateColor({1.0f, 0.0f, 0.0f});

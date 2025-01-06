@@ -1,6 +1,8 @@
 #ifndef OBJECT_HEADER
 #define OBJECT_HEADER
 
+#include <vector>
+
 #include "glad.h"
 #include <GLFW/glfw3.h>
 #include "glm/gtc/type_ptr.hpp"
@@ -10,9 +12,10 @@
 #include "Engine/OpenGL/ShaderGL.h"
 #include "Engine/Resources/Mesh.h"
 
-#include "Engine/Utilities/Collisions/ColliderComponent.h"
+#include "Engine/Components/ComponentObject.h"
 
-class Object: public ColliderComponent
+
+class Object: public ComponentObject
 {
 public:
     Object();
@@ -30,7 +33,6 @@ public:
 
     virtual void Update(double deltaTime) = 0;
     virtual void Render();
-
 
 protected:
     virtual void Draw() = 0;

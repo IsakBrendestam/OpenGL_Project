@@ -123,7 +123,9 @@ Box::Box(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale): Object()
 
     Object::Init({0.4f, 0.4f, 0.4f}, md, position, rotation, scale);
 
-    AssignAABBCollider(m_position, m_scale);
+    AddComponent(new ColliderComponent());
+    GetComponent<ColliderComponent>()->AssignAABBCollider(m_position, m_scale);
+    //AssignAABBCollider(m_position, m_scale);
 }
 
 Box::~Box()
@@ -140,7 +142,7 @@ void Box::Update(double deltaTime)
     */
 }
 
-void Box::OnCollision(const ColliderComponent& other)
+void Box::OnCollision(const ComponentObject& other)
 {
     m_shader.Use();
     UpdateColor({1.0f, 0.0f, 0.0f});

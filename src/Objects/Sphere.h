@@ -14,7 +14,7 @@ public:
     void Update(double deltaTime) override;
     void Draw() override;
 
-    void OnCollision(const ColliderComponent& other) override;
+    void OnCollision(const ComponentObject& other) override;
 
 private:
     float m_radius;
