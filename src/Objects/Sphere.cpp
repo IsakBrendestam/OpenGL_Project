@@ -11,7 +11,9 @@ Sphere::Sphere(glm::vec3 position, float radius):
     m_mesh = obj.GetMeshData();
     Object::Init(m_color, m_mesh, position, {0, 0, 0}, {radius, radius, radius});
 
-    AssignSphereCollider(position, radius);
+    AddComponent(new ColliderComponent());
+    GetComponent<ColliderComponent>()->AssignSphereCollider(m_position, m_radius);
+    //AssignSphereCollider(position, radius);
 }
 
 void Sphere::Update(double deltaTime)
@@ -19,7 +21,7 @@ void Sphere::Update(double deltaTime)
 
 }
 
-void Sphere::OnCollision(const ColliderComponent& other)
+void Sphere::OnCollision(const ComponentObject& other)
 {
     UpdateColor({1.0f, 0.0f, 0.0f});
 }

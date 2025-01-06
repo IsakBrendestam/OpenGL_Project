@@ -3,23 +3,29 @@
 
 #include "glm/gtc/type_ptr.hpp"
 
+#include "Engine/Components/Component.h"
 #include "Collider.h"
 
-class ColliderComponent 
+#include "SphereCollider.h"
+#include "AABBCollider.h"
+
+class ColliderComponent: public Component
 {
 public:
-    ColliderComponent() = default;
-    ColliderComponent(const ColliderComponent& other);
-    virtual ~ColliderComponent();
+    ColliderComponent();
+    ColliderComponent(Collider* colider);
+    ~ColliderComponent();
 
     void AssignSphereCollider(glm::vec3 position, float radius);
 
     void AssignAABBCollider(glm::vec3 position, glm::vec3 dimensions);
 
-    void CheckIntersection(const ColliderComponent& other);
-    virtual void OnCollision(const ColliderComponent& other);
+    bool CheckIntersection(const ColliderComponent& other);
 
     Collider* GetCollider() const;
+
+    void Update() override;
+    void Draw() override;
 
 protected:
     Collider* m_collider = nullptr;
