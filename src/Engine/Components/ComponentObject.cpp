@@ -2,6 +2,8 @@
 
 #include "Engine/Utilities/Debug.h"
 
+#include "ColliderComponent.h"
+
 ComponentObject::~ComponentObject()
 {
     for (auto& comp : m_components)
