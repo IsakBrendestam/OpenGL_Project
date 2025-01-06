@@ -3,11 +3,11 @@
 
 #include "glm/gtc/type_ptr.hpp"
 
-#include "Engine/Components/Component.h"
-#include "Collider.h"
+#include "Component.h"
+#include "Engine/Utilities/Collisions/Collider.h"
 
-#include "SphereCollider.h"
-#include "AABBCollider.h"
+#include "Engine/Utilities/Collisions/SphereCollider.h"
+#include "Engine/Utilities/Collisions/AABBCollider.h"
 
 class ColliderComponent: public Component
 {

@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "Component.h"
-#include "Engine/Utilities/Collisions/ColliderComponent.h"
+#include "ColliderComponent.h"
 
 class ComponentObject
 {
@@ -26,6 +26,7 @@ public:
 
     void AddComponent(Component* component);
 
+    // Collider Specific Functions
     void CheckIntersection(const ComponentObject& other);
     virtual void OnCollision(const ComponentObject& other);
 
