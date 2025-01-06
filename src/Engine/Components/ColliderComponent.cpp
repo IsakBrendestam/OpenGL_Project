@@ -3,13 +3,13 @@
 #include "Engine/Utilities/Debug.h"
 
 ColliderComponent::ColliderComponent():
-    m_collider(nullptr)
+    Component(ComponentType::COLLIDER), m_collider(nullptr)
 {
 
 }
 
 ColliderComponent::ColliderComponent(Collider* colider):
-    m_collider(colider)
+    Component(ComponentType::COLLIDER), m_collider(colider)
 {
     
 }
