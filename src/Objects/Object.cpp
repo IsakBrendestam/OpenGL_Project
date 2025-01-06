@@ -10,7 +10,7 @@
 
 Object::Object()
 {
-
+    AddComponent(new TransformComponent({0, 0, 0}, {0, 0, 0}, {0, 0, 0}));
 }
 
 Object::Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
@@ -39,9 +39,7 @@ Object::~Object()
 
 void Object::Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
-    m_position = position;
-    m_rotation = rotation;
-    m_scale = scale;
+    AddComponent(new TransformComponent(position, rotation, scale));
 
     m_shader.LoadShader("ColorShader.vs", "ColorShader.fs");
     m_shader.Use();
@@ -75,9 +73,7 @@ void Object::Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation,
 
 void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
-    m_position = position;
-    m_rotation = rotation;
-    m_scale = scale;
+    AddComponent(new TransformComponent(position, rotation, scale));
 
     m_shader.LoadShader("TextureShader.vs", "TextureShader.fs");
     m_shader.Use();
@@ -113,9 +109,7 @@ void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotatio
 
 void Object::Init(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
-    m_position = position;
-    m_rotation = rotation;
-    m_scale = scale;
+    AddComponent(new TransformComponent(position, rotation, scale));
 
     m_shader.LoadShader("TextureShader.vs", "TextureShader.fs");
     m_shader.Use();
@@ -157,9 +151,7 @@ void Object::Init(const MeshData& mesh, const std::string& textureName, glm::vec
 
 void Object::Init(glm::vec3 color, const MeshData& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
-    m_position = position;
-    m_rotation = rotation;
-    m_scale = scale;
+    AddComponent(new TransformComponent(position, rotation, scale));
 
     m_shader.LoadShader("SolidColorShader.vs", "ColorShader.fs");
     m_shader.Use();
@@ -246,16 +238,10 @@ void Object::UpdateLight()
 
 void Object::UpdateMatrices()
 {
-    m_transformMat = glm::identity<glm::mat4>();
-
-    m_transformMat = glm::translate(m_transformMat, m_position);
-    m_transformMat = glm::rotate(m_transformMat, glm::radians(m_rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-    m_transformMat = glm::rotate(m_transformMat, glm::radians(m_rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-    m_transformMat = glm::rotate(m_transformMat, glm::radians(m_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-    m_transformMat = glm::scale(m_transformMat, m_scale);
+    TransformComponent* transform = GetComponent<TransformComponent>();
 
     m_shader.Use();
-    m_shader.SetMat4("worldMat", m_transformMat);
+    m_shader.SetMat4("worldMat", transform->GetWorldMat());
     m_shader.SetMat4("viewProjectionMat", CameraManager::GetCurrentCamera().GetViewProjectionMatrix());
 }
 

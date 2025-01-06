@@ -41,6 +41,12 @@ void ComponentObject::AddComponent(Component* component)
 
     case ComponentType::TRANSFORM:
         {
+            TransformComponent* comp = GetComponent<TransformComponent>();
+            if (comp)
+            {
+                m_components.erase(std::remove(m_components.begin(), m_components.end(), comp), m_components.end());
+                delete comp;
+            }
         }
         break;
     

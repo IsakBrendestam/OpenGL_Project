@@ -12,8 +12,7 @@ Sphere::Sphere(glm::vec3 position, float radius):
     Object::Init(m_color, m_mesh, position, {0, 0, 0}, {radius, radius, radius});
 
     AddComponent(new ColliderComponent());
-    GetComponent<ColliderComponent>()->AssignSphereCollider(m_position, m_radius);
-    //AssignSphereCollider(position, radius);
+    GetComponent<ColliderComponent>()->AssignSphereCollider(position, radius);
 }
 
 void Sphere::Update(double deltaTime)

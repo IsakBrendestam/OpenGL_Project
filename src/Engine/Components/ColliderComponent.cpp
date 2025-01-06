@@ -2,8 +2,6 @@
 
 #include "Engine/Utilities/Debug.h"
 
-#include "imgui.h"
-
 ColliderComponent::ColliderComponent():
     Component(ComponentType::COLLIDER), m_collider(nullptr)
 {

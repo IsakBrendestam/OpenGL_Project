@@ -1,6 +1,8 @@
 #ifndef COMPONENT_HEADER
 #define COMPONENT_HEADER
 
+#include "imgui.h"
+
 enum ComponentType
 {
     TRANSFORM,
@@ -16,6 +18,7 @@ public:
 
     ComponentType GetType();
 
+    virtual void Update();
     virtual void Draw() = 0;
 
 private:

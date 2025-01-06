@@ -5,6 +5,7 @@
 
 #include "Component.h"
 #include "ColliderComponent.h"
+#include "TransformComponent.h"
 
 class ComponentObject
 {

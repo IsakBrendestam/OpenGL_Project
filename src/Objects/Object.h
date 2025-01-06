@@ -51,12 +51,6 @@ protected:
     unsigned int m_texture;
 
     ShaderGL m_shader;
-
-    glm::vec3 m_position;
-    glm::vec3 m_rotation;
-    glm::vec3 m_scale;
-
-    glm::mat4 m_transformMat;
 };
 
 #endif

@@ -6,6 +6,11 @@ Component::Component(ComponentType type):
 
 }
 
+void Component::Update()
+{
+
+}
+
 ComponentType Component::GetType()
 {
     return m_type;
