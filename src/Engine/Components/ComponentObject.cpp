@@ -32,7 +32,10 @@ void ComponentObject::AddComponent(Component* component)
         {
             ColliderComponent* comp = GetComponent<ColliderComponent>();
             if (comp)
+            {
+                m_components.erase(std::remove(m_components.begin(), m_components.end(), comp), m_components.end());
                 delete comp;
+            }
         }
         break;
 
