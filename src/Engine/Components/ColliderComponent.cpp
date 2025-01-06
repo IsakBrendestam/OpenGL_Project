@@ -64,5 +64,9 @@ void ColliderComponent::Draw()
         break;
     }
 
-    ImGui::Text("%s", header.c_str());
+    if (ImGui::TreeNode("%s", header.c_str()))
+    {
+
+        ImGui::TreePop();
+    }
 }
