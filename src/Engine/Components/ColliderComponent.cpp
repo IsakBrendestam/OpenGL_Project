@@ -64,5 +64,5 @@ void ColliderComponent::Draw()
         break;
     }
 
-    ImGui::Text(header.c_str());
+    ImGui::Text("%s", header.c_str());
 }

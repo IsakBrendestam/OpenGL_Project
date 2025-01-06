@@ -55,6 +55,7 @@ std::string ObjectManager::GetObjectName(unsigned int index)
     if (index < m_names.size())
         return m_names[index];
     DebugLog("Index out of bounds");
+    return "";
 }
 
 Object* ObjectManager::GetObject(unsigned int index)
@@ -62,4 +63,5 @@ Object* ObjectManager::GetObject(unsigned int index)
     if (index < m_objects.size())
         return m_objects[index];
     DebugLog("Index out of bounds");
+    return nullptr;
 }
