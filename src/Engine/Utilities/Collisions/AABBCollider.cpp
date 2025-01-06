@@ -24,6 +24,8 @@ bool AABBCollider::Intersection(const Collider& other)
         case ColliderType::BOX_AABB:
             break;
     }
+
+    return false;
 }
 
 glm::vec3 AABBCollider::GetPosition() const
