@@ -3,13 +3,13 @@
 #include "Engine/Utilities/Debug.h"
 
 ColliderComponent::ColliderComponent():
-    m_collider(nullptr)
+    Component(ComponentType::COLLIDER), m_collider(nullptr)
 {
 
 }
 
 ColliderComponent::ColliderComponent(Collider* colider):
-    m_collider(colider)
+    Component(ComponentType::COLLIDER), m_collider(colider)
 {
     
 }
@@ -47,12 +47,22 @@ Collider* ColliderComponent::GetCollider() const
     return m_collider;
 }
 
-void ColliderComponent::Update()
-{
-
-}
-
 void ColliderComponent::Draw()
 {
+    std::string header;
+    switch (m_collider->GetType())
+    {
+    case ColliderType::SPHERE:
+        header = "Sphere Collider";
+        break;
 
+    case ColliderType::BOX_AABB:
+        header = "AABB Collider";
+        break;
+    
+    default:
+        break;
+    }
+
+    ImGui::Text(header.c_str());
 }

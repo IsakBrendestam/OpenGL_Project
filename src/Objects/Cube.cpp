@@ -124,7 +124,7 @@ Cube::Cube(glm::vec3 position, glm::vec3 rotation, float scale): Object()
     Object::Init({0.4f, 0.4f, 0.4f}, md, position, rotation, {scale, scale, scale});
 
     AddComponent(new ColliderComponent());
-    GetComponent<ColliderComponent>()->AssignAABBCollider(m_position, m_scale);
+    GetComponent<ColliderComponent>()->AssignAABBCollider(position, {scale, scale, scale});
 }
 
 Cube::~Cube()

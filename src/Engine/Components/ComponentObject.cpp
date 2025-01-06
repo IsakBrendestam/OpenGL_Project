@@ -2,8 +2,6 @@
 
 #include "Engine/Utilities/Debug.h"
 
-#include "ColliderComponent.h"
-
 ComponentObject::~ComponentObject()
 {
     for (auto& comp : m_components)
@@ -28,5 +26,39 @@ void ComponentObject::OnCollision(const ComponentObject& other)
 
 void ComponentObject::AddComponent(Component* component)
 {
+    switch (component->GetType())
+    {
+    case ComponentType::COLLIDER:
+        {
+            ColliderComponent* comp = GetComponent<ColliderComponent>();
+            if (comp)
+            {
+                m_components.erase(std::remove(m_components.begin(), m_components.end(), comp), m_components.end());
+                delete comp;
+            }
+        }
+        break;
+
+    case ComponentType::TRANSFORM:
+        {
+            TransformComponent* comp = GetComponent<TransformComponent>();
+            if (comp)
+            {
+                m_components.erase(std::remove(m_components.begin(), m_components.end(), comp), m_components.end());
+                delete comp;
+            }
+        }
+        break;
+    
+    default:
+        break;
+    }
+
     m_components.push_back(component);
+}
+
+void ComponentObject::DrawComponentsUI()
+{
+    for (auto& comp : m_components)
+        comp->Draw();
 }

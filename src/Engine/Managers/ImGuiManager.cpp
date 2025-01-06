@@ -146,8 +146,6 @@ void ImGuiManager::ObjectInspector()
 
     if (m_selectedObject >= 0 && m_selectedObject < ObjectManager::GetObjectCount())
     {
-        const float min = -100.0f;
-        const float max = 100.0f;
         const int index = m_selectedObject;
 
         if (index != -1)
@@ -156,6 +154,8 @@ void ImGuiManager::ObjectInspector()
 
             ImGui::Text(title.c_str(), " - settings");
             ImGui::Separator();
+
+            ObjectManager::GetObject(index)->DrawComponentsUI();
 
             /*
             bool render = ObjectManager::GetRender(index);

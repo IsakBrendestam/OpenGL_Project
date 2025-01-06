@@ -4,6 +4,8 @@
 #include <vector>
 
 #include "Component.h"
+#include "ColliderComponent.h"
+#include "TransformComponent.h"
 
 class ComponentObject
 {
@@ -24,6 +26,7 @@ public:
     }
 
     void AddComponent(Component* component);
+    void DrawComponentsUI();
 
     // Collider Specific Functions
     void CheckIntersection(const ComponentObject& other);

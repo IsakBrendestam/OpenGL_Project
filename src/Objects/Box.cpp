@@ -124,7 +124,7 @@ Box::Box(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale): Object()
     Object::Init({0.4f, 0.4f, 0.4f}, md, position, rotation, scale);
 
     AddComponent(new ColliderComponent());
-    GetComponent<ColliderComponent>()->AssignAABBCollider(m_position, m_scale);
+    GetComponent<ColliderComponent>()->AssignAABBCollider(position, scale);
     //AssignAABBCollider(m_position, m_scale);
 }
 
