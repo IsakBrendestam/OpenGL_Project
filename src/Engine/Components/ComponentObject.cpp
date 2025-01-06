@@ -26,5 +26,24 @@ void ComponentObject::OnCollision(const ComponentObject& other)
 
 void ComponentObject::AddComponent(Component* component)
 {
+    switch (component->GetType())
+    {
+    case ComponentType::COLLIDER:
+        {
+            ColliderComponent* comp = GetComponent<ColliderComponent>();
+            if (comp)
+                delete comp;
+        }
+        break;
+
+    case ComponentType::TRANSFORM:
+        {
+        }
+        break;
+    
+    default:
+        break;
+    }
+
     m_components.push_back(component);
 }
