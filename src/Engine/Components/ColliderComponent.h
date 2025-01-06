@@ -24,7 +24,6 @@ public:
 
     Collider* GetCollider() const;
 
-    void Update() override;
     void Draw() override;
 
 protected:

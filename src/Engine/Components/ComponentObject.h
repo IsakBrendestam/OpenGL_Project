@@ -25,6 +25,7 @@ public:
     }
 
     void AddComponent(Component* component);
+    void DrawComponentsUI();
 
     // Collider Specific Functions
     void CheckIntersection(const ComponentObject& other);

@@ -157,6 +157,8 @@ void ImGuiManager::ObjectInspector()
             ImGui::Text(title.c_str(), " - settings");
             ImGui::Separator();
 
+            ObjectManager::GetObject(index)->DrawComponentsUI();
+
             /*
             bool render = ObjectManager::GetRender(index);
             ImGui::Checkbox("Render ", &render);
