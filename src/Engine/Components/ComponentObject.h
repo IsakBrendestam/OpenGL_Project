@@ -6,6 +6,7 @@
 #include "Component.h"
 #include "ColliderComponent.h"
 #include "TransformComponent.h"
+#include "MeshComponent.h"
 
 class ComponentObject
 {

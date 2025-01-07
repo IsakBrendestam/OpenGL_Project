@@ -13,6 +13,8 @@ Sphere::Sphere(glm::vec3 position, float radius):
 
     AddComponent(new ColliderComponent());
     GetComponent<ColliderComponent>()->AssignSphereCollider(position, radius);
+
+    AddComponent(new MeshComponent(m_mesh));
 }
 
 void Sphere::Update(double deltaTime)
@@ -31,7 +33,7 @@ void Sphere::Draw()
 
     glBindTexture(GL_TEXTURE_2D, m_texture);
     glBindVertexArray(m_VAO);
-    glDrawElements(GL_TRIANGLES, m_mesh.indexInfo.nrOfIndicesInBuffer, GL_UNSIGNED_INT, 0);
+    GetComponent<MeshComponent>()->DrawMesh();
+    //glDrawElements(GL_TRIANGLES, m_mesh.indexInfo.nrOfIndicesInBuffer, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
-
 }
