@@ -255,6 +255,7 @@ void Object::UpdateMatrices()
 {
     TransformComponent* transform = GetComponent<TransformComponent>();
 
+
     m_shader.Use();
     m_shader.SetMat4("worldMat", transform->GetWorldMat());
     m_shader.SetMat4("viewProjectionMat", CameraManager::GetCurrentCamera().GetViewProjectionMatrix());

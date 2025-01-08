@@ -5,7 +5,7 @@
 TransformComponent::TransformComponent(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
     Component(ComponentType::TRANSFORM), m_position(position), m_rotation(rotation), m_scale(scale)
 {
-
+    m_parentWorldMat = glm::identity<glm::mat4>();
 }
 
 glm::vec3 TransformComponent::GetPosition()
@@ -33,7 +33,19 @@ glm::mat4 TransformComponent::GetWorldMat()
     m_worldMat = glm::rotate(m_worldMat, glm::radians(m_rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
     m_worldMat = glm::scale(m_worldMat, m_scale);
 
+    m_worldMat *= m_parentWorldMat;
+
     return m_worldMat;
+}
+
+void TransformComponent::SetParentWorldMat(const glm::mat4& worldMat)
+{
+    m_parentWorldMat = worldMat;
+}
+
+void TransformComponent::RemoveParentWorldMat()
+{
+    m_parentWorldMat = glm::identity<glm::mat4>();
 }
 
 void TransformComponent::Draw()

@@ -17,11 +17,15 @@ public:
 
     glm::mat4 GetWorldMat();
 
+    void SetParentWorldMat(const glm::mat4& worldMat);
+    void RemoveParentWorldMat();
+
     void Draw() override;
 
 private:
     glm::vec3 m_position, m_rotation, m_scale;
     glm::mat4 m_worldMat;
+    glm::mat4 m_parentWorldMat;
 };
 
 #endif
