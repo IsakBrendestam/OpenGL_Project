@@ -8,34 +8,40 @@
 #include "Engine/CameraManager.h"
 #include "Engine/Resources/Light.h"
 
-Object::Object()
+Object::Object():
+    m_render(true), m_parent(nullptr)
 {
     AddComponent(new TransformComponent({0, 0, 0}, {0, 0, 0}, {0, 0, 0}));
-    m_render = true;
 }
 
-Object::Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
+    m_parent(nullptr)
 {
     Init(mesh, position, rotation, scale);
 }
 
-Object::Object(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
+    m_parent(nullptr)
 {
     Init(mesh, position, rotation, scale);
 }
 
-Object::Object(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
+    m_parent(nullptr)
 {
     Init(mesh, textureName, position, rotation, scale);
 }
 
-Object::Object(glm::vec3 color, const MeshData& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object(glm::vec3 color, const MeshData& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
+    m_parent(nullptr)
 {
     Init(color, mesh, position, rotation, scale);
 }
 
 Object::~Object()
 {
+    for (auto& child : m_children)
+        delete child;
 }
 
 void Object::Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
@@ -248,10 +254,20 @@ void Object::UpdateLight()
 void Object::UpdateMatrices()
 {
     TransformComponent* transform = GetComponent<TransformComponent>();
+    
+    for (auto& child : m_children)
+        child->GetComponent<TransformComponent>()->SetParentWorldMat(transform->GetWorldMat());
 
     m_shader.Use();
     m_shader.SetMat4("worldMat", transform->GetWorldMat());
     m_shader.SetMat4("viewProjectionMat", CameraManager::GetCurrentCamera().GetViewProjectionMatrix());
+}
+
+void Object::InternalUpdate(double deltaTime)
+{
+    Update(deltaTime);
+    for (auto& child : m_children)
+        child->Update(deltaTime);
 }
 
 void Object::Render()
@@ -260,6 +276,14 @@ void Object::Render()
     UpdateLight();
     if (m_render)
         Draw();
+
+    for (auto& child : m_children)
+        child->Render();
+}
+
+void Object::AddChild(Object* child)
+{
+    m_children.push_back(child);
 }
 
 void Object::SetRender(bool render)

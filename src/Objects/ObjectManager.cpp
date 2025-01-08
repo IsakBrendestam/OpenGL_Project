@@ -19,7 +19,7 @@ void ObjectManager::Deconstruct()
 void ObjectManager::Update(double deltaTime)
 {
     for (auto& object : m_objects)
-        object->Update(deltaTime);
+        object->InternalUpdate(deltaTime);
 
     for (int i = 0; i < m_objects.size(); i++)
         for (int j = 0; j < m_objects.size(); j++)
@@ -45,6 +45,11 @@ void ObjectManager::AddObject(const std::string& name, Object* object)
     m_names.push_back(name);
 }
 
+void ObjectManager::AddChild(const std::string& parentName, Object* object)
+{
+    GetObject(parentName)->AddChild(object);
+}
+
 unsigned int ObjectManager::GetObjectCount()
 {
     return m_objects.size();
@@ -64,4 +69,11 @@ Object* ObjectManager::GetObject(unsigned int index)
         return m_objects[index];
     DebugLog("Index out of bounds");
     return nullptr;
+}
+
+Object* ObjectManager::GetObject(const std::string& name)
+{
+    for (int i = 0; i < m_names.size(); i++)
+        if (m_names[i] == name)
+            return m_objects[i];
 }

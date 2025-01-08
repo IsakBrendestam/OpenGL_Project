@@ -16,10 +16,12 @@ public:
     static void Draw();
 
     static void AddObject(const std::string& name, Object* object);
+    static void AddChild(const std::string& name, Object* object);
 
     static unsigned int GetObjectCount();
     static std::string GetObjectName(unsigned int index);
     static Object* GetObject(unsigned int index);
+    static Object* GetObject(const std::string& name);
 
 private:
     static std::vector<std::string> m_names;
