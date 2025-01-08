@@ -281,22 +281,9 @@ void Object::Render()
         child->Render();
 }
 
-void Object::SetParent(Object* parent)
+void Object::AddChild(Object* child)
 {
-    // Remove child if parent already exists
-    if (m_parent != nullptr)
-        m_parent->m_children.erase(std::remove(m_parent->m_children.begin(), m_parent->m_children.end(), this), m_parent->m_children.end());
-
-    // Set new parent
-    m_parent = parent;
-    m_parent->m_children.push_back(this);
-}
-
-void Object::RemoveParent()
-{
-    // Remove child if parent exists
-    if (m_parent != nullptr)
-        m_parent->m_children.erase(std::remove(m_parent->m_children.begin(), m_parent->m_children.end(), this), m_parent->m_children.end());
+    m_children.push_back(child);
 }
 
 void Object::SetRender(bool render)

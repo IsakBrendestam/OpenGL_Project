@@ -28,6 +28,8 @@ void Application::Initialize()
     ObjectManager::AddObject("Sphere 2", new Sphere({1.7f, 0.5f, 0}, 0.5f));
     ObjectManager::AddObject("Box", new Box({-1.5f, 0.5f, 0}, {0, 0, 0}, {1.5f, 0.5f, 0.5f}));
     ObjectManager::AddObject("Box 2", new Cube({0.5f, 0.5f, -1.5f}, {0, 0, 0}, 0.5f));
+
+    ObjectManager::AddChild("Box", new Sphere({0, 1, 0}, 0.5f));
 }
 
 void Application::Exit()

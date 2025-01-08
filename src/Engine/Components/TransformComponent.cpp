@@ -27,13 +27,13 @@ glm::mat4 TransformComponent::GetWorldMat()
 {
     m_worldMat = glm::identity<glm::mat4>();
 
+    m_worldMat *= m_parentWorldMat;
+
     m_worldMat = glm::translate(m_worldMat, m_position);
     m_worldMat = glm::rotate(m_worldMat, glm::radians(m_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
     m_worldMat = glm::rotate(m_worldMat, glm::radians(m_rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
     m_worldMat = glm::rotate(m_worldMat, glm::radians(m_rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
     m_worldMat = glm::scale(m_worldMat, m_scale);
-
-    m_worldMat *= m_parentWorldMat;
 
     return m_worldMat;
 }

@@ -34,8 +34,7 @@ public:
     void InternalUpdate(double deltaTime);
     void Render();
 
-    void SetParent(Object* parent);
-    void RemoveParent();
+    void AddChild(Object* child);
 
     void SetRender(bool render);
     bool GetRender();
