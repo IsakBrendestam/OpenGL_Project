@@ -132,6 +132,9 @@ void ImGuiManager::DebugWindow()
 {
     ImGui::Begin("Debug Log");
 
+    if (ImGui::Button("Clear"))
+        Debug::g_debugLog.clear();
+
     ImGui::BeginChild("##log", ImVec2(0.0f, 0.0f), ImGuiChildFlags_Borders, ImGuiWindowFlags_AlwaysVerticalScrollbar | ImGuiWindowFlags_AlwaysHorizontalScrollbar);
 
     ImGuiListClipper clipper;

@@ -22,13 +22,10 @@ void DebugMessage(std::string msg, int line, const char* file)
     std::string timestamp = "[" + std::to_string(5 + ltm->tm_hour) + ":" + std::to_string(ltm->tm_min) + ":" + std::to_string(ltm->tm_sec) + "] ";
 
     std::string out = timestamp + msg + " | " + std::string(file) + ":" + std::to_string(line);
-
     std::cout << out << std::endl;
+
     if (EngineSettings::g_logMessages)
-    {
-        std::cout << "Testing" << std::endl;
         Debug::g_debugLog.push_back(out);
-    }
 }
 
 #endif
