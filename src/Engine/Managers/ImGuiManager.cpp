@@ -151,53 +151,15 @@ void ImGuiManager::ObjectInspector()
         if (index != -1)
         {
             std::string title = ObjectManager::GetObjectName(index);
+            Object* object = ObjectManager::GetObject(index);
 
-            ImGui::Text(title.c_str(), " - settings");
+            bool render = object->GetRender();
+            ImGui::Checkbox(title.c_str(), &render);
+            object->SetRender(render);
+
             ImGui::Separator();
 
-            ObjectManager::GetObject(index)->DrawComponentsUI();
-
-            /*
-            bool render = ObjectManager::GetRender(index);
-            ImGui::Checkbox("Render ", &render);
-            ObjectManager::SetRender(render, index);
-
-            ObjectManager::GetObjectByName(title)->DrawUI();
-            */
-
-            /*
-            if (ImGui::TreeNode("Texture"))
-            {
-                int textureIndex = -1;
-
-                std::string options;
-                std::vector<std::string> textureNames = ContentManager::GetTextureNames();
-                for (auto& name : textureNames)
-                    options += name + '\0';
-
-                // Set object texture
-                if (ImGui::Combo("Textures", &textureIndex, options.c_str()))
-                    ObjectManager::GetObjectByName(title)->SetTexture(ContentManager::GetTexture(textureNames[textureIndex]));
-
-
-                ImGui::BeginChild("Texture Display", ImVec2(-FLT_MIN, ImGui::GetTextLineHeightWithSpacing() * 8), ImGuiChildFlags_Border | ImGuiChildFlags_ResizeY);
-
-                ShaderResourceTextureD3D11* texture = ObjectManager::GetObjectByName(title)->GetTexture();
-
-                float textureRatio =  (float)texture->GetHeight() / (float)texture->GetWidth();
-
-                ImVec2 child_rect_min = ImGui::GetItemRectMin();
-                ImVec2 child_rect_max = ImGui::GetItemRectMax();
-
-                float childWidth = (child_rect_max.x - child_rect_min.x) * 0.9f;
-
-                ImGui::Image((ImTextureID)(intptr_t)texture->GetSRV(), ImVec2(childWidth, childWidth * textureRatio));
-
-                ImGui::EndChild();
-
-                ImGui::TreePop();
-            }
-            */
+            object->DrawComponentsUI();
         }
     }
 

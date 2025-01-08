@@ -11,6 +11,7 @@
 Object::Object()
 {
     AddComponent(new TransformComponent({0, 0, 0}, {0, 0, 0}, {0, 0, 0}));
+    m_render = true;
 }
 
 Object::Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
@@ -40,6 +41,8 @@ Object::~Object()
 void Object::Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
     AddComponent(new TransformComponent(position, rotation, scale));
+
+    m_render = true;
 
     m_shader.LoadShader("ColorShader.vs", "ColorShader.fs");
     m_shader.Use();
@@ -74,6 +77,8 @@ void Object::Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation,
 void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
     AddComponent(new TransformComponent(position, rotation, scale));
+
+    m_render = true;
 
     m_shader.LoadShader("TextureShader.vs", "TextureShader.fs");
     m_shader.Use();
@@ -110,6 +115,8 @@ void Object::Init(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotatio
 void Object::Init(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
     AddComponent(new TransformComponent(position, rotation, scale));
+
+    m_render = true;
 
     m_shader.LoadShader("TextureShader.vs", "TextureShader.fs");
     m_shader.Use();
@@ -152,6 +159,8 @@ void Object::Init(const MeshData& mesh, const std::string& textureName, glm::vec
 void Object::Init(glm::vec3 color, const MeshData& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 {
     AddComponent(new TransformComponent(position, rotation, scale));
+
+    m_render = true;
 
     m_shader.LoadShader("SolidColorShader.vs", "ColorShader.fs");
     m_shader.Use();
@@ -249,5 +258,16 @@ void Object::Render()
 {
     UpdateMatrices();
     UpdateLight();
-    Draw();
+    if (m_render)
+        Draw();
+}
+
+void Object::SetRender(bool render)
+{
+    m_render = render;
+}
+
+bool Object::GetRender()
+{
+    return m_render;
 }

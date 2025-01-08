@@ -34,6 +34,9 @@ public:
     virtual void Update(double deltaTime) = 0;
     virtual void Render();
 
+    void SetRender(bool render);
+    bool GetRender();
+
 protected:
     virtual void Draw() = 0;
     virtual void UpdateLight();
@@ -49,6 +52,8 @@ protected:
     unsigned int m_EBO;
 
     unsigned int m_texture;
+
+    bool m_render;
 
     ShaderGL m_shader;
 };
