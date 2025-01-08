@@ -8,34 +8,40 @@
 #include "Engine/CameraManager.h"
 #include "Engine/Resources/Light.h"
 
-Object::Object()
+Object::Object():
+    m_render(true), m_parent(nullptr)
 {
     AddComponent(new TransformComponent({0, 0, 0}, {0, 0, 0}, {0, 0, 0}));
-    m_render = true;
 }
 
-Object::Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
+    m_parent(nullptr)
 {
     Init(mesh, position, rotation, scale);
 }
 
-Object::Object(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
+    m_parent(nullptr)
 {
     Init(mesh, position, rotation, scale);
 }
 
-Object::Object(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
+    m_parent(nullptr)
 {
     Init(mesh, textureName, position, rotation, scale);
 }
 
-Object::Object(glm::vec3 color, const MeshData& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Object::Object(glm::vec3 color, const MeshData& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
+    m_parent(nullptr)
 {
     Init(color, mesh, position, rotation, scale);
 }
 
 Object::~Object()
 {
+    for (auto& child : m_children)
+        delete child;
 }
 
 void Object::Init(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
@@ -260,6 +266,24 @@ void Object::Render()
     UpdateLight();
     if (m_render)
         Draw();
+}
+
+void Object::SetParent(Object* parent)
+{
+    // Remove child if parent already exists
+    if (m_parent != nullptr)
+        m_parent->m_children.erase(std::remove(m_parent->m_children.begin(), m_parent->m_children.end(), this), m_parent->m_children.end());
+
+    // Set new parent
+    m_parent = parent;
+    m_parent->m_children.push_back(this);
+}
+
+void Object::RemoveParent()
+{
+    // Remove child if parent exists
+    if (m_parent != nullptr)
+        m_parent->m_children.erase(std::remove(m_parent->m_children.begin(), m_parent->m_children.end(), this), m_parent->m_children.end());
 }
 
 void Object::SetRender(bool render)

@@ -34,6 +34,9 @@ public:
     virtual void Update(double deltaTime) = 0;
     virtual void Render();
 
+    void SetParent(Object* parent);
+    void RemoveParent();
+
     void SetRender(bool render);
     bool GetRender();
 
@@ -56,6 +59,11 @@ protected:
     bool m_render;
 
     ShaderGL m_shader;
+
+    Object* m_parent;
+
+private:
+    std::vector<Object*> m_children;
 };
 
 #endif
