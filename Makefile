@@ -1,7 +1,7 @@
 # Settings
 APP_NAME := application
 
-OPTIMIZE := false
+OPTIMIZE := true
 OPT_FLAG := -O2
 
 DEBUG := true
