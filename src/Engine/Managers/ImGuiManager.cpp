@@ -8,8 +8,6 @@
 
 #include "Engine/EngineSettings.h"
 
-#include "Objects/ObjectManager.h"
-
 #include "Engine/Utilities/Debug.h"
 
 int ImGuiManager::m_selectedObject = -1;
@@ -152,16 +150,25 @@ void ImGuiManager::DebugWindow()
     ImGui::End();
 }
 
+void ImGuiManager::ObjectHierarchy(Object* object, unsigned int depth)
+{
+    std::string title = object->GetName();
+
+    title.insert(0, std::string(depth, ' '));
+    if (ImGui::Selectable(title.c_str(), m_selectedObject == object->GetID()))
+        m_selectedObject = object->GetID();
+
+    for (auto& child : object->GetChildren()) 
+        ObjectHierarchy(child, depth+1);
+}
+
 void ImGuiManager::SceneHierarchy()
 {
     ImGui::Begin("Scene Hierarchy");
 
     for (int i = 0; i < ObjectManager::GetObjectCount(); i++)
 	{
-		std::string title = ObjectManager::GetObjectName(i);
-
-		if (ImGui::Selectable(title.c_str(), m_selectedObject == i))
-            m_selectedObject = i;
+        ObjectHierarchy(ObjectManager::GetObject(i));
 	}
 
     ImGui::End();
@@ -171,17 +178,14 @@ void ImGuiManager::ObjectInspector()
 {
     ImGui::Begin("Object Inspector");
 
-    if (m_selectedObject >= 0 && m_selectedObject < ObjectManager::GetObjectCount())
+    if (m_selectedObject >= 0)
     {
-        const int index = m_selectedObject;
-
-        if (index != -1)
+        if (m_selectedObject != -1)
         {
-            std::string title = ObjectManager::GetObjectName(index);
-            Object* object = ObjectManager::GetObject(index);
+            Object* object = ObjectManager::GetObjectByID(m_selectedObject);
 
             bool render = object->GetRender();
-            ImGui::Checkbox(title.c_str(), &render);
+            ImGui::Checkbox(object->GetName().c_str(), &render);
             object->SetRender(render);
 
             ImGui::Separator();
