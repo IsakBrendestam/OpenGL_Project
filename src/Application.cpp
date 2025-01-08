@@ -15,13 +15,6 @@
 
 void Application::Initialize()
 {
-    //m_objects.push_back(new Cube({0.0f, 0.0f, 0.0f}, {0.1f, 0.1f, 0.1f}));
-    //m_objects.push_back(new Rectangle());
-    //m_objects.push_back(new Cube({-2.0f, 0.0f, -2.0f}, {0.5f, 0.5f, 0.5f}));
-
-    //ObjParser obj = ObjParser("res/Objects/", "Dragon.obj");
-
-    //m_objects.push_back(new MeshObject({1.0f, 0.85f, 0.0f}, obj.GetMeshData(), {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {0.2f, 0.2f, 0.2f}));
     ObjectManager::Initialize();
 
     ObjectManager::AddObject("Sphere", new Sphere({0, 0.5f, 0}, 0.3f));
@@ -29,7 +22,10 @@ void Application::Initialize()
     ObjectManager::AddObject("Box", new Box({-1.5f, 0.5f, 0}, {0, 0, 0}, {1.5f, 0.5f, 0.5f}));
     ObjectManager::AddObject("Box 2", new Cube({0.5f, 0.5f, -1.5f}, {0, 0, 0}, 0.5f));
 
-    ObjectManager::AddChild("Box", new Sphere({0, 1, 0}, 0.5f));
+    ObjectManager::AddChild("Temp Sphere", new Sphere({0, 1, 0}, 0.5f), "Box");
+    ObjectManager::AddChild("Temp Sphere 2", new Sphere({1, 1, 0}, 0.5f), "Box");
+
+    ObjectManager::AddChild("Temp", new Sphere({0, 1, 0}, 0.5f), "Sphere 2");
 }
 
 void Application::Exit()

@@ -5,6 +5,8 @@
 #include <GLFW/glfw3.h>
 #include <string>
 
+#include "Objects/ObjectManager.h"
+
 class ImGuiManager
 {
 public:
@@ -21,6 +23,9 @@ public:
 
     static void SceneHierarchy();
     static void ObjectInspector();
+
+private:
+    static void ObjectHierarchy(Object* object, unsigned int depth = 0);
 
 private:
     static int m_selectedObject;

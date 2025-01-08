@@ -35,9 +35,15 @@ public:
     void Render();
 
     void AddChild(Object* child);
+    std::vector<Object*> GetChildren();
 
     void SetRender(bool render);
     bool GetRender();
+
+    unsigned int GetID();
+
+    void SetName(const std::string& name);
+    std::string GetName() const;
 
 protected:
     virtual void Update(double deltaTime) = 0;
@@ -50,6 +56,8 @@ protected:
     void GenerateTexture(const std::string& textureName);
 
 protected:
+    std::string m_name;
+
     unsigned int m_VBO;
     unsigned int m_VAO;
     unsigned int m_EBO;
@@ -57,12 +65,14 @@ protected:
     unsigned int m_texture;
 
     bool m_render;
-
     ShaderGL m_shader;
 
     Object* m_parent;
 
 private:
+    static unsigned int g_ID;
+    unsigned int m_id;
+
     std::vector<Object*> m_children;
 };
 

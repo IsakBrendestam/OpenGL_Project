@@ -8,32 +8,34 @@
 #include "Engine/CameraManager.h"
 #include "Engine/Resources/Light.h"
 
+unsigned int Object::g_ID = 0;
+
 Object::Object():
-    m_render(true), m_parent(nullptr)
+    m_render(true), m_parent(nullptr), m_id(g_ID++)
 {
     AddComponent(new TransformComponent({0, 0, 0}, {0, 0, 0}, {0, 0, 0}));
 }
 
 Object::Object(const MeshColor& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
-    m_parent(nullptr)
+    m_parent(nullptr), m_id(g_ID++)
 {
     Init(mesh, position, rotation, scale);
 }
 
 Object::Object(const MeshTexture& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
-    m_parent(nullptr)
+    m_parent(nullptr), m_id(g_ID++)
 {
     Init(mesh, position, rotation, scale);
 }
 
 Object::Object(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
-    m_parent(nullptr)
+    m_parent(nullptr), m_id(g_ID++)
 {
     Init(mesh, textureName, position, rotation, scale);
 }
 
 Object::Object(glm::vec3 color, const MeshData& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale):
-    m_parent(nullptr)
+    m_parent(nullptr), m_id(g_ID++)
 {
     Init(color, mesh, position, rotation, scale);
 }
@@ -286,6 +288,11 @@ void Object::AddChild(Object* child)
     m_children.push_back(child);
 }
 
+std::vector<Object*> Object::GetChildren()
+{
+    return m_children;
+}
+
 void Object::SetRender(bool render)
 {
     m_render = render;
@@ -294,4 +301,19 @@ void Object::SetRender(bool render)
 bool Object::GetRender()
 {
     return m_render;
+}
+
+void Object::SetName(const std::string& name)
+{
+    m_name = name;
+}
+
+std::string Object::GetName() const
+{
+    return m_name;
+}
+
+unsigned int Object::GetID()
+{
+    return m_id;
 }
