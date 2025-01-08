@@ -254,11 +254,20 @@ void Object::UpdateLight()
 void Object::UpdateMatrices()
 {
     TransformComponent* transform = GetComponent<TransformComponent>();
-
+    
+    for (auto& child : m_children)
+        child->GetComponent<TransformComponent>()->SetParentWorldMat(transform->GetWorldMat());
 
     m_shader.Use();
     m_shader.SetMat4("worldMat", transform->GetWorldMat());
     m_shader.SetMat4("viewProjectionMat", CameraManager::GetCurrentCamera().GetViewProjectionMatrix());
+}
+
+void Object::InternalUpdate(double deltaTime)
+{
+    Update(deltaTime);
+    for (auto& child : m_children)
+        child->Update(deltaTime);
 }
 
 void Object::Render()
@@ -267,6 +276,9 @@ void Object::Render()
     UpdateLight();
     if (m_render)
         Draw();
+
+    for (auto& child : m_children)
+        child->Render();
 }
 
 void Object::SetParent(Object* parent)

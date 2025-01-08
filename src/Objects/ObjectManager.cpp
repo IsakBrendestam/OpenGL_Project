@@ -19,7 +19,7 @@ void ObjectManager::Deconstruct()
 void ObjectManager::Update(double deltaTime)
 {
     for (auto& object : m_objects)
-        object->Update(deltaTime);
+        object->InternalUpdate(deltaTime);
 
     for (int i = 0; i < m_objects.size(); i++)
         for (int j = 0; j < m_objects.size(); j++)

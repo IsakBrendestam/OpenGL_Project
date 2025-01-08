@@ -31,8 +31,8 @@ public:
     void Init(const MeshData& mesh, const std::string& textureName, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
     void Init(glm::vec3 color, const MeshData& mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale);
 
-    virtual void Update(double deltaTime) = 0;
-    virtual void Render();
+    void InternalUpdate(double deltaTime);
+    void Render();
 
     void SetParent(Object* parent);
     void RemoveParent();
@@ -41,6 +41,7 @@ public:
     bool GetRender();
 
 protected:
+    virtual void Update(double deltaTime) = 0;
     virtual void Draw() = 0;
     virtual void UpdateLight();
     virtual void UpdateMatrices();
