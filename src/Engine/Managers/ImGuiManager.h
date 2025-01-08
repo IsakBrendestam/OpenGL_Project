@@ -17,6 +17,7 @@ public:
 
     static void ScreenStatistics(double deltaTime);
     static void EngineSettings();
+    static void DebugWindow();
 
     static void SceneHierarchy();
     static void ObjectInspector();

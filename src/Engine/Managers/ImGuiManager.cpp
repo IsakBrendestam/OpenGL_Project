@@ -10,6 +10,8 @@
 
 #include "Objects/ObjectManager.h"
 
+#include "Engine/Utilities/Debug.h"
+
 int ImGuiManager::m_selectedObject = -1;
 
 void ImGuiManager::Initialize(GLFWwindow* window, const std::string& glslVersion)
@@ -40,6 +42,7 @@ void ImGuiManager::Update(double deltaTime)
 {
     ScreenStatistics(deltaTime);
     EngineSettings();
+    DebugWindow();
     SceneHierarchy();
     ObjectInspector();
 
@@ -121,6 +124,27 @@ void ImGuiManager::EngineSettings()
     ImGui::Checkbox("Backface Culling On", &EngineSettings::g_backFaceCullingOn);
     ImGui::Checkbox("Render Grid", &EngineSettings::g_renderGrid);
     ImGui::ColorEdit3("clear color", (float*)&EngineSettings::g_clearColor);
+
+    ImGui::End();
+}
+
+void ImGuiManager::DebugWindow()
+{
+    ImGui::Begin("Debug Log");
+
+    ImGui::BeginChild("##log", ImVec2(0.0f, 0.0f), ImGuiChildFlags_Borders, ImGuiWindowFlags_AlwaysVerticalScrollbar | ImGuiWindowFlags_AlwaysHorizontalScrollbar);
+
+    ImGuiListClipper clipper;
+
+    clipper.Begin(Debug::g_debugLog.size());
+    while (clipper.Step())
+        for (int line_no = clipper.DisplayStart; line_no < clipper.DisplayEnd; line_no++)
+            ImGui::TextUnformatted(Debug::g_debugLog[line_no].c_str());
+
+    if (ImGui::GetScrollY() >= ImGui::GetScrollMaxY())
+        ImGui::SetScrollHereY(1.0f);
+
+    ImGui::EndChild();
 
     ImGui::End();
 }
