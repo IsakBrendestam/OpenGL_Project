@@ -190,7 +190,7 @@ void ImGuiManager::ObjectInspector()
 
             ImGui::Separator();
 
-            object->DrawComponentsUI();
+            object->DrawInspector();
         }
     }
 

@@ -7,8 +7,9 @@
 #include "ColliderComponent.h"
 #include "TransformComponent.h"
 #include "MeshComponent.h"
+#include "InspectorComponent.h"
 
-class ComponentObject
+class ComponentObject: public InspectorComponent
 {
 public:
     ComponentObject() = default;
@@ -27,7 +28,7 @@ public:
     }
 
     void AddComponent(Component* component);
-    void DrawComponentsUI();
+    void DrawInspector();
 
     // Collider Specific Functions
     void CheckIntersection(const ComponentObject& other);

@@ -57,7 +57,7 @@ void ComponentObject::AddComponent(Component* component)
     m_components.push_back(component);
 }
 
-void ComponentObject::DrawComponentsUI()
+void ComponentObject::DrawInspector()
 {
     for (auto& comp : m_components)
         comp->Draw();

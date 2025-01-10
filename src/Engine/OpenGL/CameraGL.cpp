@@ -1,14 +1,32 @@
 #include "CameraGL.h"
 
+#include "Engine/Utilities/Debug.h"
 
-CameraGL::CameraGL(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation):
-    m_position(position), m_rotation(rotation)
+
+CameraGL::CameraGL(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation, CameraType type):
+    m_position(position), m_rotation(rotation), m_type(type)
 {
-    m_projectionMat = glm::perspective(projectionInfo.fovAngleY,
-                                       projectionInfo.aspectRatio,
-                                       projectionInfo.nearZ,
-                                       projectionInfo.farZ);
+    switch (m_type)
+    {
+    case CameraType::PERSPECTIVE:
+        m_projectionMat = glm::perspective(projectionInfo.fovAngleY,
+                                           projectionInfo.aspectRatio,
+                                           projectionInfo.nearZ,
+                                           projectionInfo.farZ);
+        break;
 
+    case CameraType::ORTHOGRAPHIC:
+        m_projectionMat = glm::ortho(-projectionInfo.aspectRatio, 
+                                     projectionInfo.aspectRatio, 
+                                     -1.0f, 
+                                     1.0f, 
+                                     projectionInfo.nearZ, 
+                                     projectionInfo.farZ);
+        break;
+    
+    default:
+        break;
+    }
 }
 
 void CameraGL::Update(double deltaTime, GLFWwindow* window)
@@ -60,8 +78,25 @@ glm::mat4 CameraGL::GetProjectionMatrix() const
 
 void CameraGL::SetProjectionInfo(const ProjectionInfo& projectionInfo)
 {
-    m_projectionMat = glm::perspective(projectionInfo.fovAngleY,
-                                       projectionInfo.aspectRatio,
-                                       projectionInfo.nearZ,
-                                       projectionInfo.farZ);
+    switch (m_type)
+    {
+    case CameraType::PERSPECTIVE:
+        m_projectionMat = glm::perspective(projectionInfo.fovAngleY,
+                                           projectionInfo.aspectRatio,
+                                           projectionInfo.nearZ,
+                                           projectionInfo.farZ);
+        break;
+
+    case CameraType::ORTHOGRAPHIC:
+        m_projectionMat = glm::ortho(-projectionInfo.aspectRatio, 
+                                     projectionInfo.aspectRatio, 
+                                     -1.0f, 
+                                     1.0f, 
+                                     projectionInfo.nearZ, 
+                                     projectionInfo.farZ);
+        break;
+    
+    default:
+        break;
+    }
 }
