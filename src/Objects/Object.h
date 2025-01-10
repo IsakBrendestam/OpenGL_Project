@@ -42,9 +42,6 @@ public:
 
     unsigned int GetID();
 
-    void SetName(const std::string& name);
-    std::string GetName() const;
-
 protected:
     virtual void Update(double deltaTime) = 0;
     virtual void Draw() = 0;
@@ -56,8 +53,6 @@ protected:
     void GenerateTexture(const std::string& textureName);
 
 protected:
-    std::string m_name;
-
     unsigned int m_VBO;
     unsigned int m_VAO;
     unsigned int m_EBO;

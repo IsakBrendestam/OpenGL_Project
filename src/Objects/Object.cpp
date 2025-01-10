@@ -303,16 +303,6 @@ bool Object::GetRender()
     return m_render;
 }
 
-void Object::SetName(const std::string& name)
-{
-    m_name = name;
-}
-
-std::string Object::GetName() const
-{
-    return m_name;
-}
-
 unsigned int Object::GetID()
 {
     return m_id;
