@@ -13,7 +13,7 @@ public:
 
     static void Update(double deltaTime, GLFWwindow* window);
 
-    static void AddCamera(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation);
+    static void AddCamera(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation, CameraType type = CameraType::PERSPECTIVE);
     static CameraGL GetCamera(unsigned int index);
 
     static CameraGL GetCurrentCamera();

@@ -70,7 +70,7 @@ int Engine::Init()
 
 
     ProjectionInfo projInfo = {glm::radians(45.0f), (float)EngineSettings::g_windowWidth / (float)EngineSettings::g_windowHeight, 0.1f, 100.0f};
-    CameraManager::AddCamera(projInfo, {0.0f, 3.0f, 10.0f}, {0.0f, -90.0f, 0.0f});
+    CameraManager::AddCamera(projInfo, {0.0f, 3.0f, 10.0f}, {0.0f, -90.0f, 0.0f}, CameraType::ORTHOGRAPHIC);
 
     m_grid = new Grid(20, 10);
 

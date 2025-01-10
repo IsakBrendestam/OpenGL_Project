@@ -15,9 +15,9 @@ void CameraManager::Update(double deltaTime, GLFWwindow* window)
         camera->Update(deltaTime, window);
 }
 
-void CameraManager::AddCamera(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation)
+void CameraManager::AddCamera(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation, CameraType type)
 {
-    m_cameras.push_back(new CameraGL(projectionInfo, position, rotation));
+    m_cameras.push_back(new CameraGL(projectionInfo, position, rotation, type));
 }
 
 CameraGL CameraManager::GetCamera(unsigned int index)

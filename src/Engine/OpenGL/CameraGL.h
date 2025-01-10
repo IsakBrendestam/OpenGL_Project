@@ -14,11 +14,17 @@ struct ProjectionInfo
     float farZ = 0.0f;
 };
 
+enum CameraType
+{
+    PERSPECTIVE,
+    ORTHOGRAPHIC
+};
+
 class CameraGL
 {
 public:
     CameraGL() = default;
-    CameraGL(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation);
+    CameraGL(const ProjectionInfo& projectionInfo, glm::vec3 position, glm::vec3 rotation, CameraType type = CameraType::PERSPECTIVE);
 
     void Update(double deltaTime, GLFWwindow* window);
 
@@ -29,6 +35,8 @@ public:
     void SetProjectionInfo(const ProjectionInfo& projectionInfo);
 
 private:
+    CameraType m_type;
+
     glm::mat4 m_viewMat, m_projectionMat;
 
     glm::vec3 m_position;
